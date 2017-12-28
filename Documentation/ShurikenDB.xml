@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+
+<!-- Active URL: http://ondras.zarovi.cz/sql/demo/?keyword=default/ -->
+
+-<sql>
+
+
+  -<datatypes db="mysql">
+
+
+    -<group color="rgb(238,238,170)" label="Numeric">
+
+      <type label="TINYINT" quote="" sql="TINYINT" length="0"/>
+
+      <type label="SMALLINT" quote="" sql="SMALLINT" length="0"/>
+
+      <type label="MEDIUMINT" quote="" sql="MEDIUMINT" length="0"/>
+
+      <type label="INT" quote="" sql="INT" length="0"/>
+
+      <type label="Integer" quote="" sql="INTEGER" length="0"/>
+
+      <type label="BIGINT" quote="" sql="BIGINT" length="0"/>
+
+      <type label="Decimal" quote="" sql="DECIMAL" length="1" re="DEC"/>
+
+      <type label="Single precision" quote="" sql="FLOAT" length="0"/>
+
+      <type label="Double precision" quote="" sql="DOUBLE" length="0" re="DOUBLE"/>
+
+    </group>
+
+
+    -<group color="rgb(255,200,200)" label="Character">
+
+      <type label="Char" quote="'" sql="CHAR" length="1"/>
+
+      <type label="Varchar" quote="'" sql="VARCHAR" length="1"/>
+
+      <type label="Text" quote="'" sql="MEDIUMTEXT" length="0" re="TEXT"/>
+
+      <type label="Binary" quote="'" sql="BINARY" length="1"/>
+
+      <type label="Varbinary" quote="'" sql="VARBINARY" length="1"/>
+
+      <type label="BLOB" quote="'" sql="BLOB" length="0" re="BLOB"/>
+
+    </group>
+
+
+    -<group color="rgb(200,255,200)" label="Date & Time">
+
+      <type label="Date" quote="'" sql="DATE" length="0"/>
+
+      <type label="Time" quote="'" sql="TIME" length="0"/>
+
+      <type label="Datetime" quote="'" sql="DATETIME" length="0"/>
+
+      <type label="Year" quote="" sql="YEAR" length="0"/>
+
+      <type label="Timestamp" quote="'" sql="TIMESTAMP" length="0"/>
+
+    </group>
+
+
+    -<group color="rgb(200,200,255)" label="Miscellaneous">
+
+      <type label="ENUM" quote="" sql="ENUM" length="1"/>
+
+      <type label="SET" quote="" sql="SET" length="1"/>
+
+      <type label="Bit" quote="" sql="bit" length="0"/>
+
+    </group>
+
+  </datatypes>
+
+
+  -<table name="Client" y="18" x="21">
+
+
+    -<row name="ClientID" autoincrement="1" null="0">
+
+      <datatype>INT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="NameID" autoincrement="0" null="0">
+
+      <datatype>VARCHAR(25)</datatype>
+
+      <relation row="NameID" table="Name"/>
+
+    </row>
+
+
+    -<row name="Email" autoincrement="0" null="0">
+
+      <datatype>VARCHAR</datatype>
+
+      <default>'NULL'</default>
+
+    </row>
+
+
+    -<row name="password_hash" autoincrement="0" null="0">
+
+      <datatype>VARCHAR(128)</datatype>
+
+    </row>
+
+
+    -<row name="PreferenceID" autoincrement="0" null="0">
+
+      <datatype>TINYINT</datatype>
+
+      <default>1</default>
+
+      <relation row="PreferenceID" table="Preferences"/>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>ClientID</part>
+
+    </key>
+
+    <comment>Table containing user information</comment>
+
+  </table>
+
+
+  -<table name="Name" y="268" x="193">
+
+
+    -<row name="NameID" autoincrement="0" null="0">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="FirstName" autoincrement="0" null="0">
+
+      <datatype>VARCHAR</datatype>
+
+      <default>'John'</default>
+
+    </row>
+
+
+    -<row name="LastName" autoincrement="0" null="0">
+
+      <datatype>VARCHAR</datatype>
+
+      <default>'Doe'</default>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>NameID</part>
+
+    </key>
+
+  </table>
+
+
+  -<table name="Preferences" y="373" x="189">
+
+
+    -<row name="PreferenceID" autoincrement="1" null="1">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="WeatherPreferencesID" autoincrement="0" null="0">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+      <relation row="WeatherPreferencesID" table="WeatherPreferencesID"/>
+
+    </row>
+
+
+    -<row name="TrafficPreferencesID" autoincrement="0" null="1">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+      <relation row="TrafficPreferencesID" table="TrafficPreferencesID"/>
+
+    </row>
+
+
+    -<row name="NewsPreferencesID" autoincrement="0" null="0">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+      <relation row="NewsPreferencesID" table="NewsPreferences"/>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>PreferenceID</part>
+
+    </key>
+
+  </table>
+
+
+  -<table name="Region" y="114" x="196">
+
+
+    -<row name="RegionID" autoincrement="1" null="0">
+
+      <datatype>INT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="ClientID" autoincrement="0" null="0">
+
+      <datatype>INT</datatype>
+
+      <default>NULL</default>
+
+      <relation row="ClientID" table="Client"/>
+
+    </row>
+
+
+    -<row name="Longitude" autoincrement="0" null="0">
+
+      <datatype>DECIMAL</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="Latitude" autoincrement="0" null="0">
+
+      <datatype>DECIMAL</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="Radius" autoincrement="0" null="0">
+
+      <datatype>DECIMAL</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>RegionID</part>
+
+    </key>
+
+  </table>
+
+
+  -<table name="Alerts" y="7" x="322">
+
+
+    -<row name="AlertID" autoincrement="1" null="1">
+
+      <datatype>INT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="ClientID" autoincrement="0" null="0">
+
+      <datatype>INT</datatype>
+
+      <default>NULL</default>
+
+      <relation row="ClientID" table="Client"/>
+
+    </row>
+
+
+    -<row name="AlertTypeID" autoincrement="0" null="0">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+      <relation row="SubAlertID" table="SubAlert"/>
+
+    </row>
+
+
+    -<row name="AlertMessage" autoincrement="0" null="0">
+
+      <datatype>VARCHAR</datatype>
+
+      <default>'"This is an alert"'</default>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>AlertID</part>
+
+    </key>
+
+  </table>
+
+
+  -<table name="BaseAlert" y="99" x="585">
+
+
+    -<row name="BaseAlertID" autoincrement="1" null="1">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="BaseAlertType" autoincrement="0" null="0">
+
+      <datatype>VARCHAR</datatype>
+
+      <default>'NULL'</default>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>BaseAlertID</part>
+
+    </key>
+
+  </table>
+
+
+  -<table name="SubAlert" y="54" x="443">
+
+
+    -<row name="SubAlertID" autoincrement="1" null="0">
+
+      <datatype>INT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<row name="SubAlertType" autoincrement="0" null="0">
+
+      <datatype>VARCHAR</datatype>
+
+      <default>'NULL'</default>
+
+    </row>
+
+
+    -<row name="BaseAlertID" autoincrement="0" null="0">
+
+      <datatype>INT</datatype>
+
+      <default>NULL</default>
+
+      <relation row="BaseAlertID" table="BaseAlert"/>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>SubAlertID</part>
+
+    </key>
+
+  </table>
+
+
+  -<table name="WeatherPreferencesID" y="326" x="386">
+
+
+    -<row name="WeatherPreferencesID" autoincrement="1" null="1">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>WeatherPreferencesID</part>
+
+    </key>
+
+  </table>
+
+
+  -<table name="TrafficPreferencesID" y="387" x="389">
+
+
+    -<row name="TrafficPreferencesID" autoincrement="1" null="1">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>TrafficPreferencesID</part>
+
+    </key>
+
+  </table>
+
+
+  -<table name="NewsPreferences" y="449" x="388">
+
+
+    -<row name="NewsPreferencesID" autoincrement="1" null="1">
+
+      <datatype>TINYINT</datatype>
+
+      <default>NULL</default>
+
+    </row>
+
+
+    -<key name="" type="PRIMARY">
+
+      <part>NewsPreferencesID</part>
+
+    </key>
+
+  </table>
+
+</sql>
