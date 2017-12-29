@@ -35,3 +35,56 @@ Create Table LA.Region(
 	Radius bigint,
 	DatModified DateTime
 );
+
+--**NOT RUN YET
+-- Alert Table Creation
+Create Table LA.Alert(
+    AlertID int PRIMARY KEY,
+	ClientID int,
+    AlertTypeID int,
+	AlertMessage nvarchar(50),
+	DatIssued DateTime
+);
+
+--**NOT RUN YET
+-- SubAlert Table Creation
+Create Table LA.SubAlert(
+    SubAlertID int PRIMARY KEY,
+	SubAlertType nvarchar(50),
+    BaseAlertID int,
+);
+
+--**NOT RUN YET
+-- BaseAlert Table Creation
+Create Table LA.BaseAlert(
+    BaseAlertID int PRIMARY KEY,
+	BaseAlertType nvarchar(50),
+);
+
+--**NOT RUN YET
+-- Preference Table Creation
+Create Table LA.Preference(
+    PreferenceID int PRIMARY KEY,
+	WeatherPreferenceID int,
+	TrafficPreferenceID int,
+	NewsPreferenceID int,
+	DatModified DateTime
+);
+
+--**NOT RUN YET
+-- Weather Preference Table Creation
+Create Table LA.WeatherPreference(
+    WeatherPreferenceID int PRIMARY KEY,
+);
+
+--**NOT RUN YET
+-- Traffic Preference Table Creation
+Create Table LA.WeatherPreference(
+    TrafficPreferenceID int PRIMARY KEY,
+);
+
+--**NOT RUN YET
+-- News Preference Table Creation
+Create Table LA.WeatherPreference(
+    NewsPreferenceID int PRIMARY KEY,
+);
