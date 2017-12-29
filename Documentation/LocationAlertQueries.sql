@@ -5,7 +5,9 @@ Create Schema LA;
 -- Client Table Creation
 Create Table LA.Client(
     ClientID int PRIMARY KEY,
-	NameID int,
+	FirstName nvarchar(50),
+	MiddleInit nvarchar(2),
+	LastName nvarchar(50),
     Email nvarchar(50),
     PhoneNumber nvarchar(9),
 	PasswordHash nvarchar(50),
@@ -14,15 +16,8 @@ Create Table LA.Client(
 	DateModified DateTime
 );
 
---**NOT RUN YET
--- Name Table Creation
-Create Table LA.Name(
-    NameID int PRIMARY KEY,
-    FirstName nvarchar(50),
-	MiddleInit nvarchar(2),
-	LastName nvarchar(50),
-);
-
+ALTER TABLE LA.Client
+ADD FOREIGN KEY (PreferenceID) REFERENCES LA.Preference(PreferenceID);
 
 --**NOT RUN YET
 -- Region Table Creation
@@ -36,6 +31,9 @@ Create Table LA.Region(
 	DatModified DateTime
 );
 
+ALTER TABLE LA.Region
+ADD FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID);
+
 --**NOT RUN YET
 -- Alert Table Creation
 Create Table LA.Alert(
@@ -46,6 +44,9 @@ Create Table LA.Alert(
 	DatIssued DateTime
 );
 
+ALTER TABLE LA.Alert
+ADD FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID);
+
 --**NOT RUN YET
 -- SubAlert Table Creation
 Create Table LA.SubAlert(
@@ -53,6 +54,9 @@ Create Table LA.SubAlert(
 	SubAlertType nvarchar(50),
     BaseAlertID int,
 );
+
+ALTER TABLE LA.SubAlert
+ADD FOREIGN KEY (BaseAlertID) REFERENCES LA.BaseAlert(BaseAlertID);
 
 --**NOT RUN YET
 -- BaseAlert Table Creation
@@ -77,14 +81,25 @@ Create Table LA.WeatherPreference(
     WeatherPreferenceID int PRIMARY KEY,
 );
 
+ALTER TABLE LA.WeatherPreference
+ADD FOREIGN KEY (WeatherPreferenceID) REFERENCES LA.Preference(WeatherPreferenceID);
+
 --**NOT RUN YET
 -- Traffic Preference Table Creation
-Create Table LA.WeatherPreference(
+Create Table LA.TrafficPreference(
     TrafficPreferenceID int PRIMARY KEY,
 );
 
+ALTER TABLE LA.TrafficPreference
+ADD FOREIGN KEY (TrafficPreferenceID) REFERENCES LA.Preference(TrafficPreferenceID);
+
 --**NOT RUN YET
 -- News Preference Table Creation
-Create Table LA.WeatherPreference(
+Create Table LA.NewsPreference(
     NewsPreferenceID int PRIMARY KEY,
 );
+
+ALTER TABLE LA.NewsPreference
+ADD FOREIGN KEY (NewsPreferenceID) REFERENCES LA.Preference(NewsPreferenceID);
+
+
