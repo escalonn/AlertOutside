@@ -1,21 +1,15 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Google Maps Demo";
 }
-<!DOCTYPE html>
+
 @*https://developers.google.com/maps/documentation/javascript/examples/drawing-tools*@
 
-<head>
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-    <h3>Location Regions</h3>
-    <div id="map"></div>
+<h3>Location Regions</h3>
+
+<div id="map" style="height: 400px; width: 100%;"></div>
+
+@section Scripts {
     <script>
         function initMap() {
             var uluru = { lat: 39.952584, lng: -75.165222 };
@@ -52,10 +46,8 @@
                 console.log(radius);
             });
         }
-
-
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ&libraries=drawing&callback=initMap">
     </script>
-</body>
+}
