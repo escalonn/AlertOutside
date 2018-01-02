@@ -20,6 +20,12 @@ namespace LocationAlert.Client.Controllers
             return View();
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+
 
 
         public IActionResult Error()
