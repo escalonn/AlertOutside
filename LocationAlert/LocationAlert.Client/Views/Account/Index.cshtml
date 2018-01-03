@@ -45,13 +45,6 @@
 
                 google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
                     var radius = circle.getRadius();
-                    @{ 
-                        if (Model.RegionList.Count < Account.MaxRegion)
-                        {
-                            Model.RegionList.Add(new Region());
-
-                        }
-                    }
                     console.log(radius);
                 });
             }
