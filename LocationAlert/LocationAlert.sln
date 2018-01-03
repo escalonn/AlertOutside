@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.0
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Library", "LocationAlert.Library\LocationAlert.Library.csproj", "{65B4489A-B9C3-4E7B-90C5-A2992BCA6859}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAlert.Client", "LocationAlert.Client\LocationAlert.Client.csproj", "{121B45F4-FA0F-4EE5-B12D-B307DC1BAD91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Client", "LocationAlert.Client\LocationAlert.Client.csproj", "{121B45F4-FA0F-4EE5-B12D-B307DC1BAD91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAlert.Test", "LocationAlert.Test\LocationAlert.Test.csproj", "{D4F95AF4-F436-4B46-9C51-58597E62814B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{121B45F4-FA0F-4EE5-B12D-B307DC1BAD91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{121B45F4-FA0F-4EE5-B12D-B307DC1BAD91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{121B45F4-FA0F-4EE5-B12D-B307DC1BAD91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F95AF4-F436-4B46-9C51-58597E62814B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F95AF4-F436-4B46-9C51-58597E62814B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F95AF4-F436-4B46-9C51-58597E62814B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F95AF4-F436-4B46-9C51-58597E62814B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
