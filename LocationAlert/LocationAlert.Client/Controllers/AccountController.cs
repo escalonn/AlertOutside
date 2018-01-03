@@ -13,11 +13,15 @@ namespace LocationAlert.Client.Controllers
     {
         public IActionResult Index()
         {
-            // Session serialization example
-            HttpContext.Session.Set<Account>("key", new Account());
+            Account client = HttpContext.Session.Get<Account>("AccountKey");
 
-            return View();
+            if ( client == null)
+            {
+                client = new Account();
+                HttpContext.Session.Set<Account>("AccountKey", client);
+            }
 
+            return View(client);
         }
     }
 }
