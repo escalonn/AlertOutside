@@ -10,5 +10,6 @@ namespace LocationAlert.Client.Models
         public double Longitude;
         public double Latitude;
         public double Radius;
+
     }
 }
