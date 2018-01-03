@@ -18,10 +18,12 @@ namespace LocationAlert.Client.Models
 
         public String Phone { get; set; }
 
+        public List<Region> RegionList { get; set; }
 
         public Account()
         {
             Email = new MailAddress("undefined@gmail.com");
+            RegionList = new List<Region>();
         }
 
     }
