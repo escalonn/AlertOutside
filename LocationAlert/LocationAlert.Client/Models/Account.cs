@@ -21,7 +21,7 @@ namespace LocationAlert.Client.Models
 
         public Account()
         {
-            Email = new MailAddress("undefined");
+            Email = new MailAddress("undefined@gmail.com");
         }
 
     }
