@@ -20,6 +20,8 @@ namespace LocationAlert.Client.Models
 
         public List<Region> RegionList { get; set; }
 
+        public const int MaxRegion = 3;
+
         public Account()
         {
             Email = new MailAddress("undefined@gmail.com");
