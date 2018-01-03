@@ -1,7 +1,6 @@
 using LocationAlert.Library.Models;
 using System;
 using Xunit;
-using Microsoft.AspNetCore.Mvc;
 
 namespace LocationAlert.Test
 {
@@ -11,11 +10,9 @@ namespace LocationAlert.Test
         public void Test1()
         {
             WeatherPreference wp = new WeatherPreference();
-            Object x  =  wp.GetWeatherForeCast(39.952584, -75.165222);
-          
-            
-           // Assert.Equal("", "");
+            Object x = wp.GetWeatherForecastAsync(39.952584, -75.165222);
 
+            // Assert.Equal("", "");
         }
     }
 }
