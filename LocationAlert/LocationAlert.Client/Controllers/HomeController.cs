@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using LocationAlert.Client.Models;
 
@@ -11,11 +12,6 @@ namespace LocationAlert.Client.Controllers
     public class HomeController : Controller
     {
 
-        public HomeController()
-        {
-
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -23,6 +19,7 @@ namespace LocationAlert.Client.Controllers
 
         public IActionResult Login()
         {
+
             return View();
         }
 
