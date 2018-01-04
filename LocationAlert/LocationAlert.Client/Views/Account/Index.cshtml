@@ -47,8 +47,6 @@
                 drawingManager.setMap(map);
 
                 google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
-                    var radius = circle.getRadius();
-                    console.log(radius);
 
                     if (regions.length >= 3)
                     {
@@ -62,7 +60,12 @@
             }
 
             function saveRegions() {
-                regions.log;
+                regions.forEach(function (element) {
+                    //Serialize Jason (id,longitude,latitude,radius) and send to server (Jquey.Ajax?)
+                    console.log(element.center.lat());
+                    console.log(element.center.lng());
+                    console.log(element.radius);
+                });
             }
         </script>
         <script async defer
