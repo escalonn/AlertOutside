@@ -2,7 +2,7 @@ node('master'){
     stage('import'){
         try{
             git url: 'https://github.com/sofani/AlertOutside.git'
-        } catch {
+        } catch(error) {
             slackSend message:{env.BUILD_NUMBER} color:'danger'
         }
     }
@@ -10,7 +10,7 @@ node('master'){
     stage('build'){
         try{
 
-        } catch {
+        } catch(error) {
                 slackSend message: color:'danger'
             }
         }
@@ -18,7 +18,7 @@ node('master'){
     stage('analyze'){
         try{
 
-        }   catch {
+        }   catch(error) {
                 slackSend message: color:'danger'
             }
         }
@@ -26,7 +26,7 @@ node('master'){
     stage('test'){
         try{
 
-        }   catch {
+        }   catch(error) {
                 slackSend message: color:'danger'
             }
         }
@@ -34,7 +34,7 @@ node('master'){
     stage('package'){
         try{
 
-        }   catch {
+        }   catch(error) {
                 slackSend message: color:'danger'
             }
         }
@@ -42,7 +42,7 @@ node('master'){
     stage('deploy'){
         try{
 
-        }   catch {
+        }   catch(error) {
                 slackSend message: color:'danger'
             }
         }
