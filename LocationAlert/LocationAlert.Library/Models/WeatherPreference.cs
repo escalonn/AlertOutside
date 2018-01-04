@@ -8,6 +8,19 @@ namespace LocationAlert.Library.Models
 {
     public class WeatherPreference
     {
+        // see api at http://openweathermap.org/current
+        internal class WeatherResponse
+        {
+            [JsonProperty("main")]
+            internal WeatherResponseMain Main { get; set; }
+        }
+
+        internal class WeatherResponseMain
+        {
+            [JsonProperty("temp")]
+            internal double Temperature { get; set; }
+        }
+
         private static string OpenWeatherMapApiKey = "f44745b3b949068be733eb938051eed4";
 
         public decimal Longitude { get; set; }
@@ -44,14 +57,21 @@ namespace LocationAlert.Library.Models
                     response.EnsureSuccessStatusCode();
 
                     string stringResult = await response.Content.ReadAsStringAsync();
-                    object rawWeather = JsonConvert.DeserializeObject(stringResult);
-                    return rawWeather;
+                    var rawWeather = JsonConvert.DeserializeObject<WeatherResponse>(stringResult);
+                    double temperatureK = rawWeather.Main.Temperature;
+                    double temperatureF = KelvinToFahrenheit(temperatureK);
+                    return temperatureF;
                 }
                 catch (HttpRequestException)
                 {
                     throw;
                 }
             }
+        }
+
+        private static double KelvinToFahrenheit(double tempKelvin)
+        {
+            return tempKelvin * 9 / 5 - 459.67;
         }
     }
 }
