@@ -8,21 +8,23 @@
 
 <h3>Location Regions</h3>
 
-<div id="map" style="height: 400px; width: 75%;">
 
+<div id="map" style="height: 400px; width: 75%;">
 
     @section Scripts {
         <script>
+            var regions = [];
+
             function initMap() {
                 var uluru = { lat: 39.952584, lng: -75.165222 };
-                var regions = [];
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 6,
                     center: uluru
                 });
                 var marker = new google.maps.Marker({
                     position: uluru,
-                    map: map
+                    map: map,
+                    editable: true
                 });
 
                 var drawingManager = new google.maps.drawing.DrawingManager({
@@ -50,11 +52,14 @@
                     if (regions.length >= 3) {
                         circle.setMap(null);
                     }
-                    else
-                    {
+                    else {
                         regions.push(circle);
                     }
                 });
+            }
+
+            function saveRegions() {
+                regions.log;
             }
         </script>
         <script async defer
@@ -62,3 +67,5 @@
         </script>
     }
 </div>
+
+<button onclick="saveRegions()">Save Regions </button>
