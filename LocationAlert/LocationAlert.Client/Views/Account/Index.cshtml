@@ -49,10 +49,13 @@
                 google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
                     var radius = circle.getRadius();
                     console.log(radius);
-                    if (regions.length >= 3) {
+
+                    if (regions.length >= 3)
+                    {
                         circle.setMap(null);
                     }
-                    else {
+                    else
+                    {
                         regions.push(circle);
                     }
                 });
