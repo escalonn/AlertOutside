@@ -35,7 +35,7 @@ namespace LocationAlert.Client.Controllers
             client.RegionList[r.ID] = r;
 
             // Check the count
-            //client.RegionList.Count(x => x != null);
+            // client.RegionList.Count(x => x != null);
 
             return View("Index");
         }
