@@ -23,6 +23,7 @@ node('master') {
   stage('analyze') {
     try {
       dir('LocationAlert') {
+        bat 'nuget restore'
         bat 'SonarQube.Scanner.MSBuild begin /k:ao473840 /n:alertoutside /v:0.1.0'
         bat 'MSBuild /t:Rebuild'
         bat 'SonarQube.Scanner.MSBuild end'
