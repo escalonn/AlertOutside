@@ -50,7 +50,7 @@ node('master') {
   stage('package') {
     try {
       dir('AlertOutside'){
-        bat 'dotnet package LocationAlert.csproj --out ../Package'
+        bat 'dotnet pack LocationAlert.csproj --output ../Package'
       }
     }
     catch (error) {
