@@ -52,7 +52,7 @@ node('master') {
   stage('package') {
     try {
       dir('AlertOutside'){
-        bat 'msbuild /t:pack LocationAlert.csproj'
+        bat 'dotnet package LocationAlert.csproj --out ../Package'
       }
     }
     catch (error) {
