@@ -51,7 +51,7 @@ node('master') {
     try {
       dir('LocationAlert'){
         bat 'dotnet publish --output ../Package'
-        bat 'msbuild /t:package /p:outputpath=../Package'
+        bat 'msbuild /t:pack /p:outputpath=../Package'
       }
     }
     catch (error) {
