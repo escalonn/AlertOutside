@@ -22,11 +22,11 @@ node('master') {
   }
   stage('analyze') {
     try {
-      // dir('LocationAlert') {
-      //   bat 'SonarQube.Scanner.MSBuild begin /k:ao473840 /n:alertoutside /v:0.1.0'
-      //   bat 'dotnet msbuild /t:Rebuild'
-      //   bat 'SonarQube.Scanner.MSBuild end'
-      // }
+      dir('LocationAlert') {
+        bat 'SonarQube.Scanner.MSBuild begin /k:ao473840 /n:alertoutside /v:0.1.0'
+        bat 'dotnet msbuild /t:Rebuild'
+        bat 'SonarQube.Scanner.MSBuild end'
+      }
     }
     catch (error) {
       slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\nanalyze failed:\n`${error}`"
