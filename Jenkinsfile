@@ -11,8 +11,9 @@ node('master') {
   stage('build') {
     try {
       dir('LocationAlert') {
+        bat 'dotnet restore'
         bat 'dotnet clean'
-        bat 'dotnet build'
+        bat 'dotnet build --no-restore'
       }
     }
     catch (error) {
@@ -23,9 +24,9 @@ node('master') {
   stage('analyze') {
     try {
       dir('LocationAlert') {
-        bat 'dotnet clean'
+        bat 'nuget restore'
         bat 'SonarQube.Scanner.MSBuild begin /k:ao473840 /n:alertoutside /v:0.1.0'
-        bat 'dotnet build'
+        bat 'dotnet msbuild /t:Clean,Build'
         bat 'SonarQube.Scanner.MSBuild end'
       }
     }
