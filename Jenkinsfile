@@ -49,8 +49,9 @@ node('master') {
   }
   stage('package') {
     try {
-      dir('AlertOutside'){
-        bat 'dotnet pack LocationAlert.csproj --output ../Package'
+      dir('LocationAlert'){
+        bat 'dotnet publish --output ../Package'
+        bat 'msbuild /t:pack /p:outputpath=../Package'
       }
     }
     catch (error) {
