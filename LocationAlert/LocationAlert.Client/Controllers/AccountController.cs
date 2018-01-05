@@ -27,7 +27,13 @@ namespace LocationAlert.Client.Controllers
 
         public IActionResult EditRegion(string id, string lat, string lng, string radius)
         {
-            Console.WriteLine(id);
+
+            Region r = new Region(id, lat, lng, radius);
+
+            Account client = HttpContext.Session.Get<Account>("AccountKey");
+
+            client.RegionList[r.ID] = r;
+
             return View("Index");
         }
     }
