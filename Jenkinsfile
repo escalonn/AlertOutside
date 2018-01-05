@@ -39,8 +39,6 @@ node('master') {
   stage('test') {
     try {
       dir('LocationAlert.Tests'){
-        bat 'dotnet restore'
-        bat 'msbuild /t:build LocationAlert.Tests.csproj'
         bat 'dotnet test'
       }
     }
