@@ -39,7 +39,7 @@ node('master') {
   stage('test') {
     try {
       dir('LocationAlert.Tests'){
-        bat 'dotnet test'
+        bat 'dotnet test LocationAlert.Tests.csproj'
       }
     }
     catch (error) {
