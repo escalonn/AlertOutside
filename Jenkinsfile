@@ -11,9 +11,7 @@ node('master') {
   stage('build') {
     try {
       dir('LocationAlert') {
-        bat 'dotnet restore'
-        bat 'dotnet clean'
-        bat 'dotnet build --no-restore'
+        bat 'dotnet build --no-incremental'
       }
     }
     catch (error) {
@@ -24,10 +22,8 @@ node('master') {
   stage('analyze') {
     try {
       dir('LocationAlert') {
-        bat 'nuget restore'
-        bat 'MSBuild /t:Clean'
         bat 'SonarQube.Scanner.MSBuild begin /k:ao473840 /n:alertoutside /v:0.1.0'
-        bat 'MSBuild /t:Build'
+        bat 'dotnet build --no-incremental'
         bat 'SonarQube.Scanner.MSBuild end'
       }
     }
@@ -38,7 +34,7 @@ node('master') {
   }
   stage('test') {
     try {
-      dir('LocationAlert/LocationAlert.Test'){
+      dir('LocationAlert') {
         bat 'dotnet test'
       }
     }
@@ -49,9 +45,9 @@ node('master') {
   }
   stage('package') {
     try {
-      dir('LocationAlert'){
+      dir('LocationAlert') {
         bat 'dotnet publish --output ../Package'
-        bat 'msbuild /t:pack /p:outputpath=../Package'
+        // bat 'dotnet msbuild /t:Pack /p:outputpath=../Package'
       }
     }
     catch (error) {
