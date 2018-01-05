@@ -12,7 +12,7 @@
 <div id="map" style="height: 400px; width: 75%;">
 
     @section Scripts {
-        <script>
+    <script>
             var regions = [];
 
             function initMap() {
@@ -63,15 +63,29 @@
             function saveRegions() {
                 var i = 0;
                 regions.forEach(function (element) {
-                    //Serialize Jason (id,longitude,latitude,radius) and send to server (Jquey.Ajax?)
 
                     console.log(element.id);
                     console.log(element.center.lat());
                     console.log(element.center.lng());
                     console.log(element.radius);
+
+                    $.ajax({
+                         url: '@Url.Action("EditRegion","Account")',
+                         data: { id: element.id, lat: element.center.lat(), lng: element.center.lng(), radius: element.radius },
+                         success: function(data){
+                             //It was successful
+                          },
+                             error: function (xhr, ajaxOptions, thrownError) {
+                                 //Error occured  
+                                 alert(xhr.responseText);
+
+                             }    
+                    })
+
                 });
             }
-        </script>
+
+    </script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ&libraries=drawing&callback=initMap">
         </script>
