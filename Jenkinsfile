@@ -51,7 +51,9 @@ node('master') {
   }
   stage('package') {
     try {
-
+      dir('AlertOutside'){
+        bat 'msbuild /t:package AlertOutside.csproj'
+      }
     }
     catch (error) {
       slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\npackage failed:\n`${error}`"
