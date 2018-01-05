@@ -38,7 +38,10 @@ node('master') {
   }
   stage('test') {
     try {
-
+      dir('AlertOutside.Tests'){
+        bat 'msbuild /t:build JenkinsMVC.Tests.csproj'
+        bat 'dotnet test'
+      }
     }
     catch (error) {
       slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\ntest failed:\n`${error}`"
