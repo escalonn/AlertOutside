@@ -39,6 +39,7 @@ node('master') {
   stage('test') {
     try {
       dir('AlertOutside.Tests'){
+        bat 'dotnet restore'
         bat 'msbuild /t:build JenkinsMVC.Tests.csproj'
         bat 'dotnet test'
       }
