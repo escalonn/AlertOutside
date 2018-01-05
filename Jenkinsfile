@@ -38,7 +38,7 @@ node('master') {
   }
   stage('test') {
     try {
-      dir('LocationAlert.Test'){
+      dir('LocationAlert/LocationAlert.Test'){
         bat 'dotnet test'
       }
     }
