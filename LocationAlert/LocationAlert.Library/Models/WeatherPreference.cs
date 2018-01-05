@@ -39,7 +39,7 @@ namespace LocationAlert.Library.Models
 
         // do not run more than once per 10 minutes!
         // see: https://www.openweathermap.org/appid
-        public async Task<object> GetWeatherForecastAsync(double latitude, double longitude)
+        public async Task<double> GetWeatherForecastAsync(double latitude, double longitude)
         {
             using (var client = new HttpClient())
             {
