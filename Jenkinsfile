@@ -24,7 +24,7 @@ node('master') {
     try {
       dir('LocationAlert') {
         bat 'SonarQube.Scanner.MSBuild begin /k:ao473840 /n:alertoutside /v:0.1.0'
-        bat 'dotnet msbuild /t:Rebuild'
+        bat 'MSBuild /t:Rebuild'
         bat 'SonarQube.Scanner.MSBuild end'
       }
     }
