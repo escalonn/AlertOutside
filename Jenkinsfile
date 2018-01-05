@@ -40,7 +40,7 @@ node('master') {
     try {
       dir('AlertOutside.Tests'){
         bat 'dotnet restore'
-        bat 'msbuild /t:build JenkinsMVC.Tests.csproj'
+        bat 'msbuild /t:build AlertOutside.Tests.csproj'
         bat 'dotnet test'
       }
     }
