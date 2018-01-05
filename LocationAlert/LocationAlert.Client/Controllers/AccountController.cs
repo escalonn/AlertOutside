@@ -23,5 +23,12 @@ namespace LocationAlert.Client.Controllers
 
             return View(client);
         }
+
+
+        public IActionResult EditRegion(string id, string lat, string lng, string radius)
+        {
+            Console.WriteLine(id);
+            return View("Index");
+        }
     }
 }
