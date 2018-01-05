@@ -27,6 +27,7 @@ namespace LocationAlert.Client.Models
             Email = new MailAddress("undefined@gmail.com");
             RegionList = new List<Region>();
 
+            // RegionList gets used like an array, sorry :(
             RegionList.Add(null);
             RegionList.Add(null);
             RegionList.Add(null);
