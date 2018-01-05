@@ -38,9 +38,9 @@ node('master') {
   }
   stage('test') {
     try {
-      dir('AlertOutside.Tests'){
+      dir('LocationAlert.Tests'){
         bat 'dotnet restore'
-        bat 'msbuild /t:build AlertOutside.Tests.csproj'
+        bat 'msbuild /t:build LocationAlert.Tests.csproj'
         bat 'dotnet test'
       }
     }
@@ -52,7 +52,7 @@ node('master') {
   stage('package') {
     try {
       dir('AlertOutside'){
-        bat 'msbuild /t:package AlertOutside.csproj'
+        bat 'msbuild /t:pack LocationAlert.csproj'
       }
     }
     catch (error) {
