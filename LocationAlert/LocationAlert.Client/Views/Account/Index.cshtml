@@ -54,14 +54,17 @@
                     }
                     else
                     {
-                        circle.id = (regions.length) +1;
+                        circle.id = (regions.length);
                         regions.push(circle);
                     }
                 });
             }
 
             function saveRegions() {
-                var i = 0;
+                var latData = [];
+                var lngData = [];
+                var radiusData = [];
+
                 regions.forEach(function (element) {
 
                     console.log(element.id);
@@ -69,20 +72,26 @@
                     console.log(element.center.lng());
                     console.log(element.radius);
 
-                    $.ajax({
-                         url: '@Url.Action("EditRegion","Account")',
-                         data: { id: element.id, lat: element.center.lat(), lng: element.center.lng(), radius: element.radius },
+                    latData[element.id] = element.center.lat();
+                    lngData[element.id] = element.center.lng();
+                    radiusData[element.id] = element.center.radius;
+
+                });
+
+                $.ajax({
+                    url: '@Url.Action("EditRegion","Account")',
+                         // This is important for passing arrays
+                         traditional: true,
+                         data: { latData: latData, lngData: lngData, radiusData: radiusData },
                          success: function(data){
                              //It was successful
                           },
                              error: function (xhr, ajaxOptions, thrownError) {
-                                 //Error occured  
+                                 //Error occured
                                  alert(xhr.responseText);
 
-                             }    
+                             }
                     })
-
-                });
             }
 
     </script>
@@ -94,8 +103,6 @@
 
 <button onclick="saveRegions()">Save Regions </button>
 
-
-@foreach (var item in Model.RegionList)
-{
-
-}
+<div>
+  
+</div>

@@ -25,26 +25,31 @@ namespace LocationAlert.Client.Controllers
         }
 
 
-        public IActionResult EditRegion(string id, string lat, string lng, string radius)
+        //public IActionResult EditRegion(string id, string lat, string lng, string radius)
+        //{
+
+        //    Region r = new Region(id, lat, lng, radius);
+
+        //    Account client = HttpContext.Session.Get<Account>("AccountKey");
+
+        //    if (r.ID <= client.RegionList.Count)
+        //        {
+        //            client.RegionList[r.ID] = r;
+        //        }
+        //    else
+        //        {
+        //            client.RegionList.Add(r);
+        //             Console.WriteLine(client.RegionList.Count);
+        //        }
+
+
+        //    // Check the count
+        //    // client.RegionList.Count(x => x != null);
+        //    return View("Index");
+        //}
+
+        public IActionResult EditRegion(string[] latData, string[] lngData, string[] radiusData)
         {
-
-            Region r = new Region(id, lat, lng, radius);
-
-            Account client = HttpContext.Session.Get<Account>("AccountKey");
-
-            if (r.ID <= client.RegionList.Count)
-                {
-                    client.RegionList[r.ID] = r;
-                }
-            else
-                {
-                    client.RegionList.Add(r);
-                }
-            
-
-            // Check the count
-            // client.RegionList.Count(x => x != null);
-
             return View("Index");
         }
     }
