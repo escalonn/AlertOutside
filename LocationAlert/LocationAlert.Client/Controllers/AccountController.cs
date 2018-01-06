@@ -32,7 +32,15 @@ namespace LocationAlert.Client.Controllers
 
             Account client = HttpContext.Session.Get<Account>("AccountKey");
 
-            client.RegionList[r.ID] = r;
+            if (r.ID <= client.RegionList.Count)
+                {
+                    client.RegionList[r.ID] = r;
+                }
+            else
+                {
+                    client.RegionList.Add(r);
+                }
+            
 
             // Check the count
             // client.RegionList.Count(x => x != null);

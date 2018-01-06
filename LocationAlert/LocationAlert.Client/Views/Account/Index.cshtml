@@ -54,7 +54,7 @@
                     }
                     else
                     {
-                        circle.id = regions.length;
+                        circle.id = (regions.length) +1;
                         regions.push(circle);
                     }
                 });
@@ -93,3 +93,9 @@
 </div>
 
 <button onclick="saveRegions()">Save Regions </button>
+
+
+@foreach (var item in Model.RegionList)
+{
+
+}
