@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Library", "Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Client", "LocationAlert.Client\LocationAlert.Client.csproj", "{121B45F4-FA0F-4EE5-B12D-B307DC1BAD91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAlert.Test", "LocationAlert.Test\LocationAlert.Test.csproj", "{D4F95AF4-F436-4B46-9C51-58597E62814B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Test", "LocationAlert.Test\LocationAlert.Test.csproj", "{D4F95AF4-F436-4B46-9C51-58597E62814B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAlert.Data", "LocationAlert.Data\LocationAlert.Data.csproj", "{B304D25D-1CE6-4BDD-8E42-574F59B3B619}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D4F95AF4-F436-4B46-9C51-58597E62814B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4F95AF4-F436-4B46-9C51-58597E62814B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4F95AF4-F436-4B46-9C51-58597E62814B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B304D25D-1CE6-4BDD-8E42-574F59B3B619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B304D25D-1CE6-4BDD-8E42-574F59B3B619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B304D25D-1CE6-4BDD-8E42-574F59B3B619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B304D25D-1CE6-4BDD-8E42-574F59B3B619}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
