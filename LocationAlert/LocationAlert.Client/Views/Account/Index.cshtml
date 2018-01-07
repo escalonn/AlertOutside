@@ -67,14 +67,9 @@
 
                 regions.forEach(function (element) {
 
-                    console.log(element.id);
-                    console.log(element.center.lat());
-                    console.log(element.center.lng());
-                    console.log(element.radius);
-
                     latData[element.id] = element.center.lat();
                     lngData[element.id] = element.center.lng();
-                    radiusData[element.id] = element.center.radius;
+                    radiusData[element.id] = element.getRadius();
 
                 });
 

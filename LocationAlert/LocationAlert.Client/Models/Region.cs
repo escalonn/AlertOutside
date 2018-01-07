@@ -13,9 +13,9 @@ namespace LocationAlert.Client.Models
         private double Radius { get; set; }
 
 
-        public Region(string id, string lat, string lng, string radius)
+        public Region(int id, string lat, string lng, string radius)
         {
-            ID = Convert.ToInt32(id);
+            ID = id;
             Latitude = Convert.ToDouble(lat);
             Longitude = Convert.ToDouble(lng);
             Radius = Convert.ToDouble(radius);

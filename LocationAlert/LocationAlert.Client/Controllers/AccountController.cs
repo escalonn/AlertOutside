@@ -50,6 +50,24 @@ namespace LocationAlert.Client.Controllers
 
         public IActionResult EditRegion(string[] latData, string[] lngData, string[] radiusData)
         {
+            Account client = HttpContext.Session.Get<Account>("AccountKey");
+
+            // ID's are zero indexed!!
+            for (int i = 0; i <= latData.Length -1; i++)
+            {
+                Region r = new Region(i, latData[i], lngData[i], radiusData[i]);
+
+                if (r.ID >= client.RegionList.Count)
+                {
+                    client.RegionList.Add(r);
+                }
+                else
+                {
+                    client.RegionList[r.ID] = r;
+                }
+
+            }
+
             return View("Index");
         }
     }
