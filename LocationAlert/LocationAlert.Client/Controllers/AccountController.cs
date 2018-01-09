@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
 using LocationAlert.Client.Models;
+using LocationAlert.Client.ViewModels;
 
 namespace LocationAlert.Client.Controllers
 {
     public class AccountController : Controller
     {
+        private static SuperModel _SM = new SuperModel();
         public IActionResult Index()
         {
             Account client = HttpContext.Session.Get<Account>("AccountKey");
@@ -47,6 +49,39 @@ namespace LocationAlert.Client.Controllers
         //    // client.RegionList.Count(x => x != null);
         //    return View("Index");
         //}
+
+
+
+
+        //**********************************Log in Purpose *************//
+
+        public ActionResult LogIn()
+        {
+            HttpContext.Session.SetString("phil", "false");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogIn(string firstname, string password)
+        {
+            HttpContext.Session.SetString("phil", "false");
+            if (_SM.LogIn(firstname, password))
+            {
+                _SM.GetAccount(firstname);
+                HttpContext.Session.SetString("LoggedIn", "true");
+
+                return RedirectToAction("Index", "Account");
+            }
+            return RedirectToAction("Create", "Home");
+        }
+
+        public ActionResult LogInFailed()
+        {
+            HttpContext.Session.SetString("Phil", "false");
+            return View();
+        }
+        //**********************************Log in Purpose *************//
+
 
         public IActionResult EditRegion(string[] latData, string[] lngData, string[] radiusData)
         {
