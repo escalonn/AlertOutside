@@ -50,6 +50,7 @@ namespace LocationAlert.Client.Controllers
 
         public IActionResult EditRegion(string[] latData, string[] lngData, string[] radiusData)
         {
+            // Get current account
             Account client = HttpContext.Session.Get<Account>("AccountKey");
 
             // ID's are zero indexed!!
@@ -57,18 +58,24 @@ namespace LocationAlert.Client.Controllers
             {
                 Region r = new Region(i, latData[i], lngData[i], radiusData[i]);
 
+                // Add Region
                 if (r.ID >= client.RegionList.Count)
                 {
                     client.RegionList.Add(r);
                 }
+                // Replace Region
                 else
                 {
                     client.RegionList[r.ID] = r;
                 }
 
+
             }
 
-            return View("Index");
+            // Not sure if I have to 'save' this specific account object, too scared to delete
+            HttpContext.Session.Set<Account>("AccountKey", client);
+
+            return View("Index", client);
         }
     }
 }

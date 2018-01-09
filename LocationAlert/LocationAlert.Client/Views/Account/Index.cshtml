@@ -97,7 +97,41 @@
 </div>
 
 <button onclick="saveRegions()">Save Regions </button>
-
-<div>
-  
-</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+               Latitude
+            </th>
+            <th>
+               Longitude
+            </th>
+            <th>
+               Radius
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RegionList)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @item.Latitude
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Radius)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
