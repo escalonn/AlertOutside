@@ -1,0 +1,19 @@
+﻿body {
+}
+
+.region {
+    float: left;
+    border-radius: 15px;
+    border: 2px solid #000000;
+    background: #fff3e8;
+    padding: 10px;
+    margin-right: 10px;
+    width: 300px;
+    height: 100px;
+    word-wrap: break-word;
+}
+table th,td{
+    padding-right: 5%;
+    font-weight: lighter;
+}
+
