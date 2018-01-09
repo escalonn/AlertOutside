@@ -8,11 +8,10 @@
 
 <h3>Location Regions</h3>
 
-
 <div id="map" style="height: 400px; width: 75%;">
 
     @section Scripts {
-    <script>
+        <script>
             var regions = [];
 
             function initMap() {
@@ -66,31 +65,27 @@
                 var radiusData = [];
 
                 regions.forEach(function (element) {
-
                     latData[element.id] = element.center.lat();
                     lngData[element.id] = element.center.lng();
                     radiusData[element.id] = element.getRadius();
-
                 });
 
                 $.ajax({
-                    url: '@Url.Action("EditRegion","Account")',
-                         // This is important for passing arrays
-                         traditional: true,
-                         data: { latData: latData, lngData: lngData, radiusData: radiusData },
-                         success: function(data){
-                             //It was successful
-                             location.reload();
-                          },
-                             error: function (xhr, ajaxOptions, thrownError) {
-                                 //Error occured
-                                 alert(xhr.responseText);
-
-                             }
-                    })
+                    url: '@Url.Action("EditRegion", "Account")',
+                    // This is important for passing arrays
+                    traditional: true,
+                    data: { latData: latData, lngData: lngData, radiusData: radiusData },
+                    success: function(data) {
+                        // It was successful
+                        location.reload();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        // Error occurred
+                        alert(xhr.responseText);
+                    }
+                })
             }
-
-    </script>
+        </script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ&libraries=drawing&callback=initMap">
         </script>
@@ -99,40 +94,4 @@
 
 <button onclick="saveRegions()">Save Regions </button>
 <br />
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Latitude
-            </th>
-            <th>
-                Longitude
-            </th>
-            <th>
-                Radius
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.RegionList)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @item.Latitude
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Radius)
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+@Html.Partial("RegionList", Model.RegionList)

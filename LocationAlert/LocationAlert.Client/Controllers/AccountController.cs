@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using LocationAlert.Client.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Session;
-using LocationAlert.Client.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LocationAlert.Client.Controllers
 {
@@ -15,7 +10,7 @@ namespace LocationAlert.Client.Controllers
         {
             Account client = HttpContext.Session.Get<Account>("AccountKey");
 
-            if ( client == null)
+            if (client == null)
             {
                 client = new Account();
                 HttpContext.Session.Set<Account>("AccountKey", client);
@@ -53,8 +48,8 @@ namespace LocationAlert.Client.Controllers
             // Get current account
             Account client = HttpContext.Session.Get<Account>("AccountKey");
 
-            // ID's are zero indexed!!
-            for (int i = 0; i <= latData.Length -1; i++)
+            // IDs are zero indexed!!
+            for (int i = 0; i <= latData.Length - 1; i++)
             {
                 Region r = new Region(i, latData[i], lngData[i], radiusData[i]);
 
@@ -68,8 +63,6 @@ namespace LocationAlert.Client.Controllers
                 {
                     client.RegionList[r.ID] = r;
                 }
-
-
             }
 
             // Not sure if I have to 'save' this specific account object, too scared to delete
