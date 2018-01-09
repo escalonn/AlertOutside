@@ -8,9 +8,9 @@ namespace LocationAlert.Client.Models
     public class Region
     {
         public int ID { get; }
-        private double Latitude { get; set; }
-        private double Longitude { get; set; }
-        private double Radius { get; set; }
+        public double Latitude { get; }
+        public double Longitude { get;  }
+        public double Radius { get;  }
 
 
         public Region(int id, string lat, string lng, string radius)
