@@ -5,10 +5,12 @@ GO
 CREATE SCHEMA LA
 GO
 
+
+
 --**NOT RUN YET
 -- Client Table Creation
 CREATE TABLE LA.Client(
-	ClientID INT PRIMARY KEY,
+	ClientID INT PRIMARY KEY identity,
 	FirstName NVARCHAR(50),
 	MiddleInit NCHAR(1),
 	LastName NVARCHAR(50),
@@ -20,6 +22,12 @@ CREATE TABLE LA.Client(
 	DateModified DATETIME2
 )
 GO
+Drop TABLE LA.Client
+
+
+
+
+
 
 --**NOT RUN YET
 -- Region Table Creation
