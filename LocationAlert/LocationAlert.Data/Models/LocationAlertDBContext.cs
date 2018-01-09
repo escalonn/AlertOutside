@@ -6,14 +6,15 @@ namespace LocationAlert.Data.Models
 {
     public partial class LocationAlertDBContext : DbContext
     {
+        public static string ConnectionString;
+
         public virtual DbSet<Client> Client { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"server=sofanisqlweek.database.windows.net;user=sofa;password=Sami114173;database=LocationAlertDB");
+                optionsBuilder.UseSqlServer(ConnectionString);
             }
         }
 
