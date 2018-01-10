@@ -45,6 +45,8 @@
                 });
                 drawingManager.setMap(map);
 
+               
+
                 google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
 
                     if (regions.length >= 3)
@@ -55,11 +57,43 @@
                     {
                         circle.id = (regions.length);
                         regions.push(circle);
+                        updateTables();
+
+                        google.maps.event.addListener(circle, 'radius_changed', function () {
+                            updateTables();
+                        });
+
+                        google.maps.event.addListener(circle, 'center_changed', function () {
+                            updateTables();
+                        });
                     }
                 });
+
+               
             }
 
-            function saveRegions() {
+            function loadRegions() {
+
+
+            }
+
+            function updateTables() {
+                var table1 = document.getElementById("Region1");
+                var table2 = document.getElementById("Region2");
+                var table3 = document.getElementById("Region3");
+
+                    table1.rows[0].cells[1].innerHTML = regions[0].id;
+                    table1.rows[1].cells[1].innerHTML = regions[0].center.lat();
+                    table1.rows[2].cells[1].innerHTML = regions[0].center.lng();
+                    table1.rows[3].cells[1].innerHTML = regions[0].getRadius();
+
+                
+                
+
+
+            }
+
+            function saveRegions(){
                 var latData = [];
                 var lngData = [];
                 var radiusData = [];
@@ -95,5 +129,4 @@
 <button onclick="saveRegions()">Save Regions </button>
 <br />
 @*@Html.Partial("RegionList", Model.RegionList)*@
-@Html.Partial("RegionTables")
-<br />
+@Html.Partial("RegionTables");
