@@ -73,6 +73,11 @@ namespace LocationAlert.Client.Controllers
             return View("Index", client);
         }
 
+        public IActionResult Preferences()
+        {
+            return View();
+        }
+
         //**********************************Log in Purpose *************//
 
         public ActionResult LogIn()
