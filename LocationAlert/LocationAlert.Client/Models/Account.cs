@@ -22,10 +22,13 @@ namespace LocationAlert.Client.Models
 
         public const int MaxRegion = 3;
 
+        public WeatherPreference MyWeather { get; set; }
+
         public Account()
         {
             Email = new MailAddress("undefined@gmail.com");
             RegionList = new List<Region>();
+            MyWeather = new WeatherPreference();
         }
 
     }
