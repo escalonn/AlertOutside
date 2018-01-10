@@ -5,6 +5,11 @@ namespace LocationAlert.Data.Models
 {
     public partial class Client
     {
+        public Client()
+        {
+            Region = new HashSet<Region>();
+        }
+
         public int ClientId { get; set; }
         public string FirstName { get; set; }
         public string MiddleInit { get; set; }
@@ -15,5 +20,7 @@ namespace LocationAlert.Data.Models
         public string PasswordSalt { get; set; }
         public int? PreferenceId { get; set; }
         public DateTime? DateModified { get; set; }
+
+        public ICollection<Region> Region { get; set; }
     }
 }

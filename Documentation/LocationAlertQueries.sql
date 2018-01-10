@@ -24,15 +24,10 @@ CREATE TABLE LA.Client(
 GO
 Drop TABLE LA.Client
 
-
-
-
-
-
 --**NOT RUN YET
 -- Region Table Creation
 CREATE TABLE LA.Region(
-	RegionID INT PRIMARY KEY,
+	RegionID INT PRIMARY KEY identity,
 	ClientID INT,
 	RegionName NVARCHAR(50),
 	Longitude DECIMAL(9,6),
@@ -105,10 +100,13 @@ GO
 ALTER TABLE LA.Client
 	ADD FOREIGN KEY (PreferenceID) REFERENCES LA.Preference(PreferenceID)
 GO
-
+--Foreig key added 01/10/2018 for client
 ALTER TABLE LA.Region
-	ADD FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID)
+	ADD constraint FK_LARegion_ClientID FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID) on update cascade
 GO
+
+
+
 
 ALTER TABLE LA.Alert
 	ADD FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID)
