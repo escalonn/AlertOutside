@@ -78,19 +78,22 @@
             }
 
             function updateTables() {
+
                 var table1 = document.getElementById("Region1");
                 var table2 = document.getElementById("Region2");
                 var table3 = document.getElementById("Region3");
 
-                    table1.rows[0].cells[1].innerHTML = regions[0].id;
-                    table1.rows[1].cells[1].innerHTML = regions[0].center.lat();
-                    table1.rows[2].cells[1].innerHTML = regions[0].center.lng();
-                    table1.rows[3].cells[1].innerHTML = regions[0].getRadius();
+                var tables = [table1, table2, table3];
 
-                
-                
-
-
+                for (var i = 0; i < tables.length; i++) {
+                    if (regions[i] != null) {
+                        tables[i].rows[0].cells[1].innerHTML = regions[i].id;
+                        tables[i].rows[1].cells[1].innerHTML = regions[i].center.lat();
+                        tables[i].rows[2].cells[1].innerHTML = regions[i].center.lng();
+                        tables[i].rows[3].cells[1].innerHTML = regions[i].getRadius();
+                    }
+                    
+                }
             }
 
             function saveRegions(){
