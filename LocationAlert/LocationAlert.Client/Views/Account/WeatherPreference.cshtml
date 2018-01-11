@@ -1,0 +1,112 @@
+﻿@model LocationAlert.Client.Models.WeatherPreference
+
+<h4>WeatherPreference</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="WeatherPreference">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PushAmount" class="control-label"></label>
+                <input asp-for="PushAmount" class="form-control" />
+                <span asp-validation-for="PushAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AlwaysTemp" /> @Html.DisplayNameFor(model => model.AlwaysTemp)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AlwaysHumidity" /> @Html.DisplayNameFor(model => model.AlwaysHumidity)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AlwaysWind" /> @Html.DisplayNameFor(model => model.AlwaysWind)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AlwaysSnow" /> @Html.DisplayNameFor(model => model.AlwaysSnow)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="TempMin" class="control-label"></label>
+                <input asp-for="TempMin" class="form-control" />
+                <span asp-validation-for="TempMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TempMax" class="control-label"></label>
+                <input asp-for="TempMax" class="form-control" />
+                <span asp-validation-for="TempMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HumidityMin" class="control-label"></label>
+                <input asp-for="HumidityMin" class="form-control" />
+                <span asp-validation-for="HumidityMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HumidityMax" class="control-label"></label>
+                <input asp-for="HumidityMax" class="form-control" />
+                <span asp-validation-for="HumidityMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WindMin" class="control-label"></label>
+                <input asp-for="WindMin" class="form-control" />
+                <span asp-validation-for="WindMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WindMax" class="control-label"></label>
+                <input asp-for="WindMax" class="form-control" />
+                <span asp-validation-for="WindMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CloudMin" class="control-label"></label>
+                <input asp-for="CloudMin" class="form-control" />
+                <span asp-validation-for="CloudMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CloudMax" class="control-label"></label>
+                <input asp-for="CloudMax" class="form-control" />
+                <span asp-validation-for="CloudMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RainMax" class="control-label"></label>
+                <input asp-for="RainMax" class="form-control" />
+                <span asp-validation-for="RainMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RainMin" class="control-label"></label>
+                <input asp-for="RainMin" class="form-control" />
+                <span asp-validation-for="RainMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SnowMax" class="control-label"></label>
+                <input asp-for="SnowMax" class="form-control" />
+                <span asp-validation-for="SnowMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SnowMin" class="control-label"></label>
+                <input asp-for="SnowMin" class="form-control" />
+                <span asp-validation-for="SnowMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
