@@ -1,12 +1,11 @@
 ﻿body {
 }
 
-/*.buttonPref {
-    position: absolute;
-    top: 50%
-}*/
 
 .buttonWrapper {
     text-align: center;
     margin-top: 5px;
+    width:200px;
+    height:200px;
+    float:left;
 }
