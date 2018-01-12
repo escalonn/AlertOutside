@@ -45,9 +45,8 @@ node('master') {
   }
   stage('package') {
     try {
-      dir('LocationAlert') {
-        bat 'dotnet publish --output ../Package'
-        // bat 'dotnet msbuild /t:Pack /p:outputpath=../Package'
+      dir('LocationAlert/LocationAlert.Client') {
+        bat 'dotnet publish --output ../../Package'
       }
     }
     catch (error) {
@@ -57,7 +56,7 @@ node('master') {
   }
   stage('deploy') {
     try {
-		'"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\jenkinsops\\Package\\JenkinsOps\\obj\\Debug\\netcoreapp2.0\\PubTmp\\Out" -dest:iisApp="Default Web Site/LocationAlert",computername= ec2-34-235-132-103.compute-1.amazonaws.com,username=Administrator,"password=uKgWw2?tBT8CVAi74pDybmXvsf@TLbsm",-enableRule:AppOffline'
+      bat "msdeploy -verb:sync -source:iisApp=\"C:\\Program Files (x86)\\Jenkins\\workspace\\LocationAlert\\Package\" -dest:iisApp=\"Default Web Site/LocationAlert\",computername=\"${env.MSDEPLOY_COMPUTERNAME}\",username=\"${env.MSDEPLOY_USERNAME}\",password=\"${env.MSDEPLOY_PASSWORD}\",authtype=basic -allowUntrusted -enableRule:AppOffline"
     }
     catch (error) {
       slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\ndeploy failed:\n`${error}`"
