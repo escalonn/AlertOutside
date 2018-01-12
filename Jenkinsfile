@@ -3,9 +3,9 @@ node('master') {
 		try {
 			git 'https://github.com/escalonn/AlertOutside.git'
 		}
-		catch (error) {
-			slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\nimport failed:\n`${error}`"
-			throw error
+		catch (exc) {
+			slackError('import')
+			throw exc
 		}
 	}
 	stage('build') {
@@ -14,9 +14,9 @@ node('master') {
 				bat 'dotnet build --no-incremental'
 			}
 		}
-		catch (error) {
-			slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\nbuild failed:\n`${error}`"
-			throw error
+		catch (exc) {
+			slackError('build')
+			throw exc
 		}
 	}
 	stage('analyze') {
@@ -27,9 +27,9 @@ node('master') {
 				bat 'SonarQube.Scanner.MSBuild end'
 			}
 		}
-		catch (error) {
-			slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\nanalyze failed:\n`${error}`"
-			throw error
+		catch (exc) {
+			slackError('analyze')
+			throw exc
 		}
 	}
 	stage('test') {
@@ -38,9 +38,9 @@ node('master') {
 				bat 'dotnet test'
 			}
 		}
-		catch (error) {
-			slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\ntest failed:\n`${error}`"
-			throw error
+		catch (exc) {
+			slackError('test')
+			throw exc
 		}
 	}
 	stage('package') {
@@ -49,18 +49,22 @@ node('master') {
 				bat 'dotnet publish --output ../../Package'
 			}
 		}
-		catch (error) {
-			slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\npackage failed:\n`${error}`"
-			throw error
+		catch (exc) {
+			slackError('package')
+			throw exc
 		}
 	}
 	stage('deploy') {
 		try {
 			bat "msdeploy -verb:sync -source:iisApp=\"C:\\Program Files (x86)\\Jenkins\\workspace\\LocationAlert\\Package\" -dest:iisApp=\"Default Web Site/LocationAlert\",computername=\"${env.MSDEPLOY_COMPUTERNAME}\",username=\"${env.MSDEPLOY_USERNAME}\",password=\"${env.MSDEPLOY_PASSWORD}\",authtype=basic -allowUntrusted -enableRule:AppOffline"
 		}
-		catch (error) {
-			slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\ndeploy failed:\n`${error}`"
-			throw error
+		catch (exc) {
+			slackError('deploy')
+			throw exc
 		}
 	}
+}
+
+def slackError(stageName) {
+	slackSend color: 'danger', message: "${stageName} stage failed. [<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString[0..-14]}]"
 }
