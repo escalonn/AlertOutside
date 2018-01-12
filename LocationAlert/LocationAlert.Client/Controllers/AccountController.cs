@@ -8,7 +8,13 @@ namespace LocationAlert.Client.Controllers
     public class AccountController : Controller
     {
         private static SuperModel _SM = new SuperModel();
+
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Regions()
         {
             Account client = HttpContext.Session.Get<Account>("AccountKey");
 
@@ -20,7 +26,6 @@ namespace LocationAlert.Client.Controllers
 
             return View(client);
         }
-
 
         //public IActionResult EditRegion(string id, string lat, string lng, string radius)
         //{
@@ -70,7 +75,7 @@ namespace LocationAlert.Client.Controllers
             // Not sure if I have to 'save' this specific account object, too scared to delete
             HttpContext.Session.Set<Account>("AccountKey", client);
 
-            return View("Index", client);
+            return View("Regions", client);
         }
 
         public IActionResult Preferences()
