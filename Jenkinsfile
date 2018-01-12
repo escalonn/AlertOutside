@@ -45,7 +45,9 @@ node('master') {
   }
   stage('package') {
     try {
-      bat 'dotnet publish --output ../Package'
+      dir('LocationAlert/LocationAlert.Client') {
+        bat 'dotnet publish --output ../../Package'
+      }
     }
     catch (error) {
       slackSend color: 'danger', message: "[<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString}]\npackage failed:\n`${error}`"
