@@ -11,7 +11,7 @@
 <div id="map" style="height: 400px; width: 75%;">
 
     @section Scripts {
-        <script>
+    <script>
             var regions = [];
 
             function initMap() {
@@ -45,7 +45,7 @@
                 });
                 drawingManager.setMap(map);
 
-               
+
 
                 google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
 
@@ -69,13 +69,14 @@
                     }
                 });
 
-               
+                @foreach (var item in Model.RegionList)
+                {
+                    @: var reg = new google.maps.Circle({id: @item.ID, center: { lat:@item.Latitude ,lng:@item.Longitude}, radius: @item.Radius});
+                    @: regions.push(reg);
+                }
+                console.log(regions.length);
             }
 
-            function loadRegions() {
-
-
-            }
 
             function updateTables() {
 
@@ -92,7 +93,7 @@
                         tables[i].rows[2].cells[1].innerHTML = regions[i].center.lng();
                         tables[i].rows[3].cells[1].innerHTML = regions[i].getRadius();
                     }
-                    
+
                 }
             }
 
@@ -128,7 +129,7 @@
                     }
                 })
             }
-        </script>
+    </script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ&libraries=drawing&callback=initMap">
         </script>

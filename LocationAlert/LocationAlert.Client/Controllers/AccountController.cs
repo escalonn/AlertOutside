@@ -82,6 +82,7 @@ namespace LocationAlert.Client.Controllers
         {
             return View();
         }
+
         public IActionResult WeatherPreference()
         {
             Account client = HttpContext.Session.Get<Account>("AccountKey");
