@@ -1,12 +1,12 @@
 ﻿body {
 }
 
-.buttonPref {
+/*.buttonPref {
     position: absolute;
     top: 50%
-}
+}*/
 
 .buttonWrapper {
     text-align: center;
-    margin-left: 50%;
+    margin-top: 5px;
 }
