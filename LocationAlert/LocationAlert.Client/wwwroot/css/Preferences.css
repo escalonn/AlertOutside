@@ -1,12 +1,29 @@
 ﻿body {
 }
 
-/*.buttonPref {
-    position: absolute;
-    top: 50%
-}*/
 
 .buttonWrapper {
     text-align: center;
     margin-top: 5px;
+    width:200px;
+    height:200px;
+    float:left;
 }
+
+.btn-primary {
+    font-family: Raleway-SemiBold;
+    font-size: 16px;
+    color: #ededed;
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 2px solid rgba(58, 133, 191, 0.75);
+    border-radius: 40px;
+    background: transparent;
+    transition: all 0.3s ease 0s;
+}
+
+    .btn-primary:hover {
+        color: #FFF;
+        background: #cccccc;
+        border: 2px solid rgba(58, 133, 191, 0.75);
+    }
