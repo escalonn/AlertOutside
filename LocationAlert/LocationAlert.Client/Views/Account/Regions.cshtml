@@ -45,8 +45,6 @@
                 });
                 drawingManager.setMap(map);
 
-
-
                 google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
 
                     if (regions.length >= 3)
@@ -69,12 +67,16 @@
                     }
                 });
 
+                // Load circles from model
                 @foreach (var item in Model.RegionList)
                 {
-                    @: var reg = new google.maps.Circle({id: @item.ID, center: { lat:@item.Latitude ,lng:@item.Longitude}, radius: @item.Radius});
+                    @: var reg = new google.maps.Circle({ id: @item.ID, center: { lat:@item.Latitude ,lng:@item.Longitude}, radius: @item.Radius, fillColor: '#f45642', fillOpacity: 0.5, strokeWeight: 1, clickable: false, editable: true, zIndex: 1 });
                     @: regions.push(reg);
                 }
-                console.log(regions.length);
+
+                for (var i = 0; i < regions.length; i++) {
+                    regions[i].setMap(map);
+                }
             }
 
 
