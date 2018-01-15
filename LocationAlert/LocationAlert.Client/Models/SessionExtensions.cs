@@ -21,7 +21,7 @@ namespace LocationAlert.Client.Models
         {
             var value = session.GetString(key);
             return value == null ? default(T) :
-                                  JsonConvert.DeserializeObject<T>(value);
+            JsonConvert.DeserializeObject<T>(value);
         }
     }
 }

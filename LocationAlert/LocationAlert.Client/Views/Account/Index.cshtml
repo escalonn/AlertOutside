@@ -6,26 +6,22 @@
 
 <div class="container">
 
-    <div class="row buttonWrapper">
-        <div class="col-md-6">
+    <div class="row center-block">
+        <div class="col-md-4 buttonWrapper">
             <button class="btn-primary" style="color:black">
                 <img src="~/images/WeatherIconWeb.png">
                 Edit Weather Preferences
             </button>
         </div>
-    </div>
+   
 
-    <div class="row buttonWrapper">
-        <div class="col-md-6">
+        <div class="col-md-4 buttonWrapper">
             <button class="btn-primary" style="color:black">
                 <img src="~/images/TrafficIconWeb.png">
                 Edit Traffic Preferences
             </button>
         </div>
-    </div>
-
-    <div class="row buttonWrapper">
-        <div class="col-md-6">
+        <div class="col-md-4 buttonWrapper">
             <button class="btn-primary" style="color:black">
                 <img src="~/images/NewsIconWeb.png">
                 Edit News Preferences
@@ -34,12 +30,15 @@
     </div>
 
     <br />
-    <div class="RegionButton">
-        <div class="col-md-6">
-            <button class="btn-primary" style="color:black" onclick="location.href='@Url.Action("Regions", "Account")'" />
+    <div class="row ">
+        <div class="col-md-2 RegionButton"></div>
+        <div class="col-md-4 RegionButton">
+                <button class="btn-primary" style="color:black" onclick="location.href='@Url.Action("Regions", "Account")'" />
                 <img src="~/images/RegionIconWeb.png">
                 Edit Regions
-            </button>
-        </div>
-    </div>
-</div>  
+                </button>
+         </div>
+        <div class="col-md-4 RegionButton"></div>
+    </div>  
+
+</div>

@@ -1,5 +1,7 @@
 ﻿@model LocationAlert.Client.Models.Account
 
+
+
 @{
     ViewData["Title"] = "My Google Maps Demo";
 }
@@ -8,10 +10,10 @@
 
 <h3>Location Regions</h3>
 
-<div id="map" style="height: 400px; width: 75%;">
+<div  id="map" style="width: 75%; height: 400px; margin-left: 10%">
 
     @section Scripts {
-    <script>
+        <script>
             var regions = [];
 
             function initMap() {
@@ -131,15 +133,19 @@
                     }
                 })
             }
-    </script>
+        </script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ&libraries=drawing&callback=initMap">
         </script>
     }
 </div>
-
-<button onclick="saveRegions()">Save Regions </button>
-<button onclick="deleteRegion()">Delete Region </button>
+<br />
+<div style="margin-left: 10%;">
+    <button class="btn btn-primary" onclick="saveRegions()">Save Regions </button>
+    <button class="btn btn-danger" onclick="deleteRegion()">Delete Region </button>
+</div>
 <br />
 @*@Html.Partial("RegionList", Model.RegionList)*@
-@Html.Partial("RegionTables");
+<div class="container">
+    @Html.Partial("RegionTables");
+</div>
