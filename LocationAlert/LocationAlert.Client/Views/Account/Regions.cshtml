@@ -9,12 +9,16 @@
 <h3>Location Regions</h3>
 
 <div id="map" style="width: 75%; height: 400px; margin-left: 10%"></div>
-<br />
+<br>
 <div style="margin-left: 10%;">
-    <button class="btn btn-primary" onclick="saveRegions()">Save Regions </button>
-    <button class="btn btn-danger" onclick="deleteRegion()">Delete Region </button>
+    <button class="btn btn-primary" onclick="saveRegions()">
+        Save Regions
+    </button>
+    <button class="btn btn-danger" onclick="deleteRegion()">
+        Delete Region
+    </button>
 </div>
-<br />
+<br>
 <div class="container">
     @*@Html.Partial("RegionList", Model.RegionList)*@
     @Html.Partial("RegionTables");
@@ -74,17 +78,32 @@
             });
 
             // Load circles from model
+            var reg;
             @foreach (var item in Model.RegionList)
             {
-                @: var reg = new google.maps.Circle({id: @item.ID, center: { lat:@item.Latitude ,lng:@item.Longitude}, radius: @item.Radius, fillColor: '#f45642', fillOpacity: 0.5, strokeWeight: 1, clickable: false, editable: true, zIndex: 1 });
-                @: regions.push(reg);
+                <text>
+                    reg = new google.maps.Circle({
+                        id: @item.ID,
+                        center: {
+                            lat: @item.Latitude,
+                            lng: @item.Longitude,
+                        },
+                        radius: @item.Radius,
+                        fillColor: '#f45642',
+                        fillOpacity: 0.5,
+                        strokeWeight: 1,
+                        clickable: false,
+                        editable: true,
+                        zIndex: 1
+                    });
+                    regions.push(reg);
+                </text>
             }
 
             for (var i = 0; i < regions.length; i++) {
                 regions[i].setMap(map);
             }
         }
-
 
         function updateTables() {
             var table1 = document.getElementById("Region1");
@@ -100,7 +119,6 @@
                     tables[i].rows[2].cells[1].innerHTML = regions[i].center.lng();
                     tables[i].rows[3].cells[1].innerHTML = regions[i].getRadius();
                 }
-
             }
         }
 
