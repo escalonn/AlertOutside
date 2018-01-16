@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Library", "LocationAlert.Library\LocationAlert.Library.csproj", "{65B4489A-B9C3-4E7B-90C5-A2992BCA6859}"
 EndProject
@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Client", "Loc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Test", "LocationAlert.Test\LocationAlert.Test.csproj", "{D4F95AF4-F436-4B46-9C51-58597E62814B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAlert.Data", "LocationAlert.Data\LocationAlert.Data.csproj", "{B304D25D-1CE6-4BDD-8E42-574F59B3B619}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAlert.Data", "LocationAlert.Data\LocationAlert.Data.csproj", "{B304D25D-1CE6-4BDD-8E42-574F59B3B619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAlert.Library.Service", "LocationAlert.Library.Service\LocationAlert.Library.Service.csproj", "{1D7DA8E0-A3C0-4DAB-AF1F-1843573E4E1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAlert.Data.Service", "LocationAlert.Data.Service\LocationAlert.Data.Service.csproj", "{4674F804-FC33-40B4-98C4-474BDE85EE0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{B304D25D-1CE6-4BDD-8E42-574F59B3B619}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B304D25D-1CE6-4BDD-8E42-574F59B3B619}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B304D25D-1CE6-4BDD-8E42-574F59B3B619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D7DA8E0-A3C0-4DAB-AF1F-1843573E4E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D7DA8E0-A3C0-4DAB-AF1F-1843573E4E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D7DA8E0-A3C0-4DAB-AF1F-1843573E4E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D7DA8E0-A3C0-4DAB-AF1F-1843573E4E1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4674F804-FC33-40B4-98C4-474BDE85EE0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4674F804-FC33-40B4-98C4-474BDE85EE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4674F804-FC33-40B4-98C4-474BDE85EE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4674F804-FC33-40B4-98C4-474BDE85EE0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

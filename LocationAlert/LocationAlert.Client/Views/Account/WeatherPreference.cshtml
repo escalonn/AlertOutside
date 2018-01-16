@@ -1,5 +1,6 @@
 ﻿@model LocationAlert.Client.Models.WeatherPreference
 
+
 <h4>WeatherPreference</h4>
 <hr />
 <div class="row">
@@ -11,22 +12,23 @@
                 <input asp-for="PushAmount" class="form-control" />
                 <span asp-validation-for="PushAmount" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <div class="checkbox">
                     <label>
                         <input asp-for="AlwaysTemp" /> @Html.DisplayNameFor(model => model.AlwaysTemp)
                     </label>
                 </div>
+                <p>
+                    <label for="amount">Temperature Range:</label>
+                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div id="slider-range"></div>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="TempMin" class="control-label"></label>
-                <input asp-for="TempMin" class="form-control" />
-                <span asp-validation-for="TempMin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TempMax" class="control-label"></label>
-                <input asp-for="TempMax" class="form-control" />
-                <span asp-validation-for="TempMax" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <div class="checkbox">
@@ -124,3 +126,25 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+  
+   
+    <script>
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 100,
+                values: [25, 75],
+                slide: function (event, ui) {
+                    $("#amount").val("Temperatures: " + ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1));
+        });
+    </script>
+
+}
