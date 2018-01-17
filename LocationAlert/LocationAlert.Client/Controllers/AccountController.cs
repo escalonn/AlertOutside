@@ -106,9 +106,7 @@ namespace LocationAlert.Client.Controllers
             }
 
             Account client = HttpContext.Session.Get<Account>("AccountKey");
-
             client.MyWeather = pref;
-
             HttpContext.Session.Set<Account>("AccountKey", client);
 
             return Ok();
