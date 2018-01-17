@@ -14,23 +14,27 @@ namespace LocationAlert.Library.Service.Controllers
     {
         // POST account/register
         [HttpPost]
-        public void Register([FromBody] Account client)
+        public IActionResult Register([FromBody] Account client)
         {
-
+            // validate and talk to database
+            return Ok(client);
         }
 
         // POST account/login
         [HttpPost]
-        public void Login([FromBody] Account client)
+        public IActionResult Login([FromBody] Account client)
         {
-
+            // validate that the credentials are correct, return client
+            return Ok(client);
         }
 
         // POST account/update
         [HttpPost]
-        public void Update([FromBody] Account client)
+        public IActionResult Update([FromBody] Account client)
         {
+            // change values in library and database
 
+            return Ok();
         }
 
     }
