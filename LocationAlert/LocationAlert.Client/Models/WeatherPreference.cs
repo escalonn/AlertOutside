@@ -22,8 +22,8 @@ namespace LocationAlert.Client.Models
         [DisplayName("Always Push Rain")]
         public bool AlwaysRain { get; set; }
         // Push rain when outside this range
-        public int RainMax { get; set; }
         public int RainMin { get; set; }
+        public int RainMax { get; set; }
 
         [DisplayName("Always Push Snow")]
         public bool AlwaysSnow { get; set; }

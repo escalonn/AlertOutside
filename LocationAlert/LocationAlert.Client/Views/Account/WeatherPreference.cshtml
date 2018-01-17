@@ -98,7 +98,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="button" value="Save" onclick="SaveValues();" class="btn btn-default" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Back" class="btn btn-default" />
@@ -111,7 +111,6 @@
 @section Scripts {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
-
 
     <!-- Sliders-->
     <script>
@@ -198,6 +197,20 @@
             $("#humidity-amount").val("Humidity Severity: " + $("#humidity-range").slider("values", 0) +
                 "- " + $("#humidity-range").slider("values", 1));
         });
-    </script>
 
+        function SaveValues() {
+            $.ajax({
+                url: '@Url.Action("SaveWeatherPreferences", "Account")',
+                data: { TempMin: 1, TempMax: 12, RainMin: 1, RainMax: 12, SnowMin: 1, SnowMax: 12, CloudMin: 1, CloudMax: 12, WindMin: 1, WindMax: 12, HumidityMin: 1, HumidityMax: 12, AlwaysTemp: true, AlwaysRain: true, AlwaysSnow: true, AlwaysCloud: true, AlwaysWind: true, AlwaysHumidity: true },
+                success: function(data) {
+                    // It was successful
+                    //
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // Error occurred
+                    //alert(xhr.responseText);
+                }
+            })
+        }
+    </script>
 }

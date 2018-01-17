@@ -72,7 +72,7 @@ namespace LocationAlert.Client.Controllers
                 }
             }
 
-            // Not sure if I have to 'save' this specific account object, too scared to delete
+            // Need to 'save' current account object
             HttpContext.Session.Set<Account>("AccountKey", client);
 
             return View("Regions", client);
@@ -86,11 +86,25 @@ namespace LocationAlert.Client.Controllers
         public IActionResult WeatherPreference()
         {
             Account client = HttpContext.Session.Get<Account>("AccountKey");
+
             if (client == null)
             {
                 client = new Account();
             }
+
+            HttpContext.Session.Set<Account>("AccountKey", client);
+
             return View(client.MyWeather);
+        }
+
+        public IActionResult SaveWeatherPreferences(WeatherPreference pref, int TempMin, int TempMax, int RainMin, int RainMax, int SnowMin, int SnowMax, int CloudMin, int CloudMax, int WindMin, int WindMax, int HumidityMin, int HumidityMax, bool AlwaysTemp, bool AlwaysRain, bool AlwaysSnow, bool AlwaysCloud, bool AlwaysWind, bool AlwaysHumidity)
+        {
+
+            Account client = HttpContext.Session.Get<Account>("AccountKey");
+
+            client.MyWeather = pref;
+
+            return Ok();
         }
 
         //**********************************Log in Purpose *************//
