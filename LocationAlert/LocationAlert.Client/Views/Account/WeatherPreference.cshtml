@@ -42,8 +42,8 @@
 
 
             <div class="form-group">
+                <label for="snow-amount"><b>Snow Preferences:</b></label>
                 <div class="checkbox">
-                    <label for="snow-amount"><b>Snow Preferences:</b></label>
                     <label>
                         <input asp-for="AlwaysSnow" /> @Html.DisplayNameFor(model => model.AlwaysSnow)
                     </label>
@@ -113,9 +113,9 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
 
 
-    <!-- Temperature Slider-->
+    <!-- Sliders-->
     <script>
-        $(function () {
+        $(function tempSlide() {
             $("#temp-range").slider({
                 range: true,
                 min: 0,
@@ -128,11 +128,8 @@
             $("#temp-amount").val("Temperatures: " + $("#temp-range").slider("values", 0) +
                 "- " + $("#temp-range").slider("values", 1));
         });
-    </script>
 
-    <!-- Rain Slider-->
-    <script>
-        $(function () {
+        $(function rainSlide() {
             $("#rain-range").slider({
                 range: true,
                 min: 0,
@@ -145,11 +142,8 @@
             $("#rain-amount").val("Rain Severity: " + $("#rain-range").slider("values", 0) +
                 "- " + $("#rain-range").slider("values", 1));
         });
-    </script>
 
-    <!-- Snow Slider-->
-    <script>
-        $(function () {
+        $(function snowSlide() {
             $("#snow-range").slider({
                 range: true,
                 min: 0,
@@ -162,11 +156,8 @@
             $("#snow-amount").val("Snow Severity: " + $("#snow-range").slider("values", 0) +
                 "- " + $("#snow-range").slider("values", 1));
         });
-    </script>
 
-    <!-- Cloud Slider-->
-    <script>
-        $(function () {
+        $(function cloudSlide() {
             $("#cloud-range").slider({
                 range: true,
                 min: 0,
@@ -179,11 +170,8 @@
             $("#cloud-amount").val("Cloudiness Severity: " + $("#cloud-range").slider("values", 0) +
                 "- " + $("#cloud-range").slider("values", 1));
         });
-    </script>
 
-    <!-- Wind Slider-->
-    <script>
-        $(function () {
+        $(function windSlide() {
             $("#wind-range").slider({
                 range: true,
                 min: 0,
@@ -196,10 +184,7 @@
             $("#wind-amount").val("Wind Severity: " + $("#wind-range").slider("values", 0) +
                 "- " + $("#wind-range").slider("values", 1));
         });
-    </script>
 
-    <!-- Humidity Slider-->
-    <script>
         $(function () {
             $("#humidity-range").slider({
                 range: true,
