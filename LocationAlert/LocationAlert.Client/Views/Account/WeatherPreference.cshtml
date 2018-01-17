@@ -16,134 +16,202 @@
 
             <div class="form-group">
                 <div class="checkbox">
+                    <label for="temp-amount"><b>Temperature Preferences:</b></label>
                     <label>
                         <input asp-for="AlwaysTemp" /> @Html.DisplayNameFor(model => model.AlwaysTemp)
                     </label>
                 </div>
                 <p>
-                    <label for="amount">Temperature Range:</label>
-                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    <input type="text" id="temp-amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                 </p>
-                <div id="slider-range"></div>
+                <div id="temp-range"></div>
             </div>
 
-
-            <div class="form-group">
-            </div>
             <div class="form-group">
                 <div class="checkbox">
+                    <label for="rain-amount"><b>Rain Preferences:</b></label><br />
                     <label>
                         <input asp-for="AlwaysRain" /> @Html.DisplayNameFor(model => model.AlwaysRain)
                     </label>
                 </div>
+                <p>
+                    <input type="text" id="rain-amount" readonly style="border:0; color:#291eff; font-weight:bold;">
+                </p>
+                <div id="rain-range"></div>
             </div>
-            <div class="form-group">
-                <label asp-for="RainMax" class="control-label"></label>
-                <input asp-for="RainMax" class="form-control" />
-                <span asp-validation-for="RainMax" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RainMin" class="control-label"></label>
-                <input asp-for="RainMin" class="form-control" />
-                <span asp-validation-for="RainMin" class="text-danger"></span>
-            </div>
+
+
             <div class="form-group">
                 <div class="checkbox">
+                    <label for="snow-amount"><b>Snow Preferences:</b></label>
                     <label>
                         <input asp-for="AlwaysSnow" /> @Html.DisplayNameFor(model => model.AlwaysSnow)
                     </label>
                 </div>
+                <p>
+                    <input type="text" id="snow-amount" readonly style="border:0; color:#44e6ff; font-weight:bold;">
+                </p>
+                <div id="snow-range"></div>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="SnowMin" class="control-label"></label>
-                <input asp-for="SnowMin" class="form-control" />
-                <span asp-validation-for="SnowMin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SnowMax" class="control-label"></label>
-                <input asp-for="SnowMax" class="form-control" />
-                <span asp-validation-for="SnowMax" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                <label for="cloud-amount"><b>Cloudiness Preferences:</b></label>
                 <div class="checkbox">
                     <label>
                         <input asp-for="AlwaysCloud" /> @Html.DisplayNameFor(model => model.AlwaysCloud)
                     </label>
                 </div>
+                <p>
+                    <input type="text" id="cloud-amount" readonly style="border:0; color:#979899; font-weight:bold;">
+                </p>
+                <div id="cloud-range"></div>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="CloudMin" class="control-label"></label>
-                <input asp-for="CloudMin" class="form-control" />
-                <span asp-validation-for="CloudMin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CloudMax" class="control-label"></label>
-                <input asp-for="CloudMax" class="form-control" />
-                <span asp-validation-for="CloudMax" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                <label for="wind-amount"><b>Wind Preferences:</b></label>
                 <div class="checkbox">
                     <label>
                         <input asp-for="AlwaysWind" /> @Html.DisplayNameFor(model => model.AlwaysWind)
                     </label>
                 </div>
+                <p>
+                    <input type="text" id="wind-amount" readonly style="border:0; color:#cc46f4; font-weight:bold;">
+                </p>
+                <div id="wind-range"></div>
             </div>
+
+
+
             <div class="form-group">
-                <label asp-for="WindMin" class="control-label"></label>
-                <input asp-for="WindMin" class="form-control" />
-                <span asp-validation-for="WindMin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WindMax" class="control-label"></label>
-                <input asp-for="WindMax" class="form-control" />
-                <span asp-validation-for="WindMax" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                <label for="humidity-amount"><b>Humidity Preferences:</b></label>
                 <div class="checkbox">
                     <label>
                         <input asp-for="AlwaysHumidity" /> @Html.DisplayNameFor(model => model.AlwaysHumidity)
                     </label>
                 </div>
+                <p>
+                    <input type="text" id="humidity-amount" readonly style="border:0; color:#00892d; font-weight:bold;">
+                </p>
+                <div id="humidity-range"></div>
             </div>
-            <div class="form-group">
-                <label asp-for="HumidityMin" class="control-label"></label>
-                <input asp-for="HumidityMin" class="form-control" />
-                <span asp-validation-for="HumidityMin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HumidityMax" class="control-label"></label>
-                <input asp-for="HumidityMax" class="form-control" />
-                <span asp-validation-for="HumidityMax" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Back" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
-  
-   
+
+
+    <!-- Temperature Slider-->
     <script>
         $(function () {
-            $("#slider-range").slider({
+            $("#temp-range").slider({
                 range: true,
                 min: 0,
                 max: 100,
                 values: [25, 75],
                 slide: function (event, ui) {
-                    $("#amount").val("Temperatures: " + ui.values[0] + " - " + ui.values[1]);
+                    $("#temp-amount").val("Temperatures: " + ui.values[0] + " - " + ui.values[1]);
                 }
             });
-            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-                " - $" + $("#slider-range").slider("values", 1));
+            $("#temp-amount").val("Temperatures: " + $("#temp-range").slider("values", 0) +
+                "- " + $("#temp-range").slider("values", 1));
+        });
+    </script>
+
+    <!-- Rain Slider-->
+    <script>
+        $(function () {
+            $("#rain-range").slider({
+                range: true,
+                min: 0,
+                max: 10,
+                values: [2, 7],
+                slide: function (event, ui) {
+                    $("#rain-amount").val("Rain: " + ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#rain-amount").val("Rain Severity: " + $("#rain-range").slider("values", 0) +
+                "- " + $("#rain-range").slider("values", 1));
+        });
+    </script>
+
+    <!-- Snow Slider-->
+    <script>
+        $(function () {
+            $("#snow-range").slider({
+                range: true,
+                min: 0,
+                max: 10,
+                values: [2, 7],
+                slide: function (event, ui) {
+                    $("#snow-amount").val("Snow Severity: " + ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#snow-amount").val("Snow Severity: " + $("#snow-range").slider("values", 0) +
+                "- " + $("#snow-range").slider("values", 1));
+        });
+    </script>
+
+    <!-- Cloud Slider-->
+    <script>
+        $(function () {
+            $("#cloud-range").slider({
+                range: true,
+                min: 0,
+                max: 10,
+                values: [2, 7],
+                slide: function (event, ui) {
+                    $("#cloud-amount").val("Cloudiness Severity: " + ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#cloud-amount").val("Cloudiness Severity: " + $("#cloud-range").slider("values", 0) +
+                "- " + $("#cloud-range").slider("values", 1));
+        });
+    </script>
+
+    <!-- Wind Slider-->
+    <script>
+        $(function () {
+            $("#wind-range").slider({
+                range: true,
+                min: 0,
+                max: 10,
+                values: [2, 7],
+                slide: function (event, ui) {
+                    $("#wind-amount").val("Wind Severity: " + ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#wind-amount").val("Wind Severity: " + $("#wind-range").slider("values", 0) +
+                "- " + $("#wind-range").slider("values", 1));
+        });
+    </script>
+
+    <!-- Humidity Slider-->
+    <script>
+        $(function () {
+            $("#humidity-range").slider({
+                range: true,
+                min: 0,
+                max: 10,
+                values: [2, 7],
+                slide: function (event, ui) {
+                    $("#humidity-amount").val("Humidity Severity: " + ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#humidity-amount").val("Humidity Severity: " + $("#humidity-range").slider("values", 0) +
+                "- " + $("#humidity-range").slider("values", 1));
         });
     </script>
 
