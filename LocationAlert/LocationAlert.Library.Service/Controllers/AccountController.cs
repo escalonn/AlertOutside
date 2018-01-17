@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LocationAlert.Library.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace LocationAlert.Library.Service.Controllers
         [HttpPost]
         public void Register([FromBody] Account client)
         {
-            return client;
+
         }
 
         // POST account/login
