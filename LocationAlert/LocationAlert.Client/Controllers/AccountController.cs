@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LocationAlert.Client.ViewModels;
+using System;
 
 namespace LocationAlert.Client.Controllers
 {
@@ -97,7 +98,7 @@ namespace LocationAlert.Client.Controllers
             return View(client.MyWeather);
         }
 
-        public IActionResult SaveWeatherPreferences(WeatherPreference pref, int TempMin, int TempMax, int RainMin, int RainMax, int SnowMin, int SnowMax, int CloudMin, int CloudMax, int WindMin, int WindMax, int HumidityMin, int HumidityMax, bool AlwaysTemp, bool AlwaysRain, bool AlwaysSnow, bool AlwaysCloud, bool AlwaysWind, bool AlwaysHumidity)
+        public IActionResult SaveWeatherPreferences(WeatherPreference pref, string PushAmount, int TempMin, int TempMax, int RainMin, int RainMax, int SnowMin, int SnowMax, int CloudMin, int CloudMax, int WindMin, int WindMax, int HumidityMin, int HumidityMax, bool AlwaysTemp, bool AlwaysRain, bool AlwaysSnow, bool AlwaysCloud, bool AlwaysWind, bool AlwaysHumidity)
         {
 
             Account client = HttpContext.Session.Get<Account>("AccountKey");
