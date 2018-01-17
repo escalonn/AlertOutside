@@ -98,7 +98,6 @@ namespace LocationAlert.Client.Controllers
             return View(client.MyWeather);
         }
 
-        [HttpPost]
         public IActionResult SaveWeatherPreferences(WeatherPreference pref)
         {
             if (!ModelState.IsValid)
