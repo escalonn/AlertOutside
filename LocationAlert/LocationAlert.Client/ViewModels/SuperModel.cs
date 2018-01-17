@@ -1,9 +1,7 @@
 ﻿using LocationAlert.Client.Models;
-using Lib = LocationAlert.Library.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Lib = LocationAlert.Library.Models;
 
 namespace LocationAlert.Client.ViewModels
 {
@@ -24,8 +22,8 @@ namespace LocationAlert.Client.ViewModels
             {
                 ls.Add(new Lib.Register()
                 {
-                    Firstname = item.Firstname,
-                    Email = item.Email,
+                    Firstname = item.FirstName,
+                    Email = item.Email.Address,
                     Password = item.Password
                 });
             }
@@ -37,12 +35,12 @@ namespace LocationAlert.Client.ViewModels
         {
             return _LH.LogIn(firstname, password);
         }
+
         public Lib.Account GetAccount(string firstname)
         {
             return _LH.GetAccount(firstname);
         }
-
-
+        
         public Lib.Account AccountToLibrary(Account ca)
         {
             var la = new Lib.Account()
@@ -52,7 +50,5 @@ namespace LocationAlert.Client.ViewModels
             };
             return la;
         }
-
-
     }
 }

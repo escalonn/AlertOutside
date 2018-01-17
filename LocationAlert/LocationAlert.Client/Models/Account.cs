@@ -1,35 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
-using System.Threading.Tasks;
 
 namespace LocationAlert.Client.Models
 {
     public class Account
     {
-        public MailAddress Email { get; set; }
+        [Required]
+        [EmailAddress]
+        public MailAddress Email { get; set; } = new MailAddress("undefined@gmail.com");
 
-        public String Password { get; set; }
+        [Required]
+        public string Password { get; set; }
 
-        public String FirstName { get; set; }
-        public String MiddleInitial { get; set; }
-        public String LastName { get; set; }
+        [Required]
+        public string FirstName { get; set; }
 
-        public String Phone { get; set; }
+        public string MiddleInitial { get; set; }
+        
+        public string LastName { get; set; }
 
-        public List<Region> RegionList { get; set; }
+        [Phone]
+        public string Phone { get; set; }
+
+        public List<Region> RegionList { get; set; } = new List<Region>();
 
         public const int MaxRegion = 3;
 
-        public WeatherPreference MyWeather { get; set; }
-
-        public Account()
-        {
-            Email = new MailAddress("undefined@gmail.com");
-            RegionList = new List<Region>();
-            MyWeather = new WeatherPreference();
-        }
-
+        public WeatherPreference MyWeather { get; set; } = new WeatherPreference();
     }
 }
