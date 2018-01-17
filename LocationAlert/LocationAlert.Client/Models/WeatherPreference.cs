@@ -7,7 +7,7 @@ namespace LocationAlert.Client.Models
     {
         // How often to push 'Always' values
         [DisplayName("How often should we push you alerts?")]
-        public TimeSpan PushAmount{ get; set; }
+        public TimeSpan PushAmount { get; set; }
 
         // Always push values
         [DisplayName("Always Push Temperature")]
