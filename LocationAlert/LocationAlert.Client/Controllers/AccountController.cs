@@ -157,7 +157,11 @@ namespace LocationAlert.Client.Controllers
 
             bytes.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var response = await RestClient.PostAsync("http://www.locationAlert.com", bytes);
+            var response = await RestClient.PostAsync("http://www.LocationAlert.com/api/account", bytes);
+            // load client data from response message here
+            // save the data to session
+            HttpContext.Session.Set<Account>("AccountKey", client);
+
         }
     }
 }
