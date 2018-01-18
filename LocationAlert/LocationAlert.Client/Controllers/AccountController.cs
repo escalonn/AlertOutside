@@ -14,6 +14,7 @@ namespace LocationAlert.Client.Controllers
     {
         private static SuperModel _SM = new SuperModel();
         private static HttpClient RestClient = new HttpClient();
+        public static String LibraryURL = "http://localhost:61340/api/account/register";
 
         public IActionResult Index()
         {
@@ -150,15 +151,22 @@ namespace LocationAlert.Client.Controllers
 
         public async Task RestLogin(Account client)
         {
+            // Serialize Account object
             var content = JsonConvert.SerializeObject(client);
 
+            // Json object to bytes (HttpContent compatiable
             var buffer = System.Text.Encoding.UTF8.GetBytes(content);
             var bytes = new ByteArrayContent(buffer);
 
-            bytes.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            //bytes.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var response = await RestClient.PostAsync("http://www.LocationAlert.com/api/account", bytes);
+            var response = await RestClient.PostAsync("http://localhost:61340/api/account/register", bytes);
+
+            var stringResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            client = JsonConvert.DeserializeObject<Account>(stringResponse);
             // load client data from response message here
+            HttpContext.Session.Get<Account>("AccountKey");
             // save the data to session
             HttpContext.Session.Set<Account>("AccountKey", client);
 

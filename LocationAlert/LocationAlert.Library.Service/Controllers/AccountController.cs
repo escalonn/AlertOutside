@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LocationAlert.Library.Service.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Account")]
+    [Route("api/[controller]/[action]")]
     public class AccountController : Controller
     {
         // POST account/register
