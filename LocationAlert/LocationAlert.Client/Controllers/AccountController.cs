@@ -3,12 +3,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LocationAlert.Client.ViewModels;
 using System;
+using System.Threading.Tasks;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace LocationAlert.Client.Controllers
 {
     public class AccountController : Controller
     {
         private static SuperModel _SM = new SuperModel();
+        private static HttpClient RestClient = new HttpClient();
 
         public IActionResult Index()
         {
@@ -139,6 +144,20 @@ namespace LocationAlert.Client.Controllers
         {
             HttpContext.Session.SetString("Phil", "false");
             return View();
+        }
+
+        //*********************************REST and API Work***********//
+
+        public async Task RestLogin(Account client)
+        {
+            var content = JsonConvert.SerializeObject(client);
+
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var bytes = new ByteArrayContent(buffer);
+
+            bytes.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await RestClient.PostAsync("http://www.locationAlert.com", bytes);
         }
     }
 }
