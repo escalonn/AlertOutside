@@ -17,7 +17,7 @@ namespace LocationAlert.Library.Service
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            
+            ServerTicker.Instance.Start();
         }
 
         public IConfiguration Configuration { get; }
