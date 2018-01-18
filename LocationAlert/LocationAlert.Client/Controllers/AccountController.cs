@@ -14,7 +14,7 @@ namespace LocationAlert.Client.Controllers
     {
         private static SuperModel _SM = new SuperModel();
         private static HttpClient RestClient = new HttpClient();
-        public static String LibraryURL = "http://localhost:61340/api/account/register";
+        public static string LibraryUrl;
 
         public IActionResult Index()
         {
