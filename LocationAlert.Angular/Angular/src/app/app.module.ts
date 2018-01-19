@@ -9,17 +9,25 @@ import { PreferencesComponent } from './preferences/preferences.component';
 import { WeatherpreferencesComponent } from './weatherpreferences/weatherpreferences.component';
 import { AuthGuard } from './auth.guard';
 
+import { NouisliderModule } from 'ng2-nouislider';
+
+
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PreferencesComponent,
-    WeatherpreferencesComponent
+    WeatherpreferencesComponent,
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NouisliderModule
   ],
   providers: [
     AuthGuard
