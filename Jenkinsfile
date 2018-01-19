@@ -68,9 +68,9 @@ node('master') {
 					bat 'dotnet publish --output ../../PackageData'
 				}
 			}
-			//dir('LocationAlert.Angular/Angular') {
-			//	// no op
-			//}
+			dir('LocationAlert.Angular/Angular') {
+				bat 'ng build --base-href /LocationAlert/'
+			}
 		}
 		catch (exc) {
 			slackError('package')
