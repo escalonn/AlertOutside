@@ -1,111 +1,93 @@
-<h4>WeatherPreference</h4>
+<h4>
+  WeatherPreference</h4>
 <hr />
-<div class="row">
-  <div class="col-md-4">
-    <form id="WeatherPreference">
-
-      <div class="form-group">
-        <label>
-          <b>How often should we push you alerts?</b>
-        </label>
-        <br>
-        <label>Hours:</label>
-        <input for="pushHour" type="number" class="form-control" />
-        <label>Minutes:</label>
-        <input for="pushMinutes" type="number" class="form-control" />
-      </div>
-
-
-      <div class="form-group">
-        <label>
-          <b>Temperature Preferences:</b>
-        </label>
-        <br>
-        <input type="checkbox" id="AlwaysTemp">
-        <label for="AlwaysTemp">Always Push Temperature Updates</label>
-
-        <nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="weatherPref.temp" (ngModelChange)="onChange($event)"></nouislider>
-      </div>
-
-      <div class="form-group">
-        <label>
-          <b>Rain Preferences:</b>
-        </label>
-        <br>
-        <input type="checkbox" id="AlwaysRain">
-        <label for="AlwaysRain">Always Push Rain Updates</label>
-
-        <p>
-          <input type="text" id="rain-amount" readonly style="border:0; color:#291eff; font-weight:bold;">
-        </p>
-        <div id="rain-range"></div>
-      </div>
-
-
-      <div class="form-group">
-        <label>
-          <b>Snow Preferences:</b>
-        </label>
-        <br>
-        <input type="checkbox" id="AlwaysSnow">
-        <label for="AlwaysSnow">Always Push Snow Updates</label>
-        <p>
-          <input type="text" id="snow-amount" readonly style="border:0; color:#44e6ff; font-weight:bold;">
-        </p>
-        <div id="snow-range"></div>
-      </div>
-
-
-      <div class="form-group">
-        <label>
-          <b>Cloudiness Preferences:</b>
-        </label>
-        <br>
-        <input type="checkbox" id="AlwaysCloud">
-        <label for="AlwaysCloud">Always Push Cloudiness Updates</label>
-        <p>
-          <input type="text" id="cloud-amount" readonly style="border:0; color:#979899; font-weight:bold;">
-        </p>
-        <div id="cloud-range"></div>
-      </div>
-
-
-      <div class="form-group">
-        <label>
-          <b>Wind Preferences:</b>
-        </label>
-        <br>
-        <input type="checkbox" id="AlwaysWind">
-        <label>Always Push Wind Updates</label>
-        <p>
-          <input type="text" id="wind-amount" readonly style="border:0; color:#cc46f4; font-weight:bold;">
-        </p>
-        <div id="wind-range"></div>
-      </div>
-
-
-
-      <div class="form-group">
-        <label>
-          <b>Humidity Preferences:</b>
-        </label>
-        <br>
-        <input type="checkbox" id="AlwaysHumidity">
-        <label>Always Push Humidity Updates</label>
-        <p>
-          <input type="text" id="humidity-amount" readonly style="border:0; color:#00892d; font-weight:bold;">
-        </p>
-        <div id="humidity-range"></div>
-      </div>
-
-      <div class="form-group">
-        <input type="button" value="Save" (click)="onSave()" class="btn btn-default" />
-      </div>
-      <div class="form-group">
-        <input type="button" value="Back" (click)="onBack()" class="btn btn-default" />
-      </div>
-    </form>
+<form id="WeatherPreference">
+  <div class="form-group">
+    <label>
+      <b>How often should we push you alerts?</b>
+    </label>
+    <br>
+    <label for="pushHours">Hours:</label>
+    <input type="number" class="form-control" name="pushHours" [(ngModel)]="weatherPref.pushHours">
+    <label for="pushMinutes">Minutes:</label>
+    <input type="number" class="form-control" name="pushMinutes" [(ngModel)]="weatherPref.pushMinutes">
   </div>
-</div>
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <div class="form-group">
+    <label>
+      <b>Temperature Preferences:</b>
+    </label>
+    <br>
+    <input type="checkbox" id="AlwaysTemp" name="AlwaysTemp" [(ngModel)]="weatherPref.alwaysTemp">
+    <label for="AlwaysTemp">Always Push Temperature Updates</label>
+
+    <nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="weatherPref.temp" name="temp"></nouislider>
+  </div>
+
+  <div class="form-group">
+    <label>
+      <b>Rain Preferences:</b>
+    </label>
+    <br>
+    <input type="checkbox" id="AlwaysRain" name="AlwaysRain" [(ngModel)]="weatherPref.alwaysRain">
+    <label for="AlwaysRain">Always Push Rain Updates</label>
+
+    <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.rain" name="rain"></nouislider>
+    <div id="rain-range"></div>
+  </div>
+
+  <div class="form-group">
+    <label>
+      <b>Snow Preferences:</b>
+    </label>
+    <br>
+    <input type="checkbox" id="AlwaysSnow" name="AlwaysSnow" [(ngModel)]="weatherPref.alwaysSnow">
+    <label for="AlwaysSnow">Always Push Snow Updates</label>
+
+    <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.snow" name="snow"></nouislider>
+    <div id="snow-range"></div>
+  </div>
+
+  <div class="form-group">
+    <label>
+      <b>Cloudiness Preferences:</b>
+    </label>
+    <br>
+    <input type="checkbox" id="AlwaysCloud" name="AlwaysCloud" [(ngModel)]="weatherPref.alwaysCloud">
+    <label for="AlwaysCloud">Always Push Cloudiness Updates</label>
+
+    <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.cloud" name="cloud"></nouislider>
+    <div id="cloud-range"></div>
+  </div>
+
+  <div class="form-group">
+    <label>
+      <b>Wind Preferences:</b>
+    </label>
+    <br>
+    <input type="checkbox" id="AlwaysWind" name="AlwaysWind" [(ngModel)]="weatherPref.alwaysWind">
+    <label>Always Push Wind Updates</label>
+
+    <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.wind" name="wind"></nouislider>
+    <div id="wind-range"></div>
+  </div>
+
+  <div class="form-group">
+    <label>
+      <b>Humidity Preferences:</b>
+    </label>
+    <br>
+    <input type="checkbox" id="AlwaysHumidity" name="AlwaysHumidity" [(ngModel)]="weatherPref.alwaysHumidity">
+    <label>Always Push Humidity Updates</label>
+
+    <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.humidity" name="humidity"></nouislider>
+    <div id="humidity-range"></div>
+  </div>
+
+  <div class="form-group">
+    <input type="button" value="Save" (click)="onSave()" class="btn btn-default" />
+  </div>
+  <div class="form-group">
+    <input type="button" value="Back" (click)="onBack()" class="btn btn-default" />
+  </div>
+</form>

@@ -132,13 +132,13 @@ namespace LocationAlert.Client.Controllers
         public ActionResult LogIn(string firstname, string password)
         {
             HttpContext.Session.SetString("phil", "false");
-            if (_SM.LogIn(firstname, password))
-            {
-                _SM.GetAccount(firstname);
-                HttpContext.Session.SetString("LoggedIn", "true");
+            //if (_SM.LogIn(firstname, password))
+            //{
+            //    _SM.GetAccount(firstname);
+            //    HttpContext.Session.SetString("LoggedIn", "true");
 
-                return RedirectToAction("Index", "Account");
-            }
+            //    return RedirectToAction("Index", "Account");
+            //}
             return RedirectToAction("Create", "Home");
         }
 

@@ -13,6 +13,7 @@ import { AuthenticationService } from './authentication.service';
 
 import { NouisliderModule } from 'ng2-nouislider';
 import { RegionsComponent } from './regions/regions.component';
+import { FormsModule } from '@angular/forms';
 
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
@@ -32,6 +33,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
       HttpClientModule,
       NouisliderModule,
       AppRoutingModule,
+      FormsModule,
       AgmCoreModule.forRoot({
         apiKey: 'AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ'
       }),

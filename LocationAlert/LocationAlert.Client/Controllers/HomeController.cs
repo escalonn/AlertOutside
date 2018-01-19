@@ -47,7 +47,7 @@ namespace LocationAlert.Client.Controllers
                     throw new ArgumentException("you are not registered!!!");
                 }
 
-                _SM.AddClient(r);
+                //_SM.AddClient(r);
                 return RedirectToAction("Index", "Account");
                 
             }
