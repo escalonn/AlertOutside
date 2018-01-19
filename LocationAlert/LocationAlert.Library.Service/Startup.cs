@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LocationAlert.Library.Models;
+using LocationAlert.Library.Service.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,8 @@ namespace LocationAlert.Library.Service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            
+            AccountController.DataUrl = Configuration.GetValue<string>("ServiceUris:data");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

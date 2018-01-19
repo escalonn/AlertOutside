@@ -1,16 +1,47 @@
 USE [LocationAlertDB]
 GO
 
--- Schema Creation, Location Alert
-CREATE SCHEMA LA
+ALTER TABLE LA.Preference DROP
+	constraint FK_Preference_WeatherPreference,
+	constraint FK_Preference_TrafficPreference,
+	constraint FK_Preference_NewsPreference;
+GO
+ALTER TABLE LA.SubAlert DROP constraint FK_SubAlert_BaseAlert;
+GO
+ALTER TABLE LA.Alert DROP constraint FK_Alert_Client;
+GO
+ALTER TABLE LA.Region DROP constraint FK_Region_Client;
+GO
+ALTER TABLE LA.Client DROP constraint FK_Client_Preference;
+GO
+DROP TABLE LA.NewsPreference;
+GO
+DROP TABLE LA.TrafficPreference;
+GO
+DROP TABLE LA.WeatherPreference;
+GO
+DROP TABLE LA.Preference;
+GO
+DROP TABLE LA.BaseAlert;
+GO
+DROP TABLE LA.SubAlert;
+GO
+DROP TABLE LA.Alert;
+GO
+DROP TABLE LA.Region;
+GO
+DROP TABLE LA.Client;
+GO
+DROP SCHEMA LA;
 GO
 
+-- Schema Creation, Location Alert
+CREATE SCHEMA LA;
+GO
 
-
---**NOT RUN YET
 -- Client Table Creation
 CREATE TABLE LA.Client(
-	ClientID INT PRIMARY KEY identity,
+	ClientID INT identity NOT NULL,
 	FirstName NVARCHAR(50),
 	MiddleInit NCHAR(1),
 	LastName NVARCHAR(50),
@@ -22,12 +53,10 @@ CREATE TABLE LA.Client(
 	DateModified DATETIME2
 )
 GO
-Drop TABLE LA.Client
 
---**NOT RUN YET
 -- Region Table Creation
 CREATE TABLE LA.Region(
-	RegionID INT PRIMARY KEY identity,
+	RegionID INT identity NOT NULL,
 	ClientID INT,
 	RegionName NVARCHAR(50),
 	Longitude DECIMAL(9,6),
@@ -37,10 +66,9 @@ CREATE TABLE LA.Region(
 )
 GO
 
---**NOT RUN YET
 -- Alert Table Creation
 CREATE TABLE LA.Alert(
-	AlertID INT PRIMARY KEY,
+	AlertID INT NOT NULL,
 	ClientID INT,
 	AlertTypeID INT,
 	AlertMessage NVARCHAR(512),
@@ -48,27 +76,24 @@ CREATE TABLE LA.Alert(
 )
 GO
 
---**NOT RUN YET
 -- SubAlert Table Creation
 CREATE TABLE LA.SubAlert(
-	SubAlertID INT PRIMARY KEY,
+	SubAlertID INT NOT NULL,
 	SubAlertType NVARCHAR(50),
 	BaseAlertID INT
 )
 GO
 
---**NOT RUN YET
 -- BaseAlert Table Creation
 CREATE TABLE LA.BaseAlert(
-	BaseAlertID INT PRIMARY KEY,
+	BaseAlertID INT NOT NULL,
 	BaseAlertType NVARCHAR(50)
 )
 GO
 
---**NOT RUN YET
 -- Preference Table Creation
 CREATE TABLE LA.Preference(
-	PreferenceID INT PRIMARY KEY,
+	PreferenceID INT NOT NULL,
 	WeatherPreferenceID INT,
 	TrafficPreferenceID INT,
 	NewsPreferenceID INT,
@@ -76,54 +101,69 @@ CREATE TABLE LA.Preference(
 )
 GO
 
---**NOT RUN YET
 -- Weather Preference Table Creation
 CREATE TABLE LA.WeatherPreference(
-	WeatherPreferenceID INT PRIMARY KEY
+	WeatherPreferenceID INT NOT NULL
 )
 GO
 
---**NOT RUN YET
 -- Traffic Preference Table Creation
 CREATE TABLE LA.TrafficPreference(
-	TrafficPreferenceID INT PRIMARY KEY
+	TrafficPreferenceID INT NOT NULL
 )
 GO
 
---**NOT RUN YET
 -- News Preference Table Creation
 CREATE TABLE LA.NewsPreference(
-	NewsPreferenceID INT PRIMARY KEY
+	NewsPreferenceID INT NOT NULL
 )
 GO
 
+-- Primary Key Creation
 ALTER TABLE LA.Client
-	ADD FOREIGN KEY (PreferenceID) REFERENCES LA.Preference(PreferenceID)
+	ADD constraint PK_Client_ClientID PRIMARY KEY (ClientID)
 GO
---Foreig key added 01/10/2018 for client
 ALTER TABLE LA.Region
-	ADD constraint FK_LARegion_ClientID FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID) on update cascade
+	ADD constraint PK_Region_RegionID PRIMARY KEY (RegionID)
 GO
-
-
-
-
 ALTER TABLE LA.Alert
-	ADD FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID)
+	ADD constraint PK_Alert_AlertID PRIMARY KEY (AlertID)
 GO
-
 ALTER TABLE LA.SubAlert
-	ADD FOREIGN KEY (BaseAlertID) REFERENCES LA.BaseAlert(BaseAlertID)
+	ADD constraint PK_SubAlert_SubAlertID PRIMARY KEY (SubAlertID)
 GO
-
+ALTER TABLE LA.BaseAlert
+	ADD constraint PK_BaseAlert_BaseAlertID PRIMARY KEY (BaseAlertID)
+GO
+ALTER TABLE LA.Preference
+	ADD constraint PK_Preference_PreferenceID PRIMARY KEY (PreferenceID)
+GO
 ALTER TABLE LA.WeatherPreference
-	ADD FOREIGN KEY (WeatherPreferenceID) REFERENCES LA.Preference(WeatherPreferenceID)
+	ADD constraint PK_WeatherPreference_WeatherPreferenceID PRIMARY KEY (WeatherPreferenceID)
 GO
-
 ALTER TABLE LA.TrafficPreference
-	ADD FOREIGN KEY (TrafficPreferenceID) REFERENCES LA.Preference(TrafficPreferenceID)
+	ADD constraint PK_TrafficPreference_TrafficPreferenceID PRIMARY KEY (TrafficPreferenceID)
+GO
+ALTER TABLE LA.NewsPreference
+	ADD constraint PK_NewsPreference_NewsPreferenceID PRIMARY KEY (NewsPreferenceID)
 GO
 
-ALTER TABLE LA.NewsPreference
-	ADD FOREIGN KEY (NewsPreferenceID) REFERENCES LA.Preference(NewsPreferenceID)
+-- Foreign Key Creation
+ALTER TABLE LA.Client
+	ADD constraint FK_Client_Preference FOREIGN KEY (PreferenceID) REFERENCES LA.Preference(PreferenceID)
+GO
+--Foreign key added 01/10/2018 for client
+ALTER TABLE LA.Region
+	ADD constraint FK_Region_Client FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID) on update cascade
+GO
+ALTER TABLE LA.Alert
+	ADD constraint FK_Alert_Client FOREIGN KEY (ClientID) REFERENCES LA.Client(ClientID)
+GO
+ALTER TABLE LA.SubAlert
+	ADD constraint FK_SubAlert_BaseAlert FOREIGN KEY (BaseAlertID) REFERENCES LA.BaseAlert(BaseAlertID)
+GO
+ALTER TABLE LA.Preference ADD
+	constraint FK_Preference_WeatherPreference FOREIGN KEY (WeatherPreferenceID) REFERENCES LA.WeatherPreference(WeatherPreferenceID),
+	constraint FK_Preference_TrafficPreference FOREIGN KEY (TrafficPreferenceID) REFERENCES LA.TrafficPreference(TrafficPreferenceID),
+	constraint FK_Preference_NewsPreference FOREIGN KEY (NewsPreferenceID) REFERENCES LA.NewsPreference(NewsPreferenceID)
 GO

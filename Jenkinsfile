@@ -13,6 +13,10 @@ node('master') {
 			dir('LocationAlert') {
 				bat 'dotnet build --no-incremental'
 			}
+			dir ('LocationAlert.Angular/Angular') {
+				bat 'npm install'
+				bat 'ng build'
+			}
 		}
 		catch (exc) {
 			slackError('build')
@@ -22,10 +26,13 @@ node('master') {
 	stage('analyze') {
 		try {
 			dir('LocationAlert') {
-				bat 'SonarQube.Scanner.MSBuild begin /k:ao473840 /n:alertoutside /v:0.1.0'
+				bat 'SonarQube.Scanner.MSBuild.exe begin /k:ao473840 /n:alertoutside /v:0.2.0'
 				bat 'dotnet build --no-incremental'
-				bat 'SonarQube.Scanner.MSBuild end'
+				bat 'SonarQube.Scanner.MSBuild.exe end'
 			}
+			// dir('LocationAlert.Angular/Angular') {
+			// 	bat 'SonarQube.Scanner.exe /k:ao221662 /n:alertoutsideangular /v:0.1.0'
+			// }
 		}
 		catch (exc) {
 			slackError('analyze')
@@ -34,8 +41,13 @@ node('master') {
 	}
 	stage('test') {
 		try {
-			dir('LocationAlert/LocationAlert.Test') {
-				bat 'dotnet test'
+			dir('LocationAlert') {
+				dir('LocationAlert.Test') {
+					bat 'dotnet test'
+				}
+				// dir('LocationAlert.Angular/Angular') {
+				// 	bat 'ng test'
+				// }
 			}
 		}
 		catch (exc) {
@@ -45,8 +57,20 @@ node('master') {
 	}
 	stage('package') {
 		try {
-			dir('LocationAlert/LocationAlert.Client') {
-				bat 'dotnet publish --output ../../Package'
+			dir('LocationAlert') {
+				dir('LocationAlert.Client') {
+					bat 'dotnet publish --output ../../PackageClient'
+				}
+				dir('LocationAlert.Library.Service') {
+					bat 'dotnet publish --output ../../PackageLibrary'
+				}
+				dir('LocationAlert.Data.Service') {
+					bat 'dotnet publish --output ../../PackageData'
+				}
+			}
+			dir('LocationAlert.Angular/Angular') {
+				bat 'ng build --base-href /LocationAlert/'
+				bat 'copy /y ..\\..\\web.config dist'
 			}
 		}
 		catch (exc) {
@@ -56,7 +80,10 @@ node('master') {
 	}
 	stage('deploy') {
 		try {
-			bat "msdeploy -verb:sync -source:iisApp=\"C:\\Program Files (x86)\\Jenkins\\workspace\\LocationAlert\\Package\" -dest:iisApp=\"Default Web Site/LocationAlert\",computername=\"${env.MSDEPLOY_COMPUTERNAME}\",username=\"${env.MSDEPLOY_USERNAME}\",password=\"${env.MSDEPLOY_PASSWORD}\",authtype=basic -allowUntrusted -enableRule:AppOffline"
+			bat "MSDeploy.exe -verb:sync -source:${env.DeploySettings__client_source} -dest:${env.DeploySettings__client_dest} -enableRule:AppOffline -allowUntrusted"
+			bat "MSDeploy.exe -verb:sync -source:${env.DeploySettings__library_source} -dest:${env.DeploySettings__library_dest} -enableRule:AppOffline -allowUntrusted"
+			bat "MSDeploy.exe -verb:sync -source:${env.DeploySettings__data_source} -dest:${env.DeploySettings__data_dest} -enableRule:AppOffline -allowUntrusted"
+			bat "MSDeploy.exe -verb:sync -source:${env.DeploySettings__angular_source} -dest:${env.DeploySettings__angular_dest} -enableRule:AppOffline -allowUntrusted"
 		}
 		catch (exc) {
 			slackError('deploy')
