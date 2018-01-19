@@ -13,11 +13,7 @@ import { AuthenticationService } from './authentication.service';
 
 import { NouisliderModule } from 'ng2-nouislider';
 import { RegionsComponent } from './regions/regions.component';
-
-
-
-
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,14 +21,14 @@ import { RegionsComponent } from './regions/regions.component';
     HomeComponent,
     PreferencesComponent,
     WeatherpreferencesComponent,
-    RegionsComponent,
-
+    RegionsComponent
   ],
   imports: [
-      BrowserModule,
-      HttpClientModule,
-      NouisliderModule,
-    AppRoutingModule
+    BrowserModule,
+    HttpClientModule,
+    NouisliderModule,
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     AuthGuard,

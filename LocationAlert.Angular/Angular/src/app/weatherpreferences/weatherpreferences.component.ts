@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { NouisliderModule, NouisliderComponent } from 'ng2-nouislider';
@@ -15,17 +16,15 @@ export class WeatherpreferencesComponent implements OnInit {
   constructor(private router: Router) { }
 
   onSave() {
-    // Send ouur data!
+    // Send our data!
+    console.log(this.weatherPref);
   }
 
   onBack() {
     this.router.navigate(['preferences']);
   }
 
-  onChange(value: any) {
-    console.log(value);
-    console.log(this.weatherPref);
-    console.log(this.weatherPref.temp);
+  onChange() {
   }
 
   ngOnInit() {
