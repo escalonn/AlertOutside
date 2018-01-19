@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PreferencesComponent } from './preferences/preferences.component';
+import { WeatherpreferencesComponent } from './weatherpreferences/weatherpreferences.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PreferencesComponent
+    PreferencesComponent,
+    WeatherpreferencesComponent
   ],
   imports: [
     BrowserModule,
