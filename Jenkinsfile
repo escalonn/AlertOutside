@@ -13,7 +13,7 @@ node('master') {
 			dir('LocationAlert') {
 				bat 'dotnet build --no-incremental'
 			}
-			dir ('LocationAlert.Angular') {
+			dir ('LocationAlert.Angular/Angular') {
 				bat 'npm install'
 				bat 'ng build'
 			}
@@ -30,7 +30,7 @@ node('master') {
 				bat 'dotnet build --no-incremental'
 				bat 'SonarQube.Scanner.MSBuild.exe end'
 			}
-			//dir('LocationAlert.Angular') {
+			//dir('LocationAlert.Angular/Angular') {
 			//	bat 'SonarQube.Scanner.exe /k:ao221662 /n:alertoutsideangular /v:0.1.0'
 			//}
 		}
@@ -45,7 +45,7 @@ node('master') {
 				dir('LocationAlert.Test') {
 					bat 'dotnet test'
 				}
-				//dir('LocationAlert.Angular') {
+				//dir('LocationAlert.Angular/Angular') {
 				//	bat 'ng test'
 				//}
 			}
@@ -68,7 +68,7 @@ node('master') {
 					bat 'dotnet publish --output ../../PackageData'
 				}
 			}
-			//dir('LocationAlert.Angular') {
+			//dir('LocationAlert.Angular/Angular') {
 			//	// no op
 			//}
 		}
