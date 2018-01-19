@@ -30,7 +30,32 @@ namespace LocationAlert.Client.ViewModels
 
             return ls;
         }
+        //region to library to database  
+        public void AddRegion(Region r)
+        {
+            _LH.AddRegion(RegiontToLibrary(new List<Region>() { r }).FirstOrDefault());
+        }
 
+        private List<Lib.Region> RegiontToLibrary(List<Region> rs)
+        {
+            var ls = new List<Lib.Region>();
+
+            foreach (var item in rs)
+            {
+                ls.Add(new Lib.Region()
+                {
+                   
+                    Latitude = (decimal)item.Latitude,
+                    Longitude = (decimal)item.Longitude,
+                    Radius = (long) item.Radius
+                });
+            }
+
+            return ls;
+        }
+
+
+        ///**************************************
         public bool LogIn(string firstname, string password)
         {
             return _LH.LogIn(firstname, password);
@@ -50,5 +75,8 @@ namespace LocationAlert.Client.ViewModels
             };
             return la;
         }
+
+
+
     }
 }

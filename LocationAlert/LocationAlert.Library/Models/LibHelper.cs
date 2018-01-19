@@ -68,7 +68,49 @@ namespace LocationAlert.Library.Models
             return ls;
         }
 
+        //Library to data--------------------
+        public bool AddRegion(Region r)
+        {
+            try
+            {
+                if (r == null)
+                {
+                    return false;
+                }
 
+                var ps = RegionToData(new List<Region>() { r }).FirstOrDefault();
+
+                _DB.Region.Add(ps);
+                _DB.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private List<Dac.Region> RegionToData(List<Region> ps)
+        {
+            var ls = new List<Dac.Region>();
+
+            foreach (var item in ps)
+            {
+                ls.Add(new Dac.Region()
+                {
+                    Longitude = item.Longitude,
+                    Latitude = item.Latitude,
+                    Radius = item.Radius,
+                  
+
+                });
+            }
+
+            return ls;
+        }
+
+        //--------------------------------------------------------------------------
         public bool LogIn(string firstname, string password)
         {
             if (_DB.Client.Any(acc => acc.FirstName == firstname && acc.PasswordHash == password))
