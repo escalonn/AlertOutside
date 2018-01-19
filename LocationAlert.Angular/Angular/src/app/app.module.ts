@@ -14,7 +14,7 @@ import { AuthenticationService } from './authentication.service';
 import { NouisliderModule } from 'ng2-nouislider';
 import { RegionsComponent } from './regions/regions.component';
 
-
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 
 
@@ -26,17 +26,20 @@ import { RegionsComponent } from './regions/regions.component';
     PreferencesComponent,
     WeatherpreferencesComponent,
     RegionsComponent,
-
   ],
   imports: [
       BrowserModule,
       HttpClientModule,
       NouisliderModule,
-    AppRoutingModule
+      AppRoutingModule,
+      AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ'
+      }),
   ],
   providers: [
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
 })

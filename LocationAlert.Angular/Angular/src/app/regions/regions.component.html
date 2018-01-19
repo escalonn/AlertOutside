@@ -1,3 +1,16 @@
 <p>
   regions works!
 </p>
+
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-circle *ngFor="let data of regions"
+  [latitude]="data.lat"
+  [longitude]="data.lng"
+  [circleDraggable]="true"
+  [editable]="true"
+  [fillColor]="data.color"
+  [radius]="data.radius"
+>
+</agm-circle>
+
+  </agm-map>

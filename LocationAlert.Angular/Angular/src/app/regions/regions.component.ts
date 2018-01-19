@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleMapsAPIWrapper } from '@agm/core';
+
+
 
 @Component({
   selector: 'app-regions',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegionsComponent implements OnInit {
 
-  constructor() { }
+  regions = [
+    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'}
+    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'}
+    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'}
+  ];
+
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+
+  constructor() {
+
+   }
+
+  addRegions(){
+    
+  }
+
+
 
   ngOnInit() {
+   
+  
   }
 
 }
