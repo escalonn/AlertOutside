@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { WeatherpreferencesComponent } from './weatherpreferences/weatherpreferences.component';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -20,7 +21,9 @@ import { WeatherpreferencesComponent } from './weatherpreferences/weatherprefere
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
