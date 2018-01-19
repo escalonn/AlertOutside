@@ -10,11 +10,9 @@ import { GoogleMapsAPIWrapper } from '@agm/core';
 })
 export class RegionsComponent implements OnInit {
 
-  regions = [
-    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'},
-    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'},
-    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'}
-  ];
+  maxReg = 3;
+
+  regions = [];
 
   lat: number = 51.678418;
   lng: number = 7.809007;
@@ -23,8 +21,13 @@ export class RegionsComponent implements OnInit {
 
    }
 
-   mapDblClick($event: MouseEvent) {
-      console.log("hello circle");
+   mapDblClick($event: any) {
+     if (this.regions.length < this.maxReg)
+     {
+       var circle = {lat: $event.coords.lat, lng: $event.coords.lng, radius:50000, color: '#000000'}
+       this.regions.push(circle);
+     }
+      
   };
 
   addRegions(latitude, longitude){
