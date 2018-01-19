@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NouisliderModule, NouisliderComponent } from 'ng2-nouislider';
-
-
-
+import { WeatherPreference } from '../_models/index';
 
 @Component({
   selector: 'app-weatherpreferences',
@@ -12,19 +10,22 @@ import { NouisliderModule, NouisliderComponent } from 'ng2-nouislider';
   styleUrls: ['./weatherpreferences.component.css']
 })
 export class WeatherpreferencesComponent implements OnInit {
-  someRange: number[] = [0,1];
+  weatherPref: WeatherPreference = new WeatherPreference();
+
   constructor(private router: Router) { }
 
-  onSave(){
+  onSave() {
     // Send ouur data!
   }
 
-  onBack(){
+  onBack() {
     this.router.navigate(['preferences']);
   }
 
-  onChange(value:any){
-
+  onChange(value: any) {
+    console.log(value);
+    console.log(this.weatherPref);
+    console.log(this.weatherPref.temp);
   }
 
   ngOnInit() {

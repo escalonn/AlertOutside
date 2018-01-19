@@ -1,21 +1,15 @@
 export class WeatherPreference {
   pushAmount: string;
   alwaysTemp: boolean;
-  tempMin: number;
-  tempMax: number;
+  temp: number[] = [0, 1];
   alwaysRain: boolean;
-  rainMin: number;
-  rainMax: number;
+  rain: number[] = [0, 1];
   alwaysSnow: boolean;
-  snowMin: number;
-  snowMax: number;
+  snow: number[] = [0, 1];
   alwaysCloud: boolean;
-  cloudMin: number;
-  cloudMax: number;
+  cloud: number[] = [0, 1];
   alwaysWind: boolean;
-  windMin: number;
-  windMax: number;
+  wind: number[] = [0, 1];
   alwaysHumidity: boolean;
-  humidityMin: number;
-  humidityMax: number;
+  humidity: number[] = [0, 1];
 }
