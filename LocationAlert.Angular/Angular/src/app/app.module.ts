@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 
 import { NouisliderModule } from 'ng2-nouislider';
+import { RegionsComponent } from './regions/regions.component';
 
 
 
@@ -24,6 +25,7 @@ import { NouisliderModule } from 'ng2-nouislider';
     HomeComponent,
     PreferencesComponent,
     WeatherpreferencesComponent,
+    RegionsComponent,
 
   ],
   imports: [

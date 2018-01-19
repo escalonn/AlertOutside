@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { WeatherpreferencesComponent } from './weatherpreferences/weatherpreferences.component';
 import { AuthGuard } from './auth.guard';
+import { RegionsComponent } from './regions/regions.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'weatherpreferences',
     component: WeatherpreferencesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'regions',
+    component: RegionsComponent,
     canActivate: [AuthGuard]
   },
 

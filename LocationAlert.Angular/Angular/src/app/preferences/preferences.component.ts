@@ -14,6 +14,10 @@ export class PreferencesComponent implements OnInit {
     this.router.navigate(['weatherpreferences']);
   }
 
+  goRegions(){
+    this.router.navigate(['regions']);
+  }
+
   ngOnInit() {
   }
 
