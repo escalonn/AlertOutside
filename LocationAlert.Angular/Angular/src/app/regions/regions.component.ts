@@ -23,8 +23,14 @@ export class RegionsComponent implements OnInit {
 
    }
 
-  addRegions(){
-    
+   mapDblClick($event: MouseEvent) {
+      console.log("hello circle");
+  };
+
+  addRegions(latitude, longitude){
+    var circle = [
+      {lat: latitude, lng: longitude, radius: 50000 }
+    ]
   }
 
 
