@@ -30,9 +30,9 @@ node('master') {
 				bat 'dotnet build --no-incremental'
 				bat 'SonarQube.Scanner.MSBuild.exe end'
 			}
-			//dir('LocationAlert.Angular/Angular') {
-			//	bat 'SonarQube.Scanner.exe /k:ao221662 /n:alertoutsideangular /v:0.1.0'
-			//}
+			// dir('LocationAlert.Angular/Angular') {
+			// 	bat 'SonarQube.Scanner.exe /k:ao221662 /n:alertoutsideangular /v:0.1.0'
+			// }
 		}
 		catch (exc) {
 			slackError('analyze')
@@ -45,9 +45,9 @@ node('master') {
 				dir('LocationAlert.Test') {
 					bat 'dotnet test'
 				}
-				//dir('LocationAlert.Angular/Angular') {
-				//	bat 'ng test'
-				//}
+				// dir('LocationAlert.Angular/Angular') {
+				// 	bat 'ng test'
+				// }
 			}
 		}
 		catch (exc) {
@@ -70,6 +70,7 @@ node('master') {
 			}
 			dir('LocationAlert.Angular/Angular') {
 				bat 'ng build --base-href /LocationAlert/'
+				bat 'copy /y ..\\..\\web.config dist'
 			}
 		}
 		catch (exc) {
