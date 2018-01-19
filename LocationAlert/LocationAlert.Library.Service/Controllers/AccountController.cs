@@ -12,6 +12,8 @@ namespace LocationAlert.Library.Service.Controllers
     [Route("api/[controller]/[action]")]
     public class AccountController : Controller
     {
+        public static string DataUrl { get; set; }
+
         // POST account/register
         [HttpPost]
         public IActionResult Register([FromBody] Account client)

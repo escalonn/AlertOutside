@@ -14,7 +14,8 @@ namespace LocationAlert.Client.Controllers
     {
         private static SuperModel _SM = new SuperModel();
         private static HttpClient RestClient = new HttpClient();
-        public static string LibraryUrl;
+        
+        public static string LibraryUrl { get; set; }
 
         public IActionResult Index()
         {

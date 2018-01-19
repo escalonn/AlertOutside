@@ -6,7 +6,8 @@ namespace LocationAlert.Data.Models
 {
     public partial class LocationAlertDBContext : DbContext
     {
-        public static string ConnectionString;
+        public static string ConnectionString { get; set; }
+
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Region> Region { get; set; }
 

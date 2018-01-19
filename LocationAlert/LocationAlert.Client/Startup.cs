@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LocationAlert.Client.Controllers;
-using LocationAlert.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +24,6 @@ namespace LocationAlert.Client
         {
             services.AddMvc();
 
-            LocationAlertDBContext.ConnectionString = Configuration.GetConnectionString("sofani_db1");
             AccountController.LibraryUrl = Configuration.GetValue<string>("ServiceUris:library");
 
             // Adds a default in-memory implementation of IDistributedCache.
