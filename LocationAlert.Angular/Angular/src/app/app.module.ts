@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { WeatherpreferencesComponent } from './weatherpreferences/weatherpreferences.component';
 import { AuthGuard } from './auth.guard';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationService } from './authentication.service';
 
 import { NouisliderModule } from 'ng2-nouislider';
 
@@ -25,12 +27,14 @@ import { NouisliderModule } from 'ng2-nouislider';
 
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NouisliderModule
+      BrowserModule,
+      HttpClientModule,
+      NouisliderModule,
+    AppRoutingModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })
