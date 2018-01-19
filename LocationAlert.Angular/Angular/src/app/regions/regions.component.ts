@@ -11,8 +11,8 @@ import { GoogleMapsAPIWrapper } from '@agm/core';
 export class RegionsComponent implements OnInit {
 
   regions = [
-    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'}
-    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'}
+    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'},
+    {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'},
     {lat: 51.678418, lng:7.809007, radius:10000, color: '#000000'}
   ];
 
