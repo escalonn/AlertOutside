@@ -24,7 +24,7 @@ export class RegionsComponent implements OnInit {
    mapDblClick($event: any) {
      if (this.regions.length < this.maxReg)
      {
-       var circle = {lat: $event.coords.lat, lng: $event.coords.lng, radius:50000, color: '#000000'}
+       var circle = {lat: $event.coords.lat, lng: $event.coords.lng, radius:50000, color: '#fc0000', fillOpacity: 0.7}
        this.regions.push(circle);
      }
       
@@ -36,6 +36,10 @@ export class RegionsComponent implements OnInit {
     ]
   }
 
+  deleteRegion(){
+    console.log("delete");
+    this.regions.splice(this.regions.length-1);
+  }
 
 
   ngOnInit() {
