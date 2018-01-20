@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { NouisliderModule, NouisliderComponent } from 'ng2-nouislider';
-import { Account, WeatherPreference } from '../_models/index';
+import { NouisliderComponent } from 'ng2-nouislider';
+import { Account } from '../_models/account';
 
 @Component({
   selector: 'app-weatherpreferences',

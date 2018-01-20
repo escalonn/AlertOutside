@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'
-import { Account } from './_models/index';
+import { Account } from './_models/account';
 
 @Injectable()
 export class AuthenticationService {

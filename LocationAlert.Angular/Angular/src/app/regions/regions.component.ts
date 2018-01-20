@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleMapsAPIWrapper } from '@agm/core';
-import { Account } from '../_models/index';
 import { HttpClient } from '@angular/common/http';
 import { Region } from '../_models/region';
+import { Account } from '../_models/account';
 
 
 
