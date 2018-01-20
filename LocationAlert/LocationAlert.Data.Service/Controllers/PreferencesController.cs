@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LocationAlert.Data.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace LocationAlert.Data.Service.Controllers
 {
@@ -6,6 +10,13 @@ namespace LocationAlert.Data.Service.Controllers
     [Route("api/[controller]")]
     public class PreferencesController : Controller
     {
+        public LocationAlertDBContext DBContext { get; set; }
+
+        public PreferencesController(LocationAlertDBContext dbContext)
+        {
+            DBContext = dbContext;
+        }
+
         // GET preferences/
         [HttpGet]
         public IActionResult Get()
@@ -14,13 +25,23 @@ namespace LocationAlert.Data.Service.Controllers
             return Ok();
         }
 
-        // GET preferences/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        // GET preferences/undefined@gmail.com
+        [HttpGet("{email}")]
+        public IActionResult Get(string email)
         {
             // return preferences of an account to caller
             // (for when a user is still logged in but the client doesn't know his prefs anymore)
-            return Ok();
+            Client clientOut;
+            try
+            {
+                clientOut = DBContext.Client.AsNoTracking().First(c => c.Email == email);
+            }
+            catch (InvalidOperationException)
+            {
+                // account with email does not exist
+                return BadRequest();
+            }
+            return Ok(clientOut);
         }
     }
 }
