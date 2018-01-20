@@ -6,17 +6,23 @@ namespace LocationAlert.Data.Models
 {
     public partial class LocationAlertDBContext : DbContext
     {
-        public static string ConnectionString { get; set; }
+        private static Action<DbContextOptionsBuilder> s_configureConnection = options => { };
+
+        public static Action<DbContextOptionsBuilder> ConfigureConnection
+        {
+            get => s_configureConnection;
+            set => s_configureConnection = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Region> Region { get; set; }
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(ConnectionString);
+                ConfigureConnection(optionsBuilder);
             }
         }
     
