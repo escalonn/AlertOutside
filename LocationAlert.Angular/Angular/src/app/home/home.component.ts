@@ -14,9 +14,15 @@ export class HomeComponent implements OnInit {
   constructor(private authentication: AuthenticationService) { }
 
   loginButton(){
-    console.log(this.client.email);
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.login(this.client);
+    console.log("login");
+  }
+
+  registerButton(){
+    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
+    this.authentication.register(this.client);
+    console.log("register");
   }
 
   ngOnInit() {

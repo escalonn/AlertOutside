@@ -33,7 +33,7 @@ export class AuthenticationService {
   login(client: Account){
     // Http call
     this.http.get<Account>('http://localhost:61340/api/values').subscribe(data => {
-        client = data;
+        client = <Account>data;
     })
 
     sessionStorage.setItem("AccountKey",JSON.stringify(client))
@@ -43,8 +43,10 @@ export class AuthenticationService {
     sessionStorage.removeItem("AccountKey");
   }
 
-  register(): void {
-
+  register(client: Account): void{
+    this.http.post('http://localhost:61340/api/account/register', client).subscribe(data => {
+    console.log(data);
+  });
   }
 
   update(client: Account): void {
