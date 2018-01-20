@@ -32,6 +32,11 @@ namespace LocationAlert.Library.Models
            // Email = new MailAddress("undefined@gmail.com");
         }
 
+        public Account(string email)
+        {
+            Email = email;
+        }
+
         public static void SendAlertMessage(string body)
         {
 
