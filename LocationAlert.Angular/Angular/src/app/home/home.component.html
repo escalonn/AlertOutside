@@ -10,7 +10,7 @@
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Email Address">
+                        <input [(ngModel)]="client.email" type="text" class="form-control" name="username" value="Email Address">
                     </div>
                      <br>
 
@@ -25,7 +25,7 @@
                         <div  class="form-group">
                             <!-- Button -->
                             <div class="col-sm-12 controls">
-                                <a id="btn-login" href="#" class="btn btn-success">Login  </a>
+                                <a id="btn-login"  class="btn btn-success" (click)="loginButton()">Login</a>
                             </div>
                         </div>
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
+import { Account } from './_models/index';
 
 @Injectable()
 export class AuthenticationService {
@@ -31,8 +32,16 @@ export class AuthenticationService {
   //       }
   //     });
   // }
+  login(client: Account){
+    // Http call
+    this.http.get<Account>('/locationAlert/account/login').subscribe(data => {
+        client = data;
+    })
+    
+    sessionStorage.setItem("AccountKey",JSON.stringify(client))
+  }
 
   logout(): void {
-    sessionStorage.removeItem('AccountKey');
+    sessionStorage.removeItem("AccountKey");
   }
 }

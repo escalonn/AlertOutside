@@ -43,8 +43,6 @@ export class RegionsComponent implements OnInit {
 
 
   ngOnInit() {
-   
-  
   }
 
 }
