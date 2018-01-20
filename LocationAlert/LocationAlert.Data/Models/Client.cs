@@ -7,6 +7,7 @@ namespace LocationAlert.Data.Models
     {
         public Client()
         {
+            Alert = new HashSet<Alert>();
             Region = new HashSet<Region>();
         }
 
@@ -21,6 +22,8 @@ namespace LocationAlert.Data.Models
         public int? PreferenceId { get; set; }
         public DateTime? DateModified { get; set; }
 
+        public Preference Preference { get; set; }
+        public ICollection<Alert> Alert { get; set; }
         public ICollection<Region> Region { get; set; }
     }
 }
