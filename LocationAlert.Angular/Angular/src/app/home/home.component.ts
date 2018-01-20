@@ -8,13 +8,14 @@ import { Account } from '../_models/account';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  client = new Account();
-  email : string;
+
+  client: Account = new Account();
 
   constructor(private authentication: AuthenticationService) { }
 
   loginButton(){
     console.log(this.client.email);
+    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.login(this.client);
   }
 

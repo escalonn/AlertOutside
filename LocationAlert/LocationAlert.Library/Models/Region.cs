@@ -7,7 +7,7 @@ namespace LocationAlert.Library.Models
     public class Region
     {
 
-        public int ID { get; }
+        public int id { get; set; }
 
         public decimal Latitude { get; set; }
 

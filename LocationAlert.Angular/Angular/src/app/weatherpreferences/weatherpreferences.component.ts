@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { NouisliderComponent } from 'ng2-nouislider';
 import { Account } from '../_models/account';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-weatherpreferences',
@@ -12,21 +13,18 @@ import { Account } from '../_models/account';
 })
 export class WeatherpreferencesComponent implements OnInit {
 
-  //client: Account = JSON.parse(sessionStorage.getItem("AccountKey"));
-  client: Account = new Account();
+  client: Account = JSON.parse(sessionStorage.getItem("AccountKey"));
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authentication: AuthenticationService) { }
 
   onSave() {
     // Send our data!
-    console.log(this.client.weatherPref);
+    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
+    this.authentication.update(this.client);
   }
 
   onBack() {
     this.router.navigate(['preferences']);
-  }
-
-  onChange() {
   }
 
   ngOnInit() {

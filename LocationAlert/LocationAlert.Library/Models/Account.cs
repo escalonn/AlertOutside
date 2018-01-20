@@ -21,11 +21,11 @@ namespace LocationAlert.Library.Models
 
         public string Phone { get; set; }
 
-        //public List<Region> RegionList { get; set; } = new List<Region>();
+        public List<Region> Regions { get; set; } = new List<Region>();
 
         public const int MaxRegion = 3;
 
-        public WeatherPreference MyWeather { get; set; } = new WeatherPreference();
+        public WeatherPreference weatherPref { get; set; } = new WeatherPreference();
 
         public Account()
         {

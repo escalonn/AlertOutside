@@ -42,4 +42,14 @@ export class AuthenticationService {
   logout(): void {
     sessionStorage.removeItem("AccountKey");
   }
+
+  register(): void {
+
+  }
+
+  update(client: Account): void {
+      this.http.post('http://localhost:61340/api/account/update', client).subscribe(data => {
+      console.log(data);
+  });
+  }
 }
