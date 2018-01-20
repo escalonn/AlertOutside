@@ -27,8 +27,9 @@ namespace LocationAlert.Library.Service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            
+
             AccountController.DataUrl = Configuration.GetValue<string>("ServiceUris:data");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +40,7 @@ namespace LocationAlert.Library.Service
                 app.UseDeveloperExceptionPage();
             }
 
+            
             app.UseMvc();
         }
     }
