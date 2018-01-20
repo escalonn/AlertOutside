@@ -32,7 +32,7 @@ namespace LocationAlert.Library.Service.Controllers
         {
             // validate and talk to database
             string jsonOut = JsonConvert.SerializeObject(clientIn);
-            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/account/register")
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/register")
             {
                 Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
             };
@@ -40,7 +40,7 @@ namespace LocationAlert.Library.Service.Controllers
             HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
             if (!res.IsSuccessStatusCode)
             {
-                return BadRequest();
+                return BadRequest(res);
             }
 
             string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
