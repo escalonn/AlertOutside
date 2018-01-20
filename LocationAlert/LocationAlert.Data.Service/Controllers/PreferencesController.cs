@@ -43,5 +43,19 @@ namespace LocationAlert.Data.Service.Controllers
             }
             return Ok(clientOut);
         }
+
+        // PUT preferences/undefined@gmail.com
+        [HttpPut("{email}")]
+        public IActionResult Put(string email)
+        {
+            try
+            {
+            }
+            catch (InvalidOperationException)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
     }
 }
