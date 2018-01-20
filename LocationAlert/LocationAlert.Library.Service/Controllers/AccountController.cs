@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace LocationAlert.Library.Service.Controllers
 {
@@ -26,15 +28,30 @@ namespace LocationAlert.Library.Service.Controllers
 
         // POST account/register
         [HttpPost]
-        public IActionResult Register([FromBody] Account client)
+        public IActionResult Register([FromBody] Account clientIn)
         {
             // validate and talk to database
-            return Ok(client);
+            string jsonOut = JsonConvert.SerializeObject(clientIn);
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/account/register")
+            {
+                Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
+            };
+
+            HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
+            if (!res.IsSuccessStatusCode)
+            {
+                return BadRequest();
+            }
+
+            string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            Account clientOut = JsonConvert.DeserializeObject<Account>(jsonIn);
+
+            return Ok(clientOut);
         }
 
         // Get account/login account purpose -------------------------------------------------------------------
         [HttpGet]
-        public async Task<IActionResult> Login([FromBody] Account client)
+        public IActionResult Login([FromBody] Account client)
         {
             // TODO verify user
 
@@ -45,7 +62,7 @@ namespace LocationAlert.Library.Service.Controllers
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            await HttpContext.SignInAsync(
+            HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity),
                 new AuthenticationProperties()
@@ -53,7 +70,7 @@ namespace LocationAlert.Library.Service.Controllers
                     IsPersistent = true,
                     // ExpiresUtc = new DateTimeOffset(DateTime.UtcNow.AddHours(1))
                 }
-            );
+            ).GetAwaiter().GetResult();
 
             return Ok(client);
         }
@@ -62,7 +79,7 @@ namespace LocationAlert.Library.Service.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            return Ok(HttpContext.SignOutAsync("EmailCookie"));
+            return Ok(HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme));
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------
