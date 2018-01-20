@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { NouisliderModule, NouisliderComponent } from 'ng2-nouislider';
-import { WeatherPreference } from '../_models/index';
+import { Account, WeatherPreference } from '../_models/index';
 
 @Component({
   selector: 'app-weatherpreferences',
@@ -11,13 +11,15 @@ import { WeatherPreference } from '../_models/index';
   styleUrls: ['./weatherpreferences.component.css']
 })
 export class WeatherpreferencesComponent implements OnInit {
-  weatherPref: WeatherPreference = new WeatherPreference();
+
+  //client: Account = JSON.parse(sessionStorage.getItem("AccountKey"));
+  client: Account = new Account();
 
   constructor(private router: Router) { }
 
   onSave() {
     // Send our data!
-    console.log(this.weatherPref);
+    console.log(this.client.weatherPref);
   }
 
   onBack() {
