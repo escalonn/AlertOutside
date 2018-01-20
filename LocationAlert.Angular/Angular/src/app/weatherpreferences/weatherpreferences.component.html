@@ -22,9 +22,9 @@
          <label><b>Temperature Preferences:</b></label>
          <br>
          <input type="checkbox" id="AlwaysTemp" name="AlwaysTemp" [(ngModel)]="weatherPref.alwaysTemp">
-    
          <label for="AlwaysTemp">Always Push Temperature Updates</label>
-
+        <br>
+         <label>Minimum :{{weatherPref.temp[0]}} -  Maximum :{{weatherPref.temp[1]}}</label>
          <nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="weatherPref.temp" name="temp"></nouislider>
      </div>
   </div>
@@ -35,7 +35,8 @@
           <br>
           <input type="checkbox" id="AlwaysRain" name="AlwaysRain" [(ngModel)]="weatherPref.alwaysRain">
           <label for="AlwaysRain">Always Push Rain Updates</label>
-
+          <br>
+          <label>Minimum :{{weatherPref.rain[0]}} -  Maximum :{{weatherPref.rain[1]}}</label>
           <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.rain" name="rain"></nouislider>
           <div id="rain-range"></div>
       </div>
@@ -47,7 +48,8 @@
         <br>
         <input type="checkbox" id="AlwaysSnow" name="AlwaysSnow" [(ngModel)]="weatherPref.alwaysSnow">
         <label for="AlwaysSnow">Always Push Snow Updates</label>
-
+        <br>
+        <label>Minimum :{{weatherPref.snow[0]}} -  Maximum :{{weatherPref.snow[1]}}</label>
         <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.snow" name="snow"></nouislider>
         <div id="snow-range"></div>
     </div>
@@ -59,7 +61,8 @@
         <br>
         <input type="checkbox" id="AlwaysCloud" name="AlwaysCloud" [(ngModel)]="weatherPref.alwaysCloud">
         <label for="AlwaysCloud">Always Push Cloudiness Updates</label>
-
+        <br>
+        <label>Minimum :{{weatherPref.cloud[0]}} -  Maximum :{{weatherPref.cloud[1]}}</label>
         <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.cloud" name="cloud"></nouislider>
         <div id="cloud-range"></div>
       </div>
@@ -71,6 +74,8 @@
         <br>
         <input type="checkbox" id="AlwaysWind" name="AlwaysWind" [(ngModel)]="weatherPref.alwaysWind">
         <label>Always Push Wind Updates</label>
+        <br>
+        <label>Minimum :{{weatherPref.wind[0]}} -  Maximum :{{weatherPref.wind[1]}}</label>
 
         <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.wind" name="wind"></nouislider>
         <div id="wind-range"></div>
@@ -83,7 +88,8 @@
         <br>
         <input type="checkbox" id="AlwaysHumidity" name="AlwaysHumidity" [(ngModel)]="weatherPref.alwaysHumidity">
         <label>Always Push Humidity Updates</label>
-
+        <br>
+        <label>Minimum :{{weatherPref.humidity[0]}} -  Maximum :{{weatherPref.humidity[1]}}</label>
         <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="weatherPref.humidity" name="humidity"></nouislider>
         <div id="humidity-range"></div>
      </div>

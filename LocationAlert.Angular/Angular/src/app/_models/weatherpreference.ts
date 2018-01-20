@@ -2,15 +2,15 @@ export class WeatherPreference {
   pushHours: number = 1;
   pushMinutes: number = 0;
   alwaysTemp: boolean = false;
-  temp: number[] = [80, 100];
+  temp: number[] = [0, 100];
   alwaysRain: boolean = false;
-  rain: number[] = [5, 10];
+  rain: number[] = [0, 10];
   alwaysSnow: boolean = false;
-  snow: number[] = [5, 10];
+  snow: number[] = [0, 10];
   alwaysCloud: boolean = false;
-  cloud: number[] = [5, 10];
+  cloud: number[] = [0, 10];
   alwaysWind: boolean = false;
-  wind: number[] = [5, 10];
+  wind: number[] = [0, 10];
   alwaysHumidity: boolean = false;
-  humidity: number[] = [5, 10];
+  humidity: number[] = [0, 10];
 }

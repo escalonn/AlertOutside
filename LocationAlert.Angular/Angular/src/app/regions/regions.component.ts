@@ -42,7 +42,6 @@ export class RegionsComponent implements OnInit {
     centerChange($event: any, id: number) {
       this.client.regions[id].latitude = $event.lat;
       this.client.regions[id].longitude = $event.lng;
-      //this.client.regions[id].latitude
     }
 
 
@@ -52,6 +51,7 @@ export class RegionsComponent implements OnInit {
   }
 
   saveRegion(){
+    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.http.post("",JSON.stringify(this.client));
     console.log(this.client.regions);
   }
