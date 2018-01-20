@@ -32,14 +32,19 @@ export class RegionsComponent implements OnInit {
       var circle : Region = {id: this.client.regions.length, latitude: $event.coords.lat, longitude: $event.coords.lng, radius:50000, color: '#fc0000', fillOpacity: 0.7}
       this.client.regions.push(circle);
      }
-      
-  };
+    };
 
-  addRegions(latitude, longitude){
-    var circle = [
-      {lat: latitude, lng: longitude, radius: 50000 }
-    ]
-  }
+    radiusChange($event: any, id: number) {
+      this.client.regions[id].radius = $event;
+      console.log(this.client.regions[id].radius);
+    }
+
+    centerChange($event: any, id: number) {
+      this.client.regions[id].latitude = $event.lat;
+      this.client.regions[id].longitude = $event.lng;
+      //this.client.regions[id].latitude
+    }
+
 
   deleteRegion(){
     console.log("delete");

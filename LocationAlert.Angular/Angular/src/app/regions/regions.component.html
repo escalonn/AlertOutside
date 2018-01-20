@@ -3,13 +3,16 @@
 </p>
 
 <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapDblClick($event)">
-  <agm-circle *ngFor="let data of client.regions"
+  <agm-circle *ngFor="let data of client.regions ; let i = index"
   [latitude]="data.latitude"
   [longitude]="data.longitude"
   [circleDraggable]="true"
   [editable]="true"
   [fillColor]="data.color"
   [radius]="data.radius"
+  [id]="data.id"
+  (radiusChange)="radiusChange($event, i)"
+  (centerChange)="centerChange($event, i)"
 >
 </agm-circle>
   </agm-map>
