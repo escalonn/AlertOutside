@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LocationAlert.Library.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Cors;
 
 namespace LocationAlert.Library.Service.Controllers
 {

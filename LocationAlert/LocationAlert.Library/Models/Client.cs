@@ -18,7 +18,10 @@ namespace LocationAlert.Library.Models
 
         public DateTime DateModified { get; set; }
 
-        public Client() { }
+        public Client() {
+
+
+        }
 
         public bool SignUp()
         {

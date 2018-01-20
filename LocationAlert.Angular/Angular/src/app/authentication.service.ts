@@ -34,10 +34,10 @@ export class AuthenticationService {
   // }
   login(client: Account){
     // Http call
-    this.http.get<Account>('/locationAlert/account/login').subscribe(data => {
+    this.http.get<Account>('http://localhost:61340/api/values').subscribe(data => {
         client = data;
     })
-    
+
     sessionStorage.setItem("AccountKey",JSON.stringify(client))
   }
 
