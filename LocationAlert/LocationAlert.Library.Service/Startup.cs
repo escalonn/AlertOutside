@@ -35,6 +35,7 @@ namespace LocationAlert.Library.Service
             }));
 
             AccountController.DataUrl = Configuration.GetValue<string>("ServiceUris:data");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
