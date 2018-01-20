@@ -37,14 +37,16 @@ namespace LocationAlert.Library.Service
                        .AllowAnyHeader();
             }));
             services.AddAuthentication("EmailCookie").AddCookie("EmailCookie",
-                c => {
-                     c.LoginPath = "/api/Account/Login";
-                     c.LogoutPath = "/api/Account/Logout";
-                     c.Cookie = new CookieBuilder() {
-                             HttpOnly = true,
-                             Name = "sofanib@gmail.com",
-                     };
-            });
+                c =>
+                {
+                    c.LoginPath = "/api/Account/Login";
+                    c.LogoutPath = "/api/Account/Logout";
+                    c.Cookie = new CookieBuilder()
+                    {
+                        HttpOnly = true,
+                        Name = "sofanib@gmail.com",
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +60,7 @@ namespace LocationAlert.Library.Service
             app.UseCors("MyPolicy");
             app.UseAuthentication();
             app.UseMvc();
-            
+
         }
     }
 }
