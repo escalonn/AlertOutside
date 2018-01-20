@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LocationAlert.Library.Models;
 using LocationAlert.Library.Service.Controllers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -36,16 +37,10 @@ namespace LocationAlert.Library.Service
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-            services.AddAuthentication("EmailCookie").AddCookie("EmailCookie",
-                c =>
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
                 {
-                    c.LoginPath = "/api/Account/Login";
-                    c.LogoutPath = "/api/Account/Logout";
-                    c.Cookie = new CookieBuilder()
-                    {
-                        HttpOnly = true,
-                        Name = "sofanib@gmail.com",
-                    };
+                    options.LoginPath = "/api/Account/Login";
+                    options.LogoutPath = "/api/Account/Logout";
                 });
         }
 
