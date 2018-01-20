@@ -3,9 +3,9 @@
 </p>
 
 <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapDblClick($event)">
-  <agm-circle *ngFor="let data of regions"
-  [latitude]="data.lat"
-  [longitude]="data.lng"
+  <agm-circle *ngFor="let data of client.regions"
+  [latitude]="data.latitude"
+  [longitude]="data.longitude"
   [circleDraggable]="true"
   [editable]="true"
   [fillColor]="data.color"
@@ -17,7 +17,7 @@
     <div  class="form-group">
         <!-- Button -->
         <div class="col-sm-12 controls">
-            <a id="btn-save" class="btn btn-success">Save Regions</a>
+            <a id="btn-save" class="btn btn-success" (click)="saveRegion()">Save Regions</a>
         </div>
     </div>
 

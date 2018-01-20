@@ -2,6 +2,6 @@ import { Region, WeatherPreference } from "./index";
 
 export class Account {
   email: string = "Enter Email Address";
-  regions: Region[];
+  regions: Region[] = [];
   weatherPref: WeatherPreference;
 }
