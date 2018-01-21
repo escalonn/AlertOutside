@@ -45,7 +45,7 @@ CREATE TABLE LA.Client(
 	FirstName NVARCHAR(50),
 	MiddleInit NCHAR(1),
 	LastName NVARCHAR(50),
-	Email NVARCHAR(255) NOT NULL,
+	Email NVARCHAR(255) NOT NULL UNIQUE,
 	PhoneNumber CHAR(10),
 	PasswordHash CHAR(64),
 	PasswordSalt NVARCHAR(20),

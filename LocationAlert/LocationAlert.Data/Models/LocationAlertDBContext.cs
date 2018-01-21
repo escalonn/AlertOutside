@@ -65,6 +65,10 @@ namespace LocationAlert.Data.Models
             {
                 entity.ToTable("Client", "LA");
 
+                entity.HasIndex(e => e.Email)
+                    .HasName("UQ__Client__A9D105349DD9ECF9")
+                    .IsUnique();
+
                 entity.Property(e => e.ClientId).HasColumnName("ClientID");
 
                 entity.Property(e => e.Email)

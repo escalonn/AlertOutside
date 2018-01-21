@@ -22,8 +22,9 @@ export class HomeComponent implements OnInit {
 
   registerButton(){
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
-    this.authentication.register(this.client);
-    this.router.navigate(['registersuccess']);
+    this.authentication.register(this.client, (data) => {
+      this.router.navigate(['registersuccess']);
+    });
     console.log("register");
   }
 
