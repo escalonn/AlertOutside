@@ -83,19 +83,39 @@ namespace LocationAlert.Library.Service.Controllers
         // POST account/update
         [Authorize]
         [HttpPost]
-        public IActionResult Update([FromBody] Account client)
+        public IActionResult Update([FromBody] Account clientIn)
         {
             // if trying to update a different user...
-            if (HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value != client.Email)
+            if (HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value != clientIn.Email)
             {
                 // not authorized to do that
                 return StatusCode(403);
             }
-            // otherwise, change values in library and database
-            // TODO
+            else
+            {
+                // otherwise, change values in database
+                string jsonOut = JsonConvert.SerializeObject(clientIn);
+                HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, new Uri(DataUrl, "api/account/update"))
+                {
+                    Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
+                };
 
-            return Ok();
+                //Change values in library
+                var updateClient = _account.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
+                    if (updateClient == null)
+                    {
+                        return StatusCode(400);
+                    }
+                    else
+                    {
+                        updateClient = clientIn;
+                        return Ok();
+                    }
+                   
+            }
+
         }
+            
 
     }
 }
