@@ -8,10 +8,10 @@ namespace LocationAlert.Library.Models
     public class ServerTicker
     {
         private static ServerTicker instance;
-        public List<Account> AcountList { get; set; }
+        public List<Account> AccountList { get; set; }
 
         private TimeSpan startTimeSpan = TimeSpan.Zero;
-        private TimeSpan intervalTimeSpan = TimeSpan.FromMinutes(10);
+        private TimeSpan intervalTimeSpan = TimeSpan.FromMinutes(1);
 
         public static ServerTicker Instance
         {
@@ -36,7 +36,7 @@ namespace LocationAlert.Library.Models
 
         private ServerTicker()
         {
-            AcountList = new List<Account>();
+            AccountList = new List<Account>();
             LoadAccounts();
 
             var timer = new System.Threading.Timer((e) =>
@@ -54,7 +54,7 @@ namespace LocationAlert.Library.Models
             // Make sure accounts are synced with database
             LoadAccounts();
             // For every account registered to the service
-            foreach (var account in AcountList )
+            foreach (var account in AccountList )
             {
                 if (account.LastPush != null)
                 {
@@ -62,7 +62,7 @@ namespace LocationAlert.Library.Models
                     var pushOffset = account.LastPush.AddHours(account.weatherPref.pushHours).AddMinutes(account.weatherPref.pushMinutes);
 
                     // If it has been too long since last push
-                    if (pushOffset >= DateTime.Now)
+                    if (pushOffset <= DateTime.Now)
                     {
                         var message = new Message(account.weatherPref, account.Email);
 
@@ -90,6 +90,13 @@ namespace LocationAlert.Library.Models
 
         private void LoadAccounts()
         {
+            Account a = new Account();
+            a.Email = "test@test.com";
+            a.weatherPref = new WeatherPreference();
+            a.weatherPref.pushMinutes = 3;
+            a.LastPush = DateTime.Now;
+
+            AccountList.Add(a);
             // load accounts from database
         }
 
