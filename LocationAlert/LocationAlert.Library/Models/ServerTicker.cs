@@ -8,7 +8,7 @@ namespace LocationAlert.Library.Models
 {
     public class ServerTicker
     {
-        private const string DataUrl = "http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertData";
+        public static string DataUrl { get; set; }
         private static HttpClient s_httpClient = new HttpClient();
 
         private static ServerTicker instance;

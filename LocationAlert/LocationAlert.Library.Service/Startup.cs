@@ -28,8 +28,10 @@ namespace LocationAlert.Library.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string DataUrl = Configuration.GetValue<string>("ServiceUris:data");
+            AccountController.DataUrl = DataUrl;
+            ServerTicker.DataUrl = DataUrl;
 
-            AccountController.DataUrl = Configuration.GetValue<string>("ServiceUris:data");
             services.AddMvc();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
