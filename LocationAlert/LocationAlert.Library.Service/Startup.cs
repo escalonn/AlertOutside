@@ -29,7 +29,7 @@ namespace LocationAlert.Library.Service
         public void ConfigureServices(IServiceCollection services)
         {
 
-            AccountController.DataUrl = Configuration.GetValue<string>("ServiceUris:data");
+            AccountController.DataUrl = new Uri(Configuration.GetValue<string>("ServiceUris:data"));
             services.AddMvc();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

@@ -21,7 +21,7 @@ namespace LocationAlert.Library.Service.Controllers
     {
         private static HttpClient s_httpClient = new HttpClient();
 
-        public static string DataUrl { get; set; }
+        public static Uri DataUrl { get; set; }
 
         //for sending account from library service to library
         public static List<Account> _account = new List<Account>();
@@ -32,7 +32,7 @@ namespace LocationAlert.Library.Service.Controllers
         {
             // validate and talk to database
             string jsonOut = JsonConvert.SerializeObject(clientIn);
-            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/register")
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, new Uri(DataUrl, "api/account/register"))
             {
                 Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
             };
@@ -64,12 +64,7 @@ namespace LocationAlert.Library.Service.Controllers
 
             HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(identity),
-                new AuthenticationProperties()
-                {
-                    IsPersistent = true,
-                    // ExpiresUtc = new DateTimeOffset(DateTime.UtcNow.AddHours(1))
-                }
+                new ClaimsPrincipal(identity)
             ).GetAwaiter().GetResult();
 
             return Ok(client);
@@ -79,7 +74,8 @@ namespace LocationAlert.Library.Service.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            return Ok(HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme));
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).GetAwaiter().GetResult();
+            return Ok();
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------
