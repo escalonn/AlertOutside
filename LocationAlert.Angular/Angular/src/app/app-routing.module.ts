@@ -6,6 +6,7 @@ import { WeatherpreferencesComponent } from './weatherpreferences/weatherprefere
 import { AuthGuard } from './auth.guard';
 import { RegionsComponent } from './regions/regions.component';
 import { LogoutComponent } from './logout/logout.component';
+import { RegistersuccessComponent } from './registersuccess/registersuccess.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'registersuccess',
+    component: RegistersuccessComponent,
     canActivate: [AuthGuard]
   }
 

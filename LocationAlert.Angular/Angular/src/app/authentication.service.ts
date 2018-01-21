@@ -42,14 +42,13 @@ export class AuthenticationService {
   logout(): void {
     var client = JSON.parse(sessionStorage.getItem('AccountKey'));
     this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/logout',client).subscribe(data => {
-    
+
   });
   }
 
   register(client: Account): void{
     this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/register', client).subscribe(data => {
-      
-    console.log(data);
+
   });
   }
 
