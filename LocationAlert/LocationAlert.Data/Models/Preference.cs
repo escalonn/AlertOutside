@@ -11,7 +11,7 @@ namespace LocationAlert.Data.Models
         }
 
         public int PreferenceId { get; set; }
-        public int? WeatherPreferenceId { get; set; }
+        public int WeatherPreferenceId { get; set; }
         public int? TrafficPreferenceId { get; set; }
         public int? NewsPreferenceId { get; set; }
         public DateTime? DateModified { get; set; }

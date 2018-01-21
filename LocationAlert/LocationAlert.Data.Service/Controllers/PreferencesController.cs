@@ -73,14 +73,8 @@ namespace LocationAlert.Data.Service.Controllers
                     .First(c => c.Email == client.Email);
 
                 dbClientUpdated.ClientId = dbClientExisting.ClientId;
-                if (dbClientUpdated.Preference != null && dbClientExisting.Preference != null)
-                {
-                    dbClientUpdated.Preference.PreferenceId = (int)dbClientExisting.PreferenceId;
-                    if (dbClientUpdated.Preference.WeatherPreference != null && dbClientExisting.Preference.WeatherPreference != null)
-                    {
-                        dbClientUpdated.Preference.WeatherPreference.WeatherPreferenceId = (int)dbClientExisting.Preference.WeatherPreferenceId;
-                    }
-                }
+                dbClientUpdated.Preference.PreferenceId = dbClientExisting.PreferenceId;
+                dbClientUpdated.Preference.WeatherPreference.WeatherPreferenceId = dbClientExisting.Preference.WeatherPreferenceId;
                 // can't tell first region from second or third, to wire up the IDs, so just make new ones every time.
 
                 DBContext.Update(dbClientUpdated);

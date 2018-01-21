@@ -64,29 +64,19 @@ namespace LocationAlert.Data.Service.Models
             {
                 Email = dataClient.Email,
                 Regions = dataClient.Region.Select(ToDataSvcModel).ToList(),
+                WeatherPref = ToDataSvcModel(dataClient.Preference.WeatherPreference)
             };
-            if (dataClient.Preference?.WeatherPreference != null)
-            {
-                dataSvcClient.WeatherPref = ToDataSvcModel(dataClient.Preference.WeatherPreference);
-            }
             return dataSvcClient;
         }
 
         public static Region ToDataSvcModel(Data.Models.Region dataRegion)
         {
-            var dataSvcRegion = new Region();
-            if (dataRegion.Latitude != null)
+            var dataSvcRegion = new Region
             {
-                dataSvcRegion.Latitude = (decimal)dataRegion.Latitude;
-            }
-            if (dataRegion.Longitude != null)
-            {
-                dataSvcRegion.Longitude = (decimal)dataRegion.Longitude;
-            }
-            if (dataRegion.Radius != null)
-            {
-                dataSvcRegion.Radius = (long)dataRegion.Radius;
-            }
+                Latitude = dataRegion.Latitude,
+                Longitude = dataRegion.Longitude,
+                Radius = dataRegion.Radius
+            };
             return dataSvcRegion;
         }
 

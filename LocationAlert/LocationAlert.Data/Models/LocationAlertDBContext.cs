@@ -38,9 +38,7 @@ namespace LocationAlert.Data.Models
             {
                 entity.ToTable("Alert", "LA");
 
-                entity.Property(e => e.AlertId)
-                    .HasColumnName("AlertID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.AlertId).HasColumnName("AlertID");
 
                 entity.Property(e => e.AlertMessage).HasMaxLength(512);
 
@@ -58,9 +56,7 @@ namespace LocationAlert.Data.Models
             {
                 entity.ToTable("BaseAlert", "LA");
 
-                entity.Property(e => e.BaseAlertId)
-                    .HasColumnName("BaseAlertID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.BaseAlertId).HasColumnName("BaseAlertID");
 
                 entity.Property(e => e.BaseAlertType).HasMaxLength(50);
             });
@@ -71,7 +67,9 @@ namespace LocationAlert.Data.Models
 
                 entity.Property(e => e.ClientId).HasColumnName("ClientID");
 
-                entity.Property(e => e.Email).HasMaxLength(255);
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
                 entity.Property(e => e.FirstName).HasMaxLength(50);
 
@@ -90,6 +88,7 @@ namespace LocationAlert.Data.Models
                 entity.HasOne(d => d.Preference)
                     .WithMany(p => p.Client)
                     .HasForeignKey(d => d.PreferenceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Client_Preference");
             });
 
@@ -106,9 +105,7 @@ namespace LocationAlert.Data.Models
             {
                 entity.ToTable("Preference", "LA");
 
-                entity.Property(e => e.PreferenceId)
-                    .HasColumnName("PreferenceID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.PreferenceId).HasColumnName("PreferenceID");
 
                 entity.Property(e => e.NewsPreferenceId).HasColumnName("NewsPreferenceID");
 
@@ -129,6 +126,7 @@ namespace LocationAlert.Data.Models
                 entity.HasOne(d => d.WeatherPreference)
                     .WithMany(p => p.Preference)
                     .HasForeignKey(d => d.WeatherPreferenceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Preference_WeatherPreference");
             });
 
@@ -156,9 +154,7 @@ namespace LocationAlert.Data.Models
             {
                 entity.ToTable("SubAlert", "LA");
 
-                entity.Property(e => e.SubAlertId)
-                    .HasColumnName("SubAlertID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.SubAlertId).HasColumnName("SubAlertID");
 
                 entity.Property(e => e.BaseAlertId).HasColumnName("BaseAlertID");
 
@@ -183,77 +179,35 @@ namespace LocationAlert.Data.Models
             {
                 entity.ToTable("WeatherPreference", "LA");
 
-                entity.Property(e => e.WeatherPreferenceId)
-                    .HasColumnName("WeatherPreferenceID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.WeatherPreferenceId).HasColumnName("WeatherPreferenceID");
 
-                entity.Property(e => e.AlwaysCloud).HasColumnName("alwaysCloud");
+                entity.Property(e => e.CloudMax).HasDefaultValueSql("((10))");
 
-                entity.Property(e => e.AlwaysHumidity).HasColumnName("alwaysHumidity");
+                entity.Property(e => e.CloudMin).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.AlwaysRain).HasColumnName("alwaysRain");
+                entity.Property(e => e.HumidityMax).HasDefaultValueSql("((10))");
 
-                entity.Property(e => e.AlwaysSnow).HasColumnName("alwaysSnow");
+                entity.Property(e => e.HumidityMin).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.AlwaysTemp).HasColumnName("alwaysTemp");
+                entity.Property(e => e.PushHours).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.AlwaysWind).HasColumnName("alwaysWind");
+                entity.Property(e => e.PushMinutes).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.CloudMax)
-                    .HasColumnName("cloudMax")
-                    .HasDefaultValueSql("((10))");
+                entity.Property(e => e.RainMax).HasDefaultValueSql("((10))");
 
-                entity.Property(e => e.CloudMin)
-                    .HasColumnName("cloudMin")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.RainMin).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.HumidityMax)
-                    .HasColumnName("humidityMax")
-                    .HasDefaultValueSql("((10))");
+                entity.Property(e => e.SnowMax).HasDefaultValueSql("((10))");
 
-                entity.Property(e => e.HumidityMin)
-                    .HasColumnName("humidityMin")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.SnowMin).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.PushHours)
-                    .HasColumnName("pushHours")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.TempMax).HasDefaultValueSql("((10))");
 
-                entity.Property(e => e.PushMinutes)
-                    .HasColumnName("pushMinutes")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.TempMin).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.RainMax)
-                    .HasColumnName("rainMax")
-                    .HasDefaultValueSql("((10))");
+                entity.Property(e => e.WindMax).HasDefaultValueSql("((10))");
 
-                entity.Property(e => e.RainMin)
-                    .HasColumnName("rainMin")
-                    .HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.SnowMax)
-                    .HasColumnName("snowMax")
-                    .HasDefaultValueSql("((10))");
-
-                entity.Property(e => e.SnowMin)
-                    .HasColumnName("snowMin")
-                    .HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.TempMax)
-                    .HasColumnName("tempMax")
-                    .HasDefaultValueSql("((10))");
-
-                entity.Property(e => e.TempMin)
-                    .HasColumnName("tempMin")
-                    .HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.WindMax)
-                    .HasColumnName("windMax")
-                    .HasDefaultValueSql("((10))");
-
-                entity.Property(e => e.WindMin)
-                    .HasColumnName("windMin")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.WindMin).HasDefaultValueSql("((0))");
             });
         }
     }
