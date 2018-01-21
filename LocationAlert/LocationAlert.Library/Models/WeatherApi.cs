@@ -16,33 +16,76 @@ namespace LocationAlert.Library.Models
         {
             [JsonProperty("main")]
             internal WeatherResponseMain Main { get; set; }
+            [JsonProperty("weather")]
+            internal WeatherResponseCode Code { get; set; }
+            [JsonProperty("rain")]
+            internal WeatherResponseRain RainVolume { get; set; }
+            [JsonProperty("snow")]
+            internal WeatherResponseSnow SnowVolume { get; set; }
+            [JsonProperty("wind")]
+            internal WeatherResponseWind WindSpeed { get; set; }
+            [JsonProperty("clouds")]
+            internal WeatherResponseCloud Cloudiness { get; set; }
         }
 
         internal class WeatherResponseMain
         {
             [JsonProperty("temp")]
             internal double Temperature { get; set; }
+
+            [JsonProperty("humidity")]
+            internal int Humidity { get; set; }
         }
+        internal class WeatherResponseCode
+        {
+            [JsonProperty("id")]
+            internal int Code { get; set; }
+        }
+        internal class WeatherResponseRain
+        {
+            [JsonProperty("3h")]
+            internal int RainVolume { get; set; }
+        }
+        internal class WeatherResponseSnow
+        {
+            [JsonProperty("3h")]
+            internal int SnowVolume { get; set; }
+        }
+        internal class WeatherResponseWind
+        {
+            [JsonProperty("speed")]
+            internal int WindSpeed { get; set; }
+        }
+        internal class WeatherResponseCloud
+        {
+            [JsonProperty("all ")]
+            internal int Cloudiness { get; set; }
+        }
+
+        public int WeatherCode { get; set; }
+        public int RainVolume { get; set; }
+        public int SnowVolume { get; set; }
+        public int Humidity { get; set; }
+        public int Wind { get; set; }
+        public int Clouds { get; set; }
 
         private static string OpenWeatherMapApiKey = "f44745b3b949068be733eb938051eed4";
 
         public decimal Longitude { get; set; }
-
         public decimal Latitude { get; set; }
+        public double TempInFah { get; set; }
 
-        public float TempInFah { get; set; }
+        public WeatherApi() { }
 
-        //public WeatherPreference() { }
-
-        //public WeatherPreference(decimal latitude, decimal longitude)
-        //{
-        //    Latitude = latitude;
-        //    Longitude = longitude;
-        //}
+        public WeatherApi(decimal latitude, decimal longitude)
+        {
+            Latitude = latitude;
+            Longitude = longitude;
+        }
 
         // do not run more than once per 10 minutes!
         // see: https://www.openweathermap.org/appid
-        public async Task<double> GetWeatherForecastAsync(double latitude, double longitude)
+        public async Task GetWeatherForecastAsync(double latitude, double longitude)
         {
             using (var client = new HttpClient())
             {
@@ -55,6 +98,7 @@ namespace LocationAlert.Library.Models
                         ["long"] = longitude.ToString(),
                         ["APPID"] = OpenWeatherMapApiKey
                     };
+
                     string fullApiUri = QueryHelpers.AddQueryString(baseApiUri, queryString);
                     HttpResponseMessage response = await client.GetAsync(fullApiUri);
                     response.EnsureSuccessStatusCode();
@@ -62,8 +106,19 @@ namespace LocationAlert.Library.Models
                     string stringResult = await response.Content.ReadAsStringAsync();
                     var rawWeather = JsonConvert.DeserializeObject<WeatherResponse>(stringResult);
                     double temperatureK = rawWeather.Main.Temperature;
-                    double temperatureF = KelvinToFahrenheit(temperatureK);
-                    return temperatureF;
+                    //double temperatureF = KelvinToFahrenheit(temperatureK);
+                    TempInFah = KelvinToFahrenheit(temperatureK);
+
+                    //***********
+                    WeatherCode = rawWeather.Code.Code;
+                    RainVolume = rawWeather.RainVolume.RainVolume;
+                    SnowVolume = rawWeather.SnowVolume.SnowVolume;
+                    Humidity = rawWeather.Main.Humidity;
+                    Wind = rawWeather.WindSpeed.WindSpeed;
+                    Clouds = rawWeather.Cloudiness.Cloudiness;
+                    //***********
+
+                    //return temperatureF;
                 }
                 catch (HttpRequestException)
                 {

@@ -51,9 +51,9 @@ namespace LocationAlert.Library.Models
         {
             Console.WriteLine("Fire!");
 
-            // Make sure accounts is synced with database
+            // Make sure accounts are synced with database
             LoadAccounts();
-            // For every account registed to the service
+            // For every account registered to the service
             foreach (var account in AcountList )
             {
                 if (account.LastPush != null)
@@ -70,8 +70,12 @@ namespace LocationAlert.Library.Models
                         {
 
                             //weatherAPI call
-                            // need to pass in parsed JSON data too
-                            message.ComposeMessage(account.Regions);
+                            WeatherApi ApiCall = new WeatherApi();
+
+                            ApiCall.GetWeatherForecastAsync(region.Latitude, region.Longitude).GetAwaiter();
+
+                            // Pass in all regions and the Api call object
+                            message.ComposeMessage(account.Regions, ApiCall);
                         }
                             //send message
                         account.LastPush = DateTime.Now;
