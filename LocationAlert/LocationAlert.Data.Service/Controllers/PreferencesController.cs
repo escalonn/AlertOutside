@@ -3,6 +3,7 @@ using LocationAlert.Data.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LocationAlert.Data.Service.Controllers
@@ -23,7 +24,13 @@ namespace LocationAlert.Data.Service.Controllers
         public IActionResult Get()
         {
             // return preferences of all accounts to caller
-            return Ok();
+            IEnumerable<Account> allAccounts = DBContext.Client
+                .Include(c => c.Region)
+                .Include(c => c.Preference)
+                    .ThenInclude(p => p.WeatherPreference)
+                .Select(DataHelper.ToDataSvcModel);
+
+            return Ok(allAccounts);
         }
 
         // GET preferences/undefined@gmail.com
@@ -32,33 +39,60 @@ namespace LocationAlert.Data.Service.Controllers
         {
             // return preferences of an account to caller
             // (for when a user is still logged in but the client doesn't know his prefs anymore)
-            Client clientOut;
+            Client dbClient;
             try
             {
-                clientOut = DBContext.Client.AsNoTracking().First(c => c.Email == email);
+                dbClient = DBContext.Client
+                    .Include(c => c.Region)
+                    .Include(c => c.Preference)
+                        .ThenInclude(p => p.WeatherPreference)
+                    .First(c => c.Email == email);
             }
             catch (InvalidOperationException)
             {
                 // account with email does not exist
                 return BadRequest();
             }
-            return Ok(clientOut);
+            Account client = DataHelper.ToDataSvcModel(dbClient);
+            return Ok(client);
         }
 
         // PUT preferences/undefined@gmail.com
         [HttpPut("{email}")]
         public IActionResult Put(string email, [FromBody] Account client)
         {
+            client.Email = email;
+            Client dbClientUpdated = DataHelper.ToDataModel(client);
             try
             {
-                var result = DBContext.Client.FirstOrDefault((c => c.Email == email));
-      
+                Client dbClientExisting = DBContext.Client
+                    .Include(c => c.Region)
+                    .Include(c => c.Preference)
+                        .ThenInclude(p => p.WeatherPreference)
+                    .AsNoTracking()
+                    .First(c => c.Email == client.Email);
 
+                dbClientUpdated.ClientId = dbClientExisting.ClientId;
+                if (dbClientUpdated.Preference != null && dbClientExisting.Preference != null)
+                {
+                    dbClientUpdated.Preference.PreferenceId = (int)dbClientExisting.PreferenceId;
+                    if (dbClientUpdated.Preference.WeatherPreference != null && dbClientExisting.Preference.WeatherPreference != null)
+                    {
+                        dbClientUpdated.Preference.WeatherPreference.WeatherPreferenceId = (int)dbClientExisting.Preference.WeatherPreferenceId;
+                    }
+                }
+                // can't tell first region from second or third, to wire up the IDs, so just make new ones every time.
+
+                DBContext.Update(dbClientUpdated);
             }
             catch (InvalidOperationException)
             {
-                return BadRequest();
+                // there is no existing client with this email
+                DBContext.Add(dbClientUpdated);
             }
+
+            DBContext.SaveChanges();
+
             return Ok();
         }
     }
