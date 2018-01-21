@@ -13,7 +13,8 @@ namespace LocationAlert.Data.Service.Models
             var dataClient = new Client();
 
             dataClient.Email = serviceClient.Email;
-            dataClient.Preference.WeatherPreference.
+            // TODO
+            //dataClient.Preference.WeatherPreference.
             return dataClient;
         }
     }
