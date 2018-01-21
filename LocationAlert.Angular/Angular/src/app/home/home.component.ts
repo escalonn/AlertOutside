@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
     this.authentication.login(this.client);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
