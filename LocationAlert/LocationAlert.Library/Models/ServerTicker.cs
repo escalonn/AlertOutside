@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Text;
 
 namespace LocationAlert.Library.Models
 {
     public class ServerTicker
     {
+        public static string DataUrl { get; set; }
+        private static HttpClient s_httpClient = new HttpClient();
+
         private static ServerTicker instance;
-        public List<Account> AccountList { get; set; }
+        public static List<Account> AccountList { get; set; }
 
         private TimeSpan startTimeSpan = TimeSpan.Zero;
         private TimeSpan intervalTimeSpan = TimeSpan.FromMinutes(1);
@@ -90,14 +94,11 @@ namespace LocationAlert.Library.Models
 
         private void LoadAccounts()
         {
-            Account a = new Account();
-            a.Email = "test@test.com";
-            a.weatherPref = new WeatherPreference();
-            a.weatherPref.pushMinutes = 3;
-            a.LastPush = DateTime.Now;
+            // validate and talk to database
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, DataUrl + "/api/preferences");
 
-            AccountList.Add(a);
-            // load accounts from database
+            HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
+
         }
 
     }
