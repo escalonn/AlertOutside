@@ -2,7 +2,11 @@ agm-map {
     height: 400px;
     width: 800px;
   }
-
+.googlemap {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  
+}
   /* FOOTER */
 .panel-footer {
   margin-top: 30px;
