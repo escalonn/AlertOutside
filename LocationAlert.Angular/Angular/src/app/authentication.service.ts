@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Account } from './_models/account';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     var client = JSON.parse(sessionStorage.getItem('AccountKey'));
   }
 
@@ -36,8 +37,11 @@ export class AuthenticationService {
       data => {
         client = <Account>data;
         pass(data);
+        this.router.navigate(['preferences']);
       },
-      fail)
+      fail => {
+        this.router.navigate(['loginfail']);
+      })
 
     sessionStorage.setItem("AccountKey", JSON.stringify(client))
   }

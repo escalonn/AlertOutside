@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   loginButton(){
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.login(this.client);
-    console.log("login");
   }
 
   registerButton(){
