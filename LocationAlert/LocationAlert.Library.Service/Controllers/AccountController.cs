@@ -21,7 +21,7 @@ namespace LocationAlert.Library.Service.Controllers
     {
         private static HttpClient s_httpClient = new HttpClient();
 
-        public static Uri DataUrl { get; set; }
+        public static string DataUrl { get; set; }
 
         //for sending account from library service to library
         public static List<Account> _account = new List<Account>();
@@ -32,7 +32,7 @@ namespace LocationAlert.Library.Service.Controllers
         {
             // validate and talk to database
             string jsonOut = JsonConvert.SerializeObject(clientIn);
-            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, new Uri(DataUrl, "api/account/register"))
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/register")
             {
                 Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
             };
@@ -95,7 +95,7 @@ namespace LocationAlert.Library.Service.Controllers
             {
                 // otherwise, change values in database
                 string jsonOut = JsonConvert.SerializeObject(clientIn);
-                HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, new Uri(DataUrl, "api/account/update"))
+                HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/update")
                 {
                     Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
                 };

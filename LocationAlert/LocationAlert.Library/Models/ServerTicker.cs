@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace LocationAlert.Library.Models
@@ -8,6 +9,9 @@ namespace LocationAlert.Library.Models
     {
         private static ServerTicker instance;
         public List<Account> AcountList { get; set; }
+
+        private TimeSpan startTimeSpan = TimeSpan.Zero;
+        private TimeSpan intervalTimeSpan = TimeSpan.FromMinutes(10);
 
         public static ServerTicker Instance
         {
@@ -34,6 +38,18 @@ namespace LocationAlert.Library.Models
         {
             AcountList = new List<Account>();
             LoadAccounts();
+
+            var timer = new System.Threading.Timer((e) =>
+            {
+                intervalTick();
+            }, null, startTimeSpan, intervalTimeSpan);
+
+        }
+
+        // This gets run every (intervalTimeSpan) minutes
+        private void intervalTick()
+        {
+            Console.WriteLine("Fire!");
         }
 
         private void LoadAccounts()
