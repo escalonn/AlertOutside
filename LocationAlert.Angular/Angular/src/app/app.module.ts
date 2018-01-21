@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { RegistersuccessComponent } from './registersuccess/registersuccess.component';
 import { LogoutComponent } from './logout/logout.component';
+import { RegisterfailComponent } from './registerfail/registerfail.component';
 
 
 
@@ -31,6 +32,7 @@ import { LogoutComponent } from './logout/logout.component';
     RegionsComponent,
     RegistersuccessComponent,
     LogoutComponent,
+    RegisterfailComponent,
   ],
   imports: [
       BrowserModule,
