@@ -76,8 +76,11 @@ namespace LocationAlert.Library.Models
 
                             // Pass in all regions and the Api call object
                             message.ComposeMessage(account.Regions, ApiCall);
+
                         }
-                            //send message
+
+                        //send message
+                        message.SendMessage();
                         account.LastPush = DateTime.Now;
                     }
                 }

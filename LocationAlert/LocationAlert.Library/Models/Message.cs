@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 
 namespace LocationAlert.Library.Models
@@ -9,7 +11,7 @@ namespace LocationAlert.Library.Models
         public string email { get; set; }
         public WeatherPreference preferences { get; set; }
         public List<string> RegionMessage { get; set; }
-        public string Text { get; set; }
+        public string BodyText { get; set; }
 
         public Message(WeatherPreference preferences, string email)
         {
@@ -56,6 +58,32 @@ namespace LocationAlert.Library.Models
                 {
                     regString += ("Humidity Severity: " + ApiCall.Humidity + "/n");
                 }
+
+                BodyText = regString;
+            }
+        }
+
+        public void SendMessage()
+        {
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(email));
+            message.From = new MailAddress("sofanib@outlook.com");
+            message.Subject = "Location Alert Notification!";
+            message.Body = string.Format(BodyText);
+            message.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "sofanib@outlook.com",  // replace with valid value
+                    Password = "password"  // replace with valid value(password for real email
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp-mail.outlook.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.Send(message);
             }
         }
 
