@@ -5,6 +5,7 @@ import { PreferencesComponent } from './preferences/preferences.component';
 import { WeatherpreferencesComponent } from './weatherpreferences/weatherpreferences.component';
 import { AuthGuard } from './auth.guard';
 import { RegionsComponent } from './regions/regions.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
     component: RegionsComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+    canActivate: [AuthGuard]
+  }
 
   // otherwise redirect to preferences
   // { path: '**', redirectTo: '/preferences' }
