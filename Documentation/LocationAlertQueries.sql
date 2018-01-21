@@ -167,3 +167,27 @@ ALTER TABLE LA.Preference ADD
 	constraint FK_Preference_TrafficPreference FOREIGN KEY (TrafficPreferenceID) REFERENCES LA.TrafficPreference(TrafficPreferenceID),
 	constraint FK_Preference_NewsPreference FOREIGN KEY (NewsPreferenceID) REFERENCES LA.NewsPreference(NewsPreferenceID)
 GO
+
+ALTER TABLE LA.WeatherPreference ADD
+	pushHours INT NOT NULL DEFAULT 1,
+	pushMinutes INT NOT NULL DEFAULT 0,
+	alwaysTemp BIT NOT NULL DEFAULT 0,
+	tempMin INT Not NULL DEFAULT 0,
+	tempMax INT Not NULL DEFAULT 10,
+	alwaysRain BIT Not NULL DEFAULT 0,
+	rainMin INT Not NULL DEFAULT 0,
+	rainMax INT Not NULL DEFAULT 10,
+	alwaysSnow BIT Not NULL DEFAULT 0,
+	snowMin INT Not NULL DEFAULT 0,
+	snowMax INT Not NULL DEFAULT 10,
+	alwaysCloud BIT Not NULL DEFAULT 0,
+	cloudMin INT Not NULL DEFAULT 0,
+	cloudMax INT Not NULL DEFAULT 10,
+	alwaysWind BIT Not NULL DEFAULT 0,
+	windMin INT Not NULL DEFAULT 0,
+	windMax INT Not NULL DEFAULT 10,
+	alwaysHumidity BIT Not NULL DEFAULT 0,
+	humidityMin INT Not NULL DEFAULT 0,
+	humidityMax INT Not NULL DEFAULT 10
+
+go

@@ -32,7 +32,7 @@ export class AuthenticationService {
   // }
   login(client: Account){
     // Http call
-    this.http.get<Account>('http://localhost:61340/api/values').subscribe(data => {
+    this.http.get<Account>('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/login').subscribe(data => {
         client = <Account>data;
     })
 
@@ -44,13 +44,14 @@ export class AuthenticationService {
   }
 
   register(client: Account): void{
-    this.http.post('http://localhost:61340/api/account/register', client).subscribe(data => {
+    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/register', client).subscribe(data => {
+      
     console.log(data);
   });
   }
 
   update(client: Account): void {
-      this.http.post('http://localhost:61340/api/account/update', client).subscribe(data => {
+      this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/update', client).subscribe(data => {
       console.log(data);
   });
   }

@@ -1,4 +1,5 @@
 ﻿using LocationAlert.Data.Models;
+using LocationAlert.Data.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -46,10 +47,13 @@ namespace LocationAlert.Data.Service.Controllers
 
         // PUT preferences/undefined@gmail.com
         [HttpPut("{email}")]
-        public IActionResult Put(string email)
+        public IActionResult Put(string email, [FromBody] Account client)
         {
             try
             {
+                var result = DBContext.Client.FirstOrDefault((c => c.Email == email));
+      
+
             }
             catch (InvalidOperationException)
             {
