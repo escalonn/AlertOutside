@@ -29,6 +29,8 @@ namespace LocationAlert.Data.Service
             
             LocationAlertDBContext.ConfigureConnection = options =>
                 options.UseSqlServer(Configuration.GetConnectionString("LocationAlertDB"));
+
+            services.AddDbContext<LocationAlertDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

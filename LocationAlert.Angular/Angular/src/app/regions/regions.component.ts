@@ -3,6 +3,7 @@ import { GoogleMapsAPIWrapper } from '@agm/core';
 import { HttpClient } from '@angular/common/http';
 import { Region } from '../_models/region';
 import { Account } from '../_models/account';
+import { AuthenticationService } from '../authentication.service';
 
 
 
@@ -22,7 +23,7 @@ export class RegionsComponent implements OnInit {
   lat: number = 51.678418;
   lng: number = 7.809007;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authentication: AuthenticationService) {
 
    }
 
@@ -51,9 +52,9 @@ export class RegionsComponent implements OnInit {
   }
 
   saveRegion(){
+    // Send our data!
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
-    this.http.post("",JSON.stringify(this.client));
-    console.log(this.client.regions);
+    this.authentication.update(this.client);
   }
 
   ngOnInit() {

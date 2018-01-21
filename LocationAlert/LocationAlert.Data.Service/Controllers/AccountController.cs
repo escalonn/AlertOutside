@@ -1,8 +1,7 @@
 ﻿using LocationAlert.Data.Models;
+using LocationAlert.Data.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
 
 namespace LocationAlert.Data.Service.Controllers
 {
@@ -19,11 +18,12 @@ namespace LocationAlert.Data.Service.Controllers
 
         // POST account/register
         [HttpPost]
-        public IActionResult Register([FromBody] Client client)
+        public IActionResult Register([FromBody] Account clientIn)
         {
+            Client dbClient = DataHelper.ToDataModel(clientIn);
             // validate and create in database with default prefs
             // return account
-            DBContext.Add(client);
+            DBContext.Add(dbClient);
             try
             {
                 DBContext.SaveChanges();
@@ -33,7 +33,8 @@ namespace LocationAlert.Data.Service.Controllers
                 // account with email already exists
                 return BadRequest();
             }
-            return Ok(client);
+            Account clientOut = DataHelper.ToDataSvcModel(dbClient);
+            return Ok(clientOut);
         }
     }
 }

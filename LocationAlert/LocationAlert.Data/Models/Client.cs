@@ -19,7 +19,7 @@ namespace LocationAlert.Data.Models
         public string PhoneNumber { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
-        public int? PreferenceId { get; set; }
+        public int PreferenceId { get; set; }
         public DateTime? DateModified { get; set; }
 
         public Preference Preference { get; set; }

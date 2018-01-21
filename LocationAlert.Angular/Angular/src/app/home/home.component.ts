@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Account } from '../_models/account';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +9,22 @@ import { Account } from '../_models/account';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  client = new Account();
-  email : string;
 
-  constructor(private authentication: AuthenticationService) { }
+  client: Account = new Account();
+
+  constructor(private authentication: AuthenticationService, private router: Router) { }
 
   loginButton(){
-    console.log(this.client.email);
+    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.login(this.client);
+    console.log("login");
+  }
+
+  registerButton(){
+    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
+    this.authentication.register(this.client);
+    this.router.navigate(['registersuccess']);
+    console.log("register");
   }
 
   ngOnInit() {}

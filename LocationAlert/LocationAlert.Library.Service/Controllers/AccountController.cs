@@ -5,73 +5,117 @@ using System.Threading.Tasks;
 using LocationAlert.Library.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Http.Cors;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace LocationAlert.Library.Service.Controllers
 {
-
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]
     public class AccountController : Controller
     {
-        public static string DataUrl { get; set; }
+        private static HttpClient s_httpClient = new HttpClient();
+
+        public static Uri DataUrl { get; set; }
 
         //for sending account from library service to library
         public static List<Account> _account = new List<Account>();
 
-
-
         // POST account/register
         [HttpPost]
-        public IActionResult Register([FromBody] Account client)
+        public IActionResult Register([FromBody] Account clientIn)
         {
             // validate and talk to database
-            return Ok(client);
+            string jsonOut = JsonConvert.SerializeObject(clientIn);
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, new Uri(DataUrl, "api/account/register"))
+            {
+                Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
+            };
+
+            HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
+            if (!res.IsSuccessStatusCode)
+            {
+                return BadRequest(res);
+            }
+
+            string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            Account clientOut = JsonConvert.DeserializeObject<Account>(jsonIn);
+
+            return Ok(clientOut);
         }
 
-        // Get account/login  account purpose -------------------------------------------------------------------
+        // Get account/login account purpose -------------------------------------------------------------------
         [HttpGet]
-        public async Task<IActionResult> Login([FromBody] Account client)
+        public IActionResult Login([FromBody] Account client)
         {
-            var req = Request.HttpContext;
+            // TODO verify user
 
-            var claims = new List<Claim>() {
+            var claims = new List<Claim>()
+            {
                 new Claim(ClaimTypes.Email, client.Email)
-           };
+            };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            await req.SignInAsync("EmailCookie", new ClaimsPrincipal(identity), new AuthenticationProperties()
-            {
-                IsPersistent = true,
-                // ExpiresUtc = new DateTimeOffset(DateTime.UtcNow.AddHours(1))
-            });
+            HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(identity)
+            ).GetAwaiter().GetResult();
 
             return Ok(client);
-
-
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Logout()
         {
-            return Ok(HttpContext.SignOutAsync("EmailCookie"));
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).GetAwaiter().GetResult();
+            return Ok();
         }
-
 
         //-----------------------------------------------------------------------------------------------------------------------------------------
 
         // POST account/update
+        [Authorize]
         [HttpPost]
-        public IActionResult Update([FromBody] Account client)
+        public IActionResult Update([FromBody] Account clientIn)
         {
-            // change values in library and database
+            // if trying to update a different user...
+            if (HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value != clientIn.Email)
+            {
+                // not authorized to do that
+                return StatusCode(403);
+            }
+            else
+            {
+                // otherwise, change values in database
+                string jsonOut = JsonConvert.SerializeObject(clientIn);
+                HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, new Uri(DataUrl, "api/account/update"))
+                {
+                    Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
+                };
 
-            return Ok();
+                //Change values in library
+                var updateClient = _account.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
+                    if (updateClient == null)
+                    {
+                        return StatusCode(400);
+                    }
+                    else
+                    {
+                        updateClient = clientIn;
+                        return Ok();
+                    }
+                   
+            }
+
         }
+            
 
     }
 }

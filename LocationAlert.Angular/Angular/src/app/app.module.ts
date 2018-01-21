@@ -16,6 +16,8 @@ import { RegionsComponent } from './regions/regions.component';
 import { FormsModule } from '@angular/forms';
 
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { RegistersuccessComponent } from './registersuccess/registersuccess.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 
@@ -27,6 +29,8 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     PreferencesComponent,
     WeatherpreferencesComponent,
     RegionsComponent,
+    RegistersuccessComponent,
+    LogoutComponent,
   ],
   imports: [
       BrowserModule,

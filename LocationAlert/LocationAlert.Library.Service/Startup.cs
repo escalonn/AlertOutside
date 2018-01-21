@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LocationAlert.Library.Models;
 using LocationAlert.Library.Service.Controllers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,7 @@ namespace LocationAlert.Library.Service
         public void ConfigureServices(IServiceCollection services)
         {
 
-            AccountController.DataUrl = Configuration.GetValue<string>("ServiceUris:data");
+            AccountController.DataUrl = new Uri(Configuration.GetValue<string>("ServiceUris:data"));
             services.AddMvc();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -36,15 +37,11 @@ namespace LocationAlert.Library.Service
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-            services.AddAuthentication("EmailCookie").AddCookie("EmailCookie",
-                c => {
-                     c.LoginPath = "/api/Account/Login";
-                     c.LogoutPath = "/api/Account/Logout";
-                     c.Cookie = new CookieBuilder() {
-                             HttpOnly = true,
-                             Name = "sofanib@gmail.com",
-                     };
-            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+                {
+                    options.LoginPath = "/api/Account/Login";
+                    options.LogoutPath = "/api/Account/Logout";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +55,7 @@ namespace LocationAlert.Library.Service
             app.UseCors("MyPolicy");
             app.UseAuthentication();
             app.UseMvc();
-            
+
         }
     }
 }
