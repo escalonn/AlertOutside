@@ -50,6 +50,35 @@ namespace LocationAlert.Library.Models
         private void intervalTick()
         {
             Console.WriteLine("Fire!");
+
+            // Make sure accounts is synced with database
+            LoadAccounts();
+            // For every account registed to the service
+            foreach (var account in AcountList )
+            {
+                if (account.LastPush != null)
+                {
+                    // How long it has been since last push
+                    var pushOffset = account.LastPush.AddHours(account.weatherPref.pushHours).AddMinutes(account.weatherPref.pushMinutes);
+
+                    // If it has been too long since last push
+                    if (pushOffset >= DateTime.Now)
+                    {
+                        var message = new Message(account.weatherPref, account.Email);
+
+                        foreach (var region in account.Regions)
+                        {
+
+                            //weatherAPI call
+                            // need to pass in parsed JSON data too
+                            message.ComposeMessage(account.Regions);
+                        }
+                            //send message
+                        account.LastPush = DateTime.Now;
+                    }
+                }
+            }
+           
         }
 
         private void LoadAccounts()

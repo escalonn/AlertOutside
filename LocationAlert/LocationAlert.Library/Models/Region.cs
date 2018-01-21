@@ -14,5 +14,7 @@ namespace LocationAlert.Library.Models
         public decimal Longitude { get; set; }
 
         public long Radius { get; set; }
+
+        public string name { get; set; }
     }
 }

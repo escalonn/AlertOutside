@@ -27,6 +27,8 @@ namespace LocationAlert.Library.Models
 
         public WeatherPreference weatherPref { get; set; } = new WeatherPreference();
 
+        public DateTime LastPush { get; set; }
+
         public Account()
         {
            // Email = new MailAddress("undefined@gmail.com");
