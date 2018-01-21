@@ -41,7 +41,7 @@ namespace LocationAlert.Data.Service.Controllers
             }
             catch (Exception e)
             {
-                BadRequest(e);
+                return BadRequest(e);
             }
         }
     }
