@@ -16,7 +16,7 @@ namespace LocationAlert.Library.Models
         public static List<Account> AccountList { get; set; }
 
         private TimeSpan startTimeSpan = TimeSpan.Zero;
-        private TimeSpan intervalTimeSpan = TimeSpan.FromMinutes(240);
+        private TimeSpan intervalTimeSpan = TimeSpan.FromMinutes(1);
 
         public static ServerTicker Instance
         {
@@ -61,8 +61,10 @@ namespace LocationAlert.Library.Models
             // For every account registered to the service
             foreach (var account in AccountList )
             {
-                if (account.LastPush != null)
+                if (account.LastPush == null)
                 {
+                    account.LastPush = DateTime.Now;
+                }
                     // How long it has been since last push
                     var pushOffset = account.LastPush.AddHours(account.weatherPref.pushHours).AddMinutes(account.weatherPref.pushMinutes);
 
@@ -88,7 +90,6 @@ namespace LocationAlert.Library.Models
                         message.SendMessage();
                         account.LastPush = DateTime.Now;
                     }
-                }
             }
            
         }
