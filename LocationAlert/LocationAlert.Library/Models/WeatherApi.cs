@@ -18,7 +18,7 @@ namespace LocationAlert.Library.Models
             internal WeatherResponseMain Main { get; set; }
 
             [JsonProperty("name")]
-            internal string name { get; set; }
+            internal string Name { get; set; }
 
             [JsonProperty("rain")]
             internal WeatherResponseRain RainVolume { get; set; }
@@ -60,7 +60,6 @@ namespace LocationAlert.Library.Models
             internal int Cloudiness { get; set; }
         }
 
-        public int WeatherCode { get; set; }
         public int RainVolume { get; set; }
         public int SnowVolume { get; set; }
         public int Humidity { get; set; }
@@ -114,8 +113,15 @@ namespace LocationAlert.Library.Models
                     TempInFah = KelvinToFahrenheit(temperatureK);
 
                     //***********
-                    Name = rawWeather.name;
+
+                    Name = rawWeather.Name;
                     TempInFah = KelvinToFahrenheit(rawWeather.Main.Temperature);
+                    Humidity = rawWeather.Main.Humidity;
+
+                    RainVolume = rawWeather.RainVolume?.RainVolume ?? 0;
+                    SnowVolume = rawWeather.SnowVolume?.SnowVolume ?? 0;
+                    Wind = rawWeather.WindSpeed?.WindSpeed ?? 0;
+                    Clouds = rawWeather.Cloudiness?.Cloudiness ?? 0;
                     //***********
 
                     //return temperatureF;
