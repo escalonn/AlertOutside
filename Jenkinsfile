@@ -30,9 +30,9 @@ node('master') {
 				bat 'dotnet build --no-incremental'
 				bat 'SonarQube.Scanner.MSBuild.exe end'
 			}
-			// dir('LocationAlert.Angular/Angular') {
-			// 	bat 'SonarQube.Scanner.exe /k:ao221662 /n:alertoutsideangular /v:0.1.0'
-			// }
+			dir('LocationAlert.Angular/Angular') {
+				bat 'sonar-scanner.bat -Dsonar.projectKey=ao221662 -Dsonar.sources=. -Dproject.settings=C:\\tools\\sonarqube\\sonarcloud.properties'
+			}
 		}
 		catch (exc) {
 			slackError('analyze')
