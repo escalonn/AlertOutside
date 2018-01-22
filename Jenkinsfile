@@ -71,6 +71,10 @@ node('master') {
 			dir('LocationAlert.Angular/Angular') {
 				bat 'ng build --base-href /LocationAlert/'
 				bat 'copy /y ..\\..\\web.config dist'
+				// ng build inside jenkins workspace doesn't
+				bat 'copy /y src\\favicon.ico dist'
+				bat 'md dist\\assets\\images'
+				bat 'copy /y src\\assets\\images\\*.png dist\\assets\\images'
 			}
 		}
 		catch (exc) {

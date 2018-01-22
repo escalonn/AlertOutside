@@ -79,7 +79,7 @@ namespace LocationAlert.Library.Models
                             //weatherAPI call
                             WeatherApi ApiCall = new WeatherApi();
 
-                            ApiCall.GetWeatherForecastAsync(region.Latitude, region.Longitude).GetAwaiter();
+                            ApiCall.GetWeatherForecastAsync(region.Latitude, region.Longitude).GetAwaiter().GetResult();
 
                             // Pass in all regions and the Api call object
                             message.ComposeMessage(account.Regions, ApiCall);

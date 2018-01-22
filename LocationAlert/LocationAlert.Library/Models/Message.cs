@@ -27,7 +27,7 @@ namespace LocationAlert.Library.Models
 
             foreach (var region in regions)
             {
-                regString += ("Update for Region" + region.name + "<br>");
+                regString += ("<b>Update for Region</b>" + ApiCall.Name + "<br>");
 
                 //****Change 1 to severity enum or switch string case based on severity int
                 if (preferences.alwaysTemp || (CheckRange(Convert.ToInt32(ApiCall.TempInFah), preferences.temp[0], preferences.temp[1])))
@@ -45,7 +45,7 @@ namespace LocationAlert.Library.Models
                     regString += ("Snow Volume: " + ApiCall.SnowVolume + "<br>");
                 }
 
-                if (preferences.alwaysWind || (CheckRange(ApiCall.Wind, preferences.wind[0], preferences.wind[1])))
+                if (preferences.alwaysWind || (CheckRange(Convert.ToInt32(ApiCall.Wind), preferences.wind[0], preferences.wind[1])))
                 {
                     regString += ("Wind Speed: " + ApiCall.Wind + "<br>");
                 }
