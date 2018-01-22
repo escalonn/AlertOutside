@@ -72,10 +72,12 @@ namespace LocationAlert.Data.Service.Controllers
                     .AsNoTracking()
                     .First(c => c.Email == client.Email);
 
+                // can't tell first region from second or third, to wire up the IDs, so just make new ones every time.
+                DBContext.Region.RemoveRange(DBContext.Region.Where(r => r.ClientId == dbClientExisting.ClientId));
+
                 dbClientUpdated.ClientId = dbClientExisting.ClientId;
                 dbClientUpdated.Preference.PreferenceId = dbClientExisting.PreferenceId;
                 dbClientUpdated.Preference.WeatherPreference.WeatherPreferenceId = dbClientExisting.Preference.WeatherPreferenceId;
-                // can't tell first region from second or third, to wire up the IDs, so just make new ones every time.
 
                 DBContext.Update(dbClientUpdated);
             }
