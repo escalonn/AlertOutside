@@ -34,32 +34,32 @@ namespace LocationAlert.Library.Models
                 regString += ("<b>Update for Region</b>&nbsp;" + ApiCall.Name + "<br>");
 
                 //****Change 1 to severity enum or switch string case based on severity int
-                if (preferences.alwaysTemp || (CheckRange(Convert.ToInt32(ApiCall.TempInFah), preferences.temp[0], preferences.temp[1])))
+                if (preferences.AlwaysTemp || (CheckRange(Convert.ToInt32(ApiCall.TempInFah), preferences.Temp[0], preferences.Temp[1])))
                 {
                     regString += ("Temperature:&nbsp;" + ApiCall.TempInFah + "<br>");
                 }
 
-                if (preferences.alwaysRain || (CheckRange(ApiCall.RainVolume, preferences.rain[0],preferences.rain[1])))
+                if (preferences.AlwaysRain || (CheckRange(ApiCall.RainVolume, preferences.Rain[0],preferences.Rain[1])))
                 {
                     regString += ("Rain Volume:&nbsp;" + ApiCall.RainVolume + "<br>");
                 }
 
-                if (preferences.alwaysSnow || (CheckRange(ApiCall.SnowVolume, preferences.snow[0], preferences.snow[1])))
+                if (preferences.AlwaysSnow || (CheckRange(ApiCall.SnowVolume, preferences.Snow[0], preferences.Snow[1])))
                 {
                     regString += ("Snow Volume:&nbsp;" + ApiCall.SnowVolume + "<br>");
                 }
 
-                if (preferences.alwaysWind || (CheckRange(Convert.ToInt32(ApiCall.Wind), preferences.wind[0], preferences.wind[1])))
+                if (preferences.AlwaysWind || (CheckRange(Convert.ToInt32(ApiCall.Wind), preferences.Wind[0], preferences.Wind[1])))
                 {
                     regString += ("Wind Speed:&nbsp;" + ApiCall.Wind + "<br>");
                 }
 
-                if (preferences.alwaysCloud || (CheckRange(ApiCall.Clouds, preferences.cloud[0], preferences.cloud[1])))
+                if (preferences.AlwaysCloud || (CheckRange(ApiCall.Clouds, preferences.Cloud[0], preferences.Cloud[1])))
                 {
                     regString += ("Cloud Severity:&nbsp;" + ApiCall.Clouds + "<br>");
                 }
 
-                if (preferences.alwaysHumidity || (CheckRange(ApiCall.Humidity, preferences.humidity[0], preferences.humidity[1])))
+                if (preferences.AlwaysHumidity || (CheckRange(ApiCall.Humidity, preferences.Humidity[0], preferences.Humidity[1])))
                 {
                     regString += ("Humidity Severity:&nbsp;" + ApiCall.Humidity + "<br>");
                 }

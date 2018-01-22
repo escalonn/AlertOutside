@@ -46,13 +46,13 @@ namespace LocationAlert.Library.Models
 
             var timer = new System.Threading.Timer((e) =>
             {
-                intervalTick();
+                IntervalTick();
             }, null, startTimeSpan, intervalTimeSpan);
 
         }
 
         // This gets run every (intervalTimeSpan) minutes
-        private void intervalTick()
+        private void IntervalTick()
         {
             Console.WriteLine("Fire!");
 
@@ -66,7 +66,7 @@ namespace LocationAlert.Library.Models
                     account.LastPush = DateTime.Now;
                 }
                     // How long it has been since last push
-                    var pushOffset = account.LastPush.AddHours(account.weatherPref.pushHours).AddMinutes(account.weatherPref.pushMinutes);
+                    var pushOffset = account.LastPush.AddHours(account.weatherPref.PushHours).AddMinutes(account.weatherPref.PushMinutes);
 
                     // If it has been too long since last push
                     if (pushOffset <= DateTime.Now)
