@@ -78,7 +78,7 @@ namespace LocationAlert.Library.Models
                 var credential = new NetworkCredential
                 {
                     UserName = "sofanib@outlook.com",  // replace with valid value
-                    Password = "password"  // replace with valid value(password for real email
+                    Password = "sami114173"  // replace with valid value(password for real email
                 };
                 smtp.Credentials = credential;
                 smtp.Host = "smtp-mail.outlook.com";
