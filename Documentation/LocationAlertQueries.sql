@@ -1,6 +1,16 @@
 USE [LocationAlertDB]
 GO
 
+SELECT *
+FROM LA.Client as c
+LEFT JOIN LA.Region as r
+	ON r.ClientID = c.ClientID
+LEFT JOIN LA.Preference as p
+	ON c.PreferenceID = p.PreferenceID
+LEFT JOIN LA.WeatherPreference as w
+	ON p.WeatherPreferenceID = w.WeatherPreferenceID;
+GO
+
 ALTER TABLE LA.Preference DROP
 	CONSTRAINT FK_Preference_WeatherPreference,
 	CONSTRAINT FK_Preference_TrafficPreference,
