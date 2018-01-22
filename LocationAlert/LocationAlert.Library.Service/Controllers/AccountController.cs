@@ -24,7 +24,7 @@ namespace LocationAlert.Library.Service.Controllers
         public static string DataUrl { get; set; }
 
         //for sending account from library service to library
-        public static List<Account> _account = new List<Account>();
+        //public static List<Account> _account = new List<Account>();
 
         // POST account/register
         [HttpPost]
@@ -50,7 +50,7 @@ namespace LocationAlert.Library.Service.Controllers
         }
 
         // Get account/login account purpose -------------------------------------------------------------------
-        [HttpGet]
+        [HttpPost]
         public IActionResult Login([FromBody] Account client)
         {
             // TODO verify user
@@ -101,7 +101,7 @@ namespace LocationAlert.Library.Service.Controllers
                 };
 
                 //Change values in library
-                var updateClient = _account.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
+                var updateClient = ServerTicker.AccountList.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
                     if (updateClient == null)
                     {
                         return StatusCode(400);

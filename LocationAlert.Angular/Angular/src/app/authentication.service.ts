@@ -33,13 +33,14 @@ export class AuthenticationService {
   // }
   login(client: Account, pass = (data: Object) => { }, fail = err => { }) {
     // Http call
-    this.http.get<Account>('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/login').subscribe(
+
+    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/login',client).subscribe(
       data => {
         client = <Account>data;
         pass(data);
         this.router.navigate(['preferences']);
       },
-      fail => {
+      data => {
         this.router.navigate(['loginfail']);
       })
 

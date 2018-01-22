@@ -18,6 +18,7 @@ namespace LocationAlert.Library.Models
             this.preferences = preferences;
             this.email = email;
             RegionMessage = new List<string>();
+            BodyText = "";
         }
 
         public void ComposeMessage(List<Region> regions, WeatherApi ApiCall)
