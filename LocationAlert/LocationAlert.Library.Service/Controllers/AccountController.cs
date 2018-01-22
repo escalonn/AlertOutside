@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LocationAlert.Library.Models;
+﻿using LocationAlert.Library.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using System.Net.Http;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 
 namespace LocationAlert.Library.Service.Controllers
@@ -53,7 +52,18 @@ namespace LocationAlert.Library.Service.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] Account client)
         {
-            // TODO verify user
+            //validate and talk to database
+            string resource = WebUtility.UrlEncode(client.Email);
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, DataUrl + $"/api/preferences/{resource}");
+
+            HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
+            if (!res.IsSuccessStatusCode)
+            {
+                return BadRequest(res);
+            }
+
+            string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            Account clientOut = JsonConvert.DeserializeObject<Account>(jsonIn);
 
             var claims = new List<Claim>()
             {
@@ -66,23 +76,7 @@ namespace LocationAlert.Library.Service.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity)
             ).GetAwaiter().GetResult();
-
-            //validate and talk to database
-            string jsonOut = JsonConvert.SerializeObject(client);
-            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/login")
-            {
-                Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
-            };
-
-            HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
-            if (!res.IsSuccessStatusCode)
-            {
-                return BadRequest(res);
-            }
-
-            string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            Account clientOut = JsonConvert.DeserializeObject<Account>(jsonIn);
-
+            
             return Ok(clientOut);
         }
 
@@ -107,31 +101,22 @@ namespace LocationAlert.Library.Service.Controllers
                 // not authorized to do that
                 return StatusCode(403);
             }
-            else
+
+            // otherwise, change values in database
+            string jsonOut = JsonConvert.SerializeObject(clientIn);
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/update")
             {
-                // otherwise, change values in database
-                string jsonOut = JsonConvert.SerializeObject(clientIn);
-                HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/update")
-                {
-                    Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
-                };
+                Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
+            };
 
-                //Change values in library
-                var updateClient = ServerTicker.AccountList.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
-                    if (updateClient == null)
-                    {
-                        return StatusCode(400);
-                    }
-                    else
-                    {
-                        updateClient = clientIn;
-                        return Ok();
-                    }
-                   
+            //Change values in library
+            var updateClient = ServerTicker.AccountList.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
+            if (updateClient is null)
+            {
+                return StatusCode(400);
             }
-
+            updateClient = clientIn;
+            return Ok();
         }
-            
-
     }
 }

@@ -19,7 +19,7 @@ namespace LocationAlert.Data.Service.Controllers
             DBContext = dbContext;
         }
 
-        // GET preferences/
+        // GET api/preferences
         [HttpGet]
         public IActionResult Get()
         {
@@ -33,7 +33,7 @@ namespace LocationAlert.Data.Service.Controllers
             return Ok(allAccounts);
         }
 
-        // GET preferences/undefined@gmail.com
+        // GET api/preferences/undefined@gmail.com
         [HttpGet("{email}")]
         public IActionResult Get(string email)
         {
@@ -57,7 +57,7 @@ namespace LocationAlert.Data.Service.Controllers
             return Ok(client);
         }
 
-        // PUT preferences/undefined@gmail.com
+        // PUT api/preferences/undefined@gmail.com
         [HttpPut("{email}")]
         public IActionResult Put(string email, [FromBody] Account client)
         {
