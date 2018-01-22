@@ -58,9 +58,6 @@ node('master') {
 	stage('package') {
 		try {
 			dir('LocationAlert') {
-				dir('LocationAlert.Client') {
-					bat 'dotnet publish --output ../../PackageClient'
-				}
 				dir('LocationAlert.Library.Service') {
 					bat 'dotnet publish --output ../../PackageLibrary'
 				}
@@ -84,7 +81,6 @@ node('master') {
 	}
 	stage('deploy') {
 		try {
-			bat "MSDeploy.exe -verb:sync -source:${env.DeploySettings__client_source} -dest:${env.DeploySettings__client_dest} -enableRule:AppOffline -allowUntrusted"
 			bat "MSDeploy.exe -verb:sync -source:${env.DeploySettings__library_source} -dest:${env.DeploySettings__library_dest} -enableRule:AppOffline -allowUntrusted"
 			bat "MSDeploy.exe -verb:sync -source:${env.DeploySettings__data_source} -dest:${env.DeploySettings__data_dest} -enableRule:AppOffline -allowUntrusted"
 			bat "MSDeploy.exe -verb:sync -source:${env.DeploySettings__angular_source} -dest:${env.DeploySettings__angular_dest} -enableRule:AppOffline -allowUntrusted"
