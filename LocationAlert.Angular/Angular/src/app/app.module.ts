@@ -15,14 +15,11 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { RegionsComponent } from './regions/regions.component';
 import { FormsModule } from '@angular/forms';
 
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
 import { RegistersuccessComponent } from './registersuccess/registersuccess.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterfailComponent } from './registerfail/registerfail.component';
 import { LoginfailComponent } from './loginfail/loginfail.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -37,19 +34,18 @@ import { LoginfailComponent } from './loginfail/loginfail.component';
     LoginfailComponent,
   ],
   imports: [
-      BrowserModule,
-      HttpClientModule,
-      NouisliderModule,
-      AppRoutingModule,
-      FormsModule,
-      AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ'
-      }),
+    BrowserModule,
+    HttpClientModule,
+    NouisliderModule,
+    AppRoutingModule,
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDqINRPfJaUcmFkhziYrl3KgMY3NYCG4uQ'
+    }),
   ],
   providers: [
     AuthGuard,
-    AuthenticationService,
-    GoogleMapsAPIWrapper
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })
