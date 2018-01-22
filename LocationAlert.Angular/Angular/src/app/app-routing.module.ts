@@ -48,6 +48,10 @@ const routes: Routes = [
   {
     path: 'loginfail',
     component: LoginfailComponent,
+  },
+  { path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
 
   // otherwise redirect to preferences
