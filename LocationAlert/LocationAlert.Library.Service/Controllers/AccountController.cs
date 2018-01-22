@@ -67,23 +67,23 @@ namespace LocationAlert.Library.Service.Controllers
                 new ClaimsPrincipal(identity)
             ).GetAwaiter().GetResult();
 
-            // validate and talk to database
-            //string jsonOut = JsonConvert.SerializeObject(client);
-            //HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/login")
-            //{
-            //    Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
-            //};
+            //validate and talk to database
+            string jsonOut = JsonConvert.SerializeObject(client);
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/login")
+            {
+                Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
+            };
 
-            //HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
-            //if (!res.IsSuccessStatusCode)
-            //{
-            //    return BadRequest(res);
-            //}
+            HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
+            if (!res.IsSuccessStatusCode)
+            {
+                return BadRequest(res);
+            }
 
-            //string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            //Account clientOut = JsonConvert.DeserializeObject<Account>(jsonIn);
+            string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            Account clientOut = JsonConvert.DeserializeObject<Account>(jsonIn);
 
-            //return Ok(clientOut);
+            return Ok(clientOut);
         }
 
         [Authorize]
