@@ -53,7 +53,8 @@ namespace LocationAlert.Library.Service.Controllers
         public IActionResult Login([FromBody] Account client)
         {
             //validate and talk to database
-            string resource = WebUtility.UrlEncode(client.Email);
+            //string resource = WebUtility.UrlEncode(client.Email);
+            string resource = client.Email;
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, DataUrl + $"/api/preferences/{resource}");
 
             HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
@@ -91,19 +92,20 @@ namespace LocationAlert.Library.Service.Controllers
         //-----------------------------------------------------------------------------------------------------------------------------------------
 
         // POST account/update
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public IActionResult Update([FromBody] Account clientIn)
         {
             // if trying to update a different user...
-            if (HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value != clientIn.Email)
-            {
-                // not authorized to do that
-                return StatusCode(403);
-            }
+            //if (HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value != clientIn.Email)
+            //{
+            //    // not authorized to do that
+            //    return StatusCode(403);
+            //}
 
             // otherwise, change values in database
-            string resource = WebUtility.UrlEncode(clientIn.Email);
+            //string resource = WebUtility.UrlEncode(clientIn.Email);
+            string resource = clientIn.Email;
             string jsonOut = JsonConvert.SerializeObject(clientIn);
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Put, DataUrl + $"/api/preferences/{resource}")
             {
