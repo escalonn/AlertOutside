@@ -103,19 +103,30 @@ namespace LocationAlert.Library.Service.Controllers
             }
 
             // otherwise, change values in database
+            string resource = WebUtility.UrlEncode(clientIn.Email);
             string jsonOut = JsonConvert.SerializeObject(clientIn);
-            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, DataUrl + "/api/account/update")
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Put, DataUrl + $"/api/preferences/{resource}")
             {
                 Content = new StringContent(jsonOut, Encoding.UTF8, "application/json")
             };
 
-            //Change values in library
-            var updateClient = ServerTicker.AccountList.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
-            if (updateClient is null)
+            HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
+            if (!res.IsSuccessStatusCode)
             {
-                return StatusCode(400);
+                return BadRequest(res);
             }
-            updateClient = clientIn;
+
+            string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            Account clientOut = JsonConvert.DeserializeObject<Account>(jsonIn);
+
+            ////Change values in library
+            //var updateClient = ServerTicker.AccountList.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
+            //if (updateClient is null)
+            //{
+            //    return StatusCode(400);
+            //}
+            //updateClient = clientIn;
+
             return Ok();
         }
     }
