@@ -40,68 +40,25 @@
       </div>
         <div class="row">
                 <div class="col-lg-4 ">
-                    <table class=" table table-bordered region" id="Region1">
+                    <table class=" table table-bordered region" id="Region1" *ngFor="let data of client.regions ; let i = index">
                         <tr>
-                            <td><b>Name :</b></td>
-                            <td id="name1">Name value</td>
+                            <td><b>ID :</b></td>
+                            <td id="name1">{{client.regions[i].id}}</td>
                         </tr>
                         <tr>
                             <td><b>Latitude :</b></td>
-                            <td>Latitude Value</td>
+                            <td>{{client.regions[i].latitude}}</td>
                         </tr>
                         <tr>
                             <td><b>Longitude :</b></td>
-                            <td>Longitude Value</td>
+                            <td>{{client.regions[i].longitude}}</td>
                         </tr>
                         <tr>
                             <td><b>Radius :</b></td>
-                            <td>Radius Value</td>
+                            <td>{{client.regions[i].radius}}</td>
                         </tr>
                     </table>
                 </div>
-            
-                <div class="col-lg-4 ">
-                    <table  class="table table-bordered region" id="Region2">
-                        <tr>
-                            <td><b>Name :</b></td>
-                            <td> Name value</td>
-                        </tr>
-                        <tr>
-                            <td><b>Latitude :</b></td>
-                            <td>Latitude Value</td>
-                        </tr>
-                        <tr>
-                            <td><b>Longitude :</b></td>
-                            <td>Longitude Value</td>
-                        </tr>
-                        <tr>
-                            <td><b>Radius :</b></td>
-                            <td>Radius Value</td>
-                        </tr>
-                    </table>
-                </div>
-            
-                <div class="col-lg-4  ">
-                    <table class="table table-bordered region" id="Region3">
-                        <tr>
-                            <td><b>Name :</b></td>
-                            <td> Name value</td>
-                        </tr>
-                        <tr>
-                            <td><b>Latitude :</b></td>
-                            <td>Latitude Value</td>
-                        </tr>
-                        <tr>
-                            <td><b>Longitude :</b></td>
-                            <td>Longitude Value</td>
-                        </tr>
-                        <tr>
-                            <td><b>Radius :</b></td>
-                            <td>Radius Value</td>
-                        </tr>
-                    </table>
-                </div>
-            
           </div>
    
 </div>
