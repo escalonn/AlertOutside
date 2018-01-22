@@ -3,23 +3,26 @@
         <br>
         <h4 class="text-center">RegionPreference</h4>
         <hr />
-    <div class="googlemap">
-            <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapDblClick($event)">
-                <agm-circle *ngFor="let data of client.regions ; let i = index"
-                    [latitude]="data.latitude"
-                    [longitude]="data.longitude"
-                    [circleDraggable]="true"
-                    [editable]="true"
-                    [fillColor]="data.color"
-                    [radius]="data.radius"
-                    [id]="data.id"
-                    (radiusChange)="radiusChange($event, i)"
-                    (centerChange)="centerChange($event, i)"
-                >
-                </agm-circle>
-            </agm-map>
-    </div>
-    <div class="row">
+        <div class="row">
+                <div class="googlemap" class="col-lg-8">
+                        <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapDblClick($event)">
+                            <agm-circle *ngFor="let data of client.regions ; let i = index"
+                                [latitude]="data.latitude"
+                                [longitude]="data.longitude"
+                                [circleDraggable]="true"
+                                [editable]="true"
+                                [fillColor]="data.color"
+                                [radius]="data.radius"
+                                [id]="data.id"
+                                (radiusChange)="radiusChange($event, i)"
+                                (centerChange)="centerChange($event, i)"
+                            >
+                            </agm-circle>
+                        </agm-map>
+                </div>
+        </div>
+    <br>
+        <div class="row">
                 <div  class="form-group">
                     <!-- Button -->
                     <div class="col-sm-12 controls">
@@ -34,6 +37,72 @@
                     </div>
                 </div>
 
-    </div>
+      </div>
+        <div class="row">
+                <div class="col-lg-4 ">
+                    <table class=" table table-bordered region" id="Region1">
+                        <tr>
+                            <td><b>Name :</b></td>
+                            <td id="name1">Name value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Latitude :</b></td>
+                            <td>Latitude Value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Longitude :</b></td>
+                            <td>Longitude Value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Radius :</b></td>
+                            <td>Radius Value</td>
+                        </tr>
+                    </table>
+                </div>
+            
+                <div class="col-lg-4 ">
+                    <table  class="table table-bordered region" id="Region2">
+                        <tr>
+                            <td><b>Name :</b></td>
+                            <td> Name value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Latitude :</b></td>
+                            <td>Latitude Value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Longitude :</b></td>
+                            <td>Longitude Value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Radius :</b></td>
+                            <td>Radius Value</td>
+                        </tr>
+                    </table>
+                </div>
+            
+                <div class="col-lg-4  ">
+                    <table class="table table-bordered region" id="Region3">
+                        <tr>
+                            <td><b>Name :</b></td>
+                            <td> Name value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Latitude :</b></td>
+                            <td>Latitude Value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Longitude :</b></td>
+                            <td>Longitude Value</td>
+                        </tr>
+                        <tr>
+                            <td><b>Radius :</b></td>
+                            <td>Radius Value</td>
+                        </tr>
+                    </table>
+                </div>
+            
+          </div>
+   
 </div>
 
