@@ -16,9 +16,7 @@ export class RegionsComponent implements OnInit {
 
   maxReg = 3;
 
-  //client: Account = JSON.parse(sessionStorage.getItem("AccountKey"));
-  client: Account = new Account();
-
+  client: Account = JSON.parse(sessionStorage.getItem("AccountKey"));
 
   lat: number = 51.678418;
   lng: number = 7.809007;
