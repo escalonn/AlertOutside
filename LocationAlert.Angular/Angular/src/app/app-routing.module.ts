@@ -43,12 +43,11 @@ const routes: Routes = [
   {
     path: 'registerfail',
     component: RegisterfailComponent,
-    canActivate: [AuthGuard]
+
   },
   {
     path: 'loginfail',
     component: LoginfailComponent,
-    canActivate: [AuthGuard]
   }
 
   // otherwise redirect to preferences
