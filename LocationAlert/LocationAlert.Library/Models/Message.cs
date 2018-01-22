@@ -23,45 +23,51 @@ namespace LocationAlert.Library.Models
 
         public void ComposeMessage(List<Region> regions, WeatherApi ApiCall)
         {
+
             string regString = "";
 
             foreach (var region in regions)
             {
-                regString += ("<b>Update for Region</b>&nbsp:" + ApiCall.Name + "<br>");
+
+                regString = "";
+
+                regString += ("<b>Update for Region</b>&nbsp;" + ApiCall.Name + "<br>");
 
                 //****Change 1 to severity enum or switch string case based on severity int
                 if (preferences.alwaysTemp || (CheckRange(Convert.ToInt32(ApiCall.TempInFah), preferences.temp[0], preferences.temp[1])))
                 {
-                    regString += ("Temperature:&nbsp:" + ApiCall.TempInFah + "<br>");
+                    regString += ("Temperature:&nbsp;" + ApiCall.TempInFah + "<br>");
                 }
 
                 if (preferences.alwaysRain || (CheckRange(ApiCall.RainVolume, preferences.rain[0],preferences.rain[1])))
                 {
-                    regString += ("Rain Volume:&nbsp:" + ApiCall.RainVolume + "<br>");
+                    regString += ("Rain Volume:&nbsp;" + ApiCall.RainVolume + "<br>");
                 }
 
                 if (preferences.alwaysSnow || (CheckRange(ApiCall.SnowVolume, preferences.snow[0], preferences.snow[1])))
                 {
-                    regString += ("Snow Volume:&nbsp:" + ApiCall.SnowVolume + "<br>");
+                    regString += ("Snow Volume:&nbsp;" + ApiCall.SnowVolume + "<br>");
                 }
 
                 if (preferences.alwaysWind || (CheckRange(Convert.ToInt32(ApiCall.Wind), preferences.wind[0], preferences.wind[1])))
                 {
-                    regString += ("Wind Speed:&nbsp:" + ApiCall.Wind + "<br>");
+                    regString += ("Wind Speed:&nbsp;" + ApiCall.Wind + "<br>");
                 }
 
                 if (preferences.alwaysCloud || (CheckRange(ApiCall.Clouds, preferences.cloud[0], preferences.cloud[1])))
                 {
-                    regString += ("Cloud Severity:&nbsp:" + ApiCall.Clouds + "<br>");
+                    regString += ("Cloud Severity:&nbsp;" + ApiCall.Clouds + "<br>");
                 }
 
                 if (preferences.alwaysHumidity || (CheckRange(ApiCall.Humidity, preferences.humidity[0], preferences.humidity[1])))
                 {
-                    regString += ("Humidity Severity:&nbsp:" + ApiCall.Humidity + "<br>");
+                    regString += ("Humidity Severity:&nbsp;" + ApiCall.Humidity + "<br>");
                 }
 
-                BodyText = regString;
+                
             }
+
+            BodyText += regString;
         }
 
         public void SendMessage()

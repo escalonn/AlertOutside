@@ -1,4 +1,5 @@
-body {
+.pref {
+    margin-top: 50px;
 }
 
 
@@ -23,7 +24,7 @@ body {
 }
 .btn-primary:hover {
         color: #FFF;
-        background: #cccccc;
+        background: #475363;
         border: 2px solid rgba(58, 133, 191, 0.75);
 }
 
