@@ -59,39 +59,39 @@ namespace LocationAlert.Library.Models
             // Make sure accounts are synced with database
             LoadAccounts();
             // For every account registered to the service
-            foreach (var account in AccountList )
+            foreach (var account in AccountList)
             {
-                if (account.LastPush == null)
+                bool shouldPush = true;
+                if (account.EverPushed)
                 {
-                    account.LastPush = DateTime.Now;
-                }
                     // How long it has been since last push
-                    var pushOffset = account.LastPush.AddHours(account.weatherPref.PushHours).AddMinutes(account.weatherPref.PushMinutes);
+                    var pushOffset = account.LastPush.AddHours(account.WeatherPref.PushHours).AddMinutes(account.WeatherPref.PushMinutes);
 
                     // If it has been too long since last push
-                    if (pushOffset <= DateTime.Now)
+                    shouldPush = pushOffset <= DateTime.Now;
+                }
+
+                if (shouldPush)
+                {
+                    var message = new Message(account.WeatherPref, account.Email);
+
+                    foreach (var region in account.Regions)
                     {
-                        var message = new Message(account.weatherPref, account.Email);
+                        //weatherAPI call
+                        WeatherApi ApiCall = new WeatherApi();
 
-                        foreach (var region in account.Regions)
-                        {
+                        ApiCall.GetWeatherForecastAsync(region.Latitude, region.Longitude).GetAwaiter().GetResult();
 
-                            //weatherAPI call
-                            WeatherApi ApiCall = new WeatherApi();
-
-                            ApiCall.GetWeatherForecastAsync(region.Latitude, region.Longitude).GetAwaiter().GetResult();
-
-                            // Pass in all regions and the Api call object
-                            message.ComposeMessage(account.Regions, ApiCall);
-
-                        }
-
-                        //send message
-                        message.SendMessage();
-                        account.LastPush = DateTime.Now;
+                        // Pass in all regions and the Api call object
+                        message.ComposeMessage(account.Regions, ApiCall);
                     }
+
+                    //send message
+                    message.SendMessage();
+                    account.EverPushed = true;
+                    account.LastPush = DateTime.Now;
+                }
             }
-           
         }
 
         private void LoadAccounts()

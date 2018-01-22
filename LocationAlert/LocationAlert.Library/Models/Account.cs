@@ -25,7 +25,9 @@ namespace LocationAlert.Library.Models
 
         public const int MaxRegion = 3;
 
-        public WeatherPreference weatherPref { get; set; } = new WeatherPreference();
+        public WeatherPreference WeatherPref { get; set; } = new WeatherPreference();
+
+        public bool EverPushed { get; set; } = false;
 
         public DateTime LastPush { get; set; }
 
