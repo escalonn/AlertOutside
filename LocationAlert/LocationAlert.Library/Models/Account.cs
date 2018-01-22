@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
 
 namespace LocationAlert.Library.Models
 {
     public  class Account
     {
-
         public string  Email { get; set; }
 
         public string Password { get; set; }
@@ -31,15 +27,11 @@ namespace LocationAlert.Library.Models
 
         public DateTime LastPush { get; set; }
 
-        public Account()
-        {
-           // Email = new MailAddress("undefined@gmail.com");
-        }
+        public Account() { }
 
         public Account(string email)
         {
             Email = email;
         }
-
     }
 }

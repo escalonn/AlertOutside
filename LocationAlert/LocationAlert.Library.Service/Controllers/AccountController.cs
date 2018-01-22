@@ -22,9 +22,6 @@ namespace LocationAlert.Library.Service.Controllers
 
         public static string DataUrl { get; set; }
 
-        //for sending account from library service to library
-        //public static List<Account> _account = new List<Account>();
-
         // POST account/register
         [HttpPost]
         public IActionResult Register([FromBody] Account clientIn)
@@ -53,7 +50,6 @@ namespace LocationAlert.Library.Service.Controllers
         public IActionResult Login([FromBody] Account client)
         {
             //validate and talk to database
-            //string resource = WebUtility.UrlEncode(client.Email);
             string resource = client.Email;
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, DataUrl + $"/api/preferences/{resource}");
 
@@ -104,7 +100,6 @@ namespace LocationAlert.Library.Service.Controllers
             //}
 
             // otherwise, change values in database
-            //string resource = WebUtility.UrlEncode(clientIn.Email);
             string resource = clientIn.Email;
             string jsonOut = JsonConvert.SerializeObject(clientIn);
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Put, DataUrl + $"/api/preferences/{resource}")
@@ -117,17 +112,6 @@ namespace LocationAlert.Library.Service.Controllers
             {
                 return BadRequest(res);
             }
-
-            string jsonIn = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            Account clientOut = JsonConvert.DeserializeObject<Account>(jsonIn);
-
-            ////Change values in library
-            //var updateClient = ServerTicker.AccountList.FirstOrDefault(a => a.Email.Equals(clientIn.Email));
-            //if (updateClient is null)
-            //{
-            //    return StatusCode(400);
-            //}
-            //updateClient = clientIn;
 
             return Ok();
         }
