@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Account } from './_models/account';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
@@ -34,7 +35,7 @@ export class AuthenticationService {
   login(client: Account, pass = (data: Object) => { }, fail = err => { }) {
     // Http call
 
-    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/login',client).subscribe(
+    this.http.post(environment.libraryServiceUri + '/api/account/login',client).subscribe(
       data => {
         client = <Account>data;
         pass(data);
@@ -49,15 +50,15 @@ export class AuthenticationService {
 
   logout(pass = (data: Object) => { }, fail = err => { }): void {
     var client = JSON.parse(sessionStorage.getItem('AccountKey'));
-    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/logout', client).subscribe(pass, fail);
+    this.http.post(environment.libraryServiceUri + '/api/account/logout', client).subscribe(pass, fail);
   }
 
   register(client: Account, pass = (data: Object) => { }, fail = err => { }): void {
-    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/register', client).subscribe(pass, fail);
+    this.http.post(environment.libraryServiceUri + '/api/account/register', client).subscribe(pass, fail);
   }
 
   update(client: Account, pass = (data: Object) => { }, fail = err => { }): void {
-    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/update', client).subscribe(
+    this.http.post(environment.libraryServiceUri + '/api/account/update', client).subscribe(
       data => {
         console.log(data);
         pass(data);
