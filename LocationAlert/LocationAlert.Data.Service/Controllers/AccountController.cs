@@ -17,7 +17,7 @@ namespace LocationAlert.Data.Service.Controllers
             DBContext = dbContext;
         }
 
-        // POST account/register
+        // POST api/account/register
         [HttpPost]
         public IActionResult Register([FromBody] Account clientIn)
         {

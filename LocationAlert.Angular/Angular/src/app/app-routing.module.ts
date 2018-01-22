@@ -7,6 +7,8 @@ import { AuthGuard } from './auth.guard';
 import { RegionsComponent } from './regions/regions.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegistersuccessComponent } from './registersuccess/registersuccess.component';
+import { RegisterfailComponent } from './registerfail/registerfail.component';
+import { LoginfailComponent } from './loginfail/loginfail.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,16 @@ const routes: Routes = [
   {
     path: 'registersuccess',
     component: RegistersuccessComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'registerfail',
+    component: RegisterfailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'loginfail',
+    component: LoginfailComponent,
     canActivate: [AuthGuard]
   }
 

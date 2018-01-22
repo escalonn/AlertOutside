@@ -17,15 +17,17 @@ export class HomeComponent implements OnInit {
   loginButton(){
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.login(this.client);
-    console.log("login");
   }
 
   registerButton(){
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
-    this.authentication.register(this.client, (data) => {
-      this.router.navigate(['registersuccess']);
-    });
-    console.log("register");
+    this.authentication.register(this.client,
+      //success
+      (data) => 
+        {this.router.navigate(['registersuccess']);},
+      //failure
+      (data) => 
+        {this.router.navigate(['registerfail']);});
   }
 
   ngOnInit() {}

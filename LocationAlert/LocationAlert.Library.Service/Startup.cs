@@ -20,7 +20,6 @@ namespace LocationAlert.Library.Service
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            ServerTicker.Instance.Start();
         }
 
         public IConfiguration Configuration { get; }
@@ -58,6 +57,7 @@ namespace LocationAlert.Library.Service
             app.UseAuthentication();
             app.UseMvc();
 
+            ServerTicker.Instance.Start();
         }
     }
 }

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Account } from './_models/account';
+import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     var client = JSON.parse(sessionStorage.getItem('AccountKey'));
   }
 
@@ -32,27 +34,31 @@ export class AuthenticationService {
   // }
   login(client: Account, pass = (data: Object) => { }, fail = err => { }) {
     // Http call
-    this.http.get<Account>('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/login').subscribe(
+
+    this.http.post(environment.libraryServiceUri + '/api/account/login',client).subscribe(
       data => {
         client = <Account>data;
         pass(data);
+        this.router.navigate(['preferences']);
       },
-      fail)
+      data => {
+        this.router.navigate(['loginfail']);
+      })
 
     sessionStorage.setItem("AccountKey", JSON.stringify(client))
   }
 
   logout(pass = (data: Object) => { }, fail = err => { }): void {
     var client = JSON.parse(sessionStorage.getItem('AccountKey'));
-    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/logout', client).subscribe(pass, fail);
+    this.http.post(environment.libraryServiceUri + '/api/account/logout', client).subscribe(pass, fail);
   }
 
   register(client: Account, pass = (data: Object) => { }, fail = err => { }): void {
-    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/register', client).subscribe(pass, fail);
+    this.http.post(environment.libraryServiceUri + '/api/account/register', client).subscribe(pass, fail);
   }
 
   update(client: Account, pass = (data: Object) => { }, fail = err => { }): void {
-    this.http.post('http://ec2-34-201-125-246.compute-1.amazonaws.com/LocationAlertLibrary/api/account/update', client).subscribe(
+    this.http.post(environment.libraryServiceUri + '/api/account/update', client).subscribe(
       data => {
         console.log(data);
         pass(data);

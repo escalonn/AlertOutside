@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -98,7 +99,16 @@ namespace LocationAlert.Library.Models
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, DataUrl + "/api/preferences");
 
             HttpResponseMessage res = s_httpClient.SendAsync(req).GetAwaiter().GetResult();
+            if (!res.IsSuccessStatusCode)
+            {
+                // error
+                return;
+            }
 
+            string content = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            List<Account> accounts = JsonConvert.DeserializeObject<List<Account>>(content);
+
+            AccountList = accounts;
         }
 
     }
