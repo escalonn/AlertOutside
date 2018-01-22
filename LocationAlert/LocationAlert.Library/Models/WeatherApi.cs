@@ -56,7 +56,7 @@ namespace LocationAlert.Library.Models
         }
         internal class WeatherResponseCloud
         {
-            [JsonProperty("all ")]
+            [JsonProperty("all")]
             internal int Cloudiness { get; set; }
         }
 
