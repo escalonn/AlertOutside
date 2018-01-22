@@ -26,32 +26,32 @@
          <label for="AlwaysTemp">Always Push Temperature Updates</label>
         <br>
          <label>Minimum :{{client.weatherPref.temp[0]}} -  Maximum :{{client.weatherPref.temp[1]}}</label>
-         <nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="client.weatherPref.temp" name="temp"></nouislider>
+         <nouislider [connect]="true" [min]="-10" [max]="110" [step]="1" [(ngModel)]="client.weatherPref.temp" name="temp"></nouislider>
      </div>
   </div>
 
   <div class="form-group">
       <div class="col-lg-4">
-          <label><b>Rain Preferences:</b></label>
+          <label><b>Rain Preferences(inches):</b></label>
           <br>
           <input type="checkbox" id="AlwaysRain" name="AlwaysRain" [(ngModel)]="client.weatherPref.alwaysRain">
           <label for="AlwaysRain">Always Push Rain Updates</label>
           <br>
           <label>Minimum :{{client.weatherPref.rain[0]}} -  Maximum :{{client.weatherPref.rain[1]}}</label>
-          <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="client.weatherPref.rain" name="rain"></nouislider>
+          <nouislider [connect]="true" [min]="0" [max]="36" [step]="1" [(ngModel)]="client.weatherPref.rain" name="rain"></nouislider>
           <div id="rain-range"></div>
       </div>
   </div>
 
   <div class="form-group">
       <div class="col-lg-4">
-        <label><b>Snow Preferences:</b></label>
+        <label><b>Snow Preferences(inches):</b></label>
         <br>
         <input type="checkbox" id="AlwaysSnow" name="AlwaysSnow" [(ngModel)]="client.weatherPref.alwaysSnow">
         <label for="AlwaysSnow">Always Push Snow Updates</label>
         <br>
         <label>Minimum :{{client.weatherPref.snow[0]}} -  Maximum :{{client.weatherPref.snow[1]}}</label>
-        <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="client.weatherPref.snow" name="snow"></nouislider>
+        <nouislider [connect]="true" [min]="0" [max]="36" [step]="1" [(ngModel)]="client.weatherPref.snow" name="snow"></nouislider>
         <div id="snow-range"></div>
     </div>
   </div>
@@ -64,7 +64,7 @@
         <label for="AlwaysCloud">Always Push Cloudiness Updates</label>
         <br>
         <label>Minimum :{{client.weatherPref.cloud[0]}} -  Maximum :{{client.weatherPref.cloud[1]}}</label>
-        <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="client.weatherPref.cloud" name="cloud"></nouislider>
+        <nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="client.weatherPref.cloud" name="cloud"></nouislider>
         <div id="cloud-range"></div>
       </div>
     </div>
@@ -78,7 +78,7 @@
         <br>
         <label>Minimum :{{client.weatherPref.wind[0]}} -  Maximum :{{client.weatherPref.wind[1]}}</label>
 
-        <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="client.weatherPref.wind" name="wind"></nouislider>
+        <nouislider [connect]="true" [min]="0" [max]="25" [step]="1" [(ngModel)]="client.weatherPref.wind" name="wind"></nouislider>
         <div id="wind-range"></div>
       </div>
   </div>
@@ -91,7 +91,7 @@
         <label>Always Push Humidity Updates</label>
         <br>
         <label>Minimum :{{client.weatherPref.humidity[0]}} -  Maximum :{{client.weatherPref.humidity[1]}}</label>
-        <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [(ngModel)]="client.weatherPref.humidity" name="humidity"></nouislider>
+        <nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="client.weatherPref.humidity" name="humidity"></nouislider>
         <div id="humidity-range"></div>
      </div>
   </div>

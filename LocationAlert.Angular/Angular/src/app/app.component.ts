@@ -9,11 +9,15 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent {
   title = 'app';
-
+  email = "";
   constructor(private router: Router, private authentication: AuthenticationService) { }
   
   onLogout(){
     this.authentication.logout();
     this.router.navigate(['logout']);
+  }
+
+  setEmail(email){
+    this.email = email;
   }
 }

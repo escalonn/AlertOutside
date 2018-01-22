@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Account } from '../_models/account';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   client: Account = new Account();
 
-  constructor(private authentication: AuthenticationService, private router: Router) { }
+  constructor(private authentication: AuthenticationService, private router: Router, private App: AppComponent) { }
 
   loginButton() {
     this.authentication.login(
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
       data => {
         this.client = <Account>data;
         this.router.navigate(['preferences']);
+        this.App.setEmail(this.client.email);
       },
       error => {
         this.router.navigate(['loginfail']);
