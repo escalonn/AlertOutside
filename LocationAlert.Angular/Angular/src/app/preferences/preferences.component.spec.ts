@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PreferencesComponent } from './preferences.component';
+import { Router } from '@angular/router';
 
 describe('PreferencesComponent', () => {
   let component: PreferencesComponent;
@@ -8,9 +9,12 @@ describe('PreferencesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreferencesComponent ]
+      declarations: [PreferencesComponent],
+      providers: [
+        { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

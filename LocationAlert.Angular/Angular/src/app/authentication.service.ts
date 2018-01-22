@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Account } from './_models/account';
-import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
 
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     var client = JSON.parse(sessionStorage.getItem('AccountKey'));
   }
 

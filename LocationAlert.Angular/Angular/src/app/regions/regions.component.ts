@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleMapsAPIWrapper } from '@agm/core';
 import { HttpClient } from '@angular/common/http';
 import { Region } from '../_models/region';
 import { Account } from '../_models/account';
@@ -19,9 +18,9 @@ export class RegionsComponent implements OnInit {
 
   client: Account = JSON.parse(sessionStorage.getItem("AccountKey"));
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-
+  lat: number = 39.986855;
+  lng: number = -75.196442;
+  
   constructor(private http: HttpClient, private authentication: AuthenticationService, private router: Router) {
 
    }
