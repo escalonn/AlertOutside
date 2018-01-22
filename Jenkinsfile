@@ -31,7 +31,7 @@ node('master') {
 				bat 'SonarQube.Scanner.MSBuild.exe end'
 			}
 			dir('LocationAlert.Angular/Angular') {
-				bat 'sonar.scanner.bat -Dsonar.projectKey=ao221662 -Dsonar.sources=. -Dproject.settings=C:\\tools\\sonarqube\\sonarcloud.properties'
+				bat 'sonar-scanner.bat -Dsonar.projectKey=ao221662 -Dsonar.sources=. -Dproject.settings=C:\\tools\\sonarqube\\sonarcloud.properties'
 			}
 		}
 		catch (exc) {
