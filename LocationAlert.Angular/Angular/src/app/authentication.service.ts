@@ -32,20 +32,19 @@ export class AuthenticationService {
   //       }
   //     });
   // }
-  login(client: Account, pass = (data: Object) => { }, fail = err => { }) {
+  login(
+    client: Account,
+    pass = (data: Object) => { },
+    fail = err => { }) {
     // Http call
-
-    this.http.post(environment.libraryServiceUri + '/api/account/login',client).subscribe(
+    this.http.post(environment.libraryServiceUri + '/api/account/login', client).subscribe(
       data => {
         client = <Account>data;
+        sessionStorage.setItem("AccountKey", JSON.stringify(client));
         pass(data);
-        this.router.navigate(['preferences']);
       },
-      data => {
-        this.router.navigate(['loginfail']);
-      })
-
-    sessionStorage.setItem("AccountKey", JSON.stringify(client))
+      fail
+    );
   }
 
   logout(pass = (data: Object) => { }, fail = err => { }): void {
@@ -58,11 +57,6 @@ export class AuthenticationService {
   }
 
   update(client: Account, pass = (data: Object) => { }, fail = err => { }): void {
-    this.http.post(environment.libraryServiceUri + '/api/account/update', client).subscribe(
-      data => {
-        console.log(data);
-        pass(data);
-      },
-      fail);
+    this.http.post(environment.libraryServiceUri + '/api/account/update', client).subscribe(pass, fail);
   }
 }

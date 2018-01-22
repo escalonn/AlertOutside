@@ -14,22 +14,38 @@ export class HomeComponent implements OnInit {
 
   constructor(private authentication: AuthenticationService, private router: Router) { }
 
-  loginButton(){
-    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
-    this.authentication.login(this.client);
+  loginButton() {
+    this.authentication.login(
+      this.client,
+      data => {
+        this.client = <Account>data;
+        this.router.navigate(['preferences']);
+      },
+      error => {
+        this.router.navigate(['loginfail']);
+      }
+    );
   }
 
-  registerButton(){
-    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
-    this.authentication.register(this.client,
-      //success
-      (data) => 
-        {this.router.navigate(['registersuccess']);},
-      //failure
-      (data) => 
-        {this.router.navigate(['registerfail']);});
+  registerButton() {
+    var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    if (regexp.test(this.client.email)) {
+      this.authentication.register(
+        this.client,
+        (data) => {
+          this.router.navigate(['registersuccess']);
+        },
+        (error) => {
+          this.router.navigate(['registerfail']);
+        }
+      );
+    }
+    else {
+      console.log("email invalid");
+      this.router.navigate(['registerfail']);
+    }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }
