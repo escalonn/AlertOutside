@@ -87,9 +87,12 @@ namespace LocationAlert.Library.Models
                     }
 
                     //send message
-                    message.SendMessage();
-                    account.EverPushed = true;
-                    account.LastPush = DateTime.Now;
+                    if (message.ShouldSend)
+                    {
+                        message.SendMessage();
+                        account.EverPushed = true;
+                        account.LastPush = DateTime.Now;
+                    }
                 }
             }
         }
