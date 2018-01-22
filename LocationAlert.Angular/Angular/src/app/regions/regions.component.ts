@@ -28,7 +28,7 @@ export class RegionsComponent implements OnInit {
    mapDblClick($event: any) {
      if (this.client.regions.length < this.maxReg)
      {
-      var circle : Region = {id: this.client.regions.length, latitude: $event.coords.lat, longitude: $event.coords.lng, radius:50000, color: '#fc0000', fillOpacity: 0.7}
+      var circle : Region = {id: this.client.regions.length, latitude: $event.coords.lat, longitude: $event.coords.lng, radius:8000, color: '#fc0000', fillOpacity: 0.7}
       this.client.regions.push(circle);
      }
     };
