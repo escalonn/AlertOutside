@@ -49,6 +49,7 @@ export class AuthenticationService {
   logout(pass = (data: Object) => { }, fail = err => { }): void {
     var client = JSON.parse(sessionStorage.getItem('AccountKey'));
     this.http.post(environment.libraryServiceUri + '/api/account/logout', client).subscribe(pass, fail);
+    sessionStorage.removeItem('AccountKey');
   }
 
   register(client: Account, pass = (data: Object) => { }, fail = err => { }): void {
