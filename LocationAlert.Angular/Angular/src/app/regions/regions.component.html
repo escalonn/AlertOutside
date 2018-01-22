@@ -39,11 +39,11 @@
 
       </div>
         <div class="row">
-                <div class="col-lg-4 ">
-                    <table class=" table table-bordered region" id="Region1" *ngFor="let data of client.regions ; let i = index">
+                <div fxLayout="row">
+                    <table class="table table-bordered region "  *ngFor="let data of client.regions ; let i = index">
                         <tr>
                             <td><b>ID :</b></td>
-                            <td id="name1">{{client.regions[i].id}}</td>
+                            <td>{{client.regions[i].id}}</td>
                         </tr>
                         <tr>
                             <td><b>Latitude :</b></td>
