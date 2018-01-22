@@ -41,6 +41,9 @@ h3 {
     margin-bottom: 0;
     line-height: .75;
 }
+#nav-list {
+  
+}
 
   
 
@@ -71,6 +74,11 @@ div ul li  a:focus{
 }
 
 
-/* END FOOTER */
+.emailSession {
+ 
+  margin-left: 90%; 
+  margin-top: -20px;
+  color: white;
+}
 
 

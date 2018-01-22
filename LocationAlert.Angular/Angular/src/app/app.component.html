@@ -32,22 +32,19 @@
                            <h3>Prefrence</h3>
                         </a>
                     </li>
-                   
+                   <li>
+                      <a routerLink="logout"></a>
+                      <a id="btn-delete" class="btn btn-danger" (click)="onLogout()">Logout</a>
+               
+                   </li>
                
                 </ul>
             </div>
-            <div class="form-group">
-              <!-- Button -->
-              <div class="col-sm-12 controls">
-                <a routerLink="logout"></a>
-                  <a id="btn-delete" class="btn btn-danger" (click)="onLogout()">Logout</a>
-              </div>
-              <label>{{email}}</label>
+            <div class="emailSession">{{email}}</div>
             </div>
-
-            </div>
-        
+          
     </nav>
+    
 </header>
 
  <router-outlet></router-outlet>
