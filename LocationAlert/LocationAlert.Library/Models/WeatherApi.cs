@@ -16,8 +16,10 @@ namespace LocationAlert.Library.Models
         {
             [JsonProperty("main")]
             internal WeatherResponseMain Main { get; set; }
-            [JsonProperty("weather")]
-            internal WeatherResponseCode Code { get; set; }
+
+            [JsonProperty("name")]
+            internal string name { get; set; }
+
             [JsonProperty("rain")]
             internal WeatherResponseRain RainVolume { get; set; }
             [JsonProperty("snow")]
@@ -36,11 +38,7 @@ namespace LocationAlert.Library.Models
             [JsonProperty("humidity")]
             internal int Humidity { get; set; }
         }
-        internal class WeatherResponseCode
-        {
-            [JsonProperty("id")]
-            internal int Code { get; set; }
-        }
+
         internal class WeatherResponseRain
         {
             [JsonProperty("3h")]
@@ -54,7 +52,7 @@ namespace LocationAlert.Library.Models
         internal class WeatherResponseWind
         {
             [JsonProperty("speed")]
-            internal int WindSpeed { get; set; }
+            internal double WindSpeed { get; set; }
         }
         internal class WeatherResponseCloud
         {
@@ -66,8 +64,10 @@ namespace LocationAlert.Library.Models
         public int RainVolume { get; set; }
         public int SnowVolume { get; set; }
         public int Humidity { get; set; }
-        public int Wind { get; set; }
+        public double Wind { get; set; }
         public int Clouds { get; set; }
+        public string Name { get; set; }
+        public double temperatureK { get; set; }
 
         private static string OpenWeatherMapApiKey = "f44745b3b949068be733eb938051eed4";
 
@@ -95,27 +95,27 @@ namespace LocationAlert.Library.Models
                     var queryString = new Dictionary<string, string>()
                     {
                         ["lat"] = latitude.ToString(),
-                        ["long"] = longitude.ToString(),
+                        ["lon"] = longitude.ToString(),
                         ["APPID"] = OpenWeatherMapApiKey
                     };
 
                     string fullApiUri = QueryHelpers.AddQueryString(baseApiUri, queryString);
+                    Console.WriteLine(fullApiUri);
+                    //string fullApiUri = "http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=f44745b3b949068be733eb938051eed4";
+                                           //http://api.openweathermap.org/data/2.5/weather?lat=51.79163&long=6.818848&APPID=f44745b3b949068be733eb938051eed4
                     HttpResponseMessage response = await client.GetAsync(fullApiUri);
                     response.EnsureSuccessStatusCode();
 
                     string stringResult = await response.Content.ReadAsStringAsync();
+
                     var rawWeather = JsonConvert.DeserializeObject<WeatherResponse>(stringResult);
-                    double temperatureK = rawWeather.Main.Temperature;
+
                     //double temperatureF = KelvinToFahrenheit(temperatureK);
                     TempInFah = KelvinToFahrenheit(temperatureK);
 
                     //***********
-                    WeatherCode = rawWeather.Code.Code;
-                    RainVolume = rawWeather.RainVolume.RainVolume;
-                    SnowVolume = rawWeather.SnowVolume.SnowVolume;
-                    Humidity = rawWeather.Main.Humidity;
-                    Wind = rawWeather.WindSpeed.WindSpeed;
-                    Clouds = rawWeather.Cloudiness.Cloudiness;
+                    Name = rawWeather.name;
+                    TempInFah = KelvinToFahrenheit(rawWeather.Main.Temperature);
                     //***********
 
                     //return temperatureF;
