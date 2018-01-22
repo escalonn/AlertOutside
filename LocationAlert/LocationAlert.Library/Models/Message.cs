@@ -66,22 +66,25 @@ namespace LocationAlert.Library.Models
 
         public void SendMessage()
         {
+            // Replace smtp_username with your Amazon SES SMTP user name.
+            const String SMTP_USERNAME = "AKIAIAY5OFPQZKFIP5RA";
+
+            // Replace smtp_password with your Amazon SES SMTP user name.
+            const String SMTP_PASSWORD = "Am3pzxpoJF8RPIE50u71O4whO8WekAZRb1aKCX3/DVan";
+
             var message = new MailMessage();
             message.To.Add(new MailAddress(email));
-            message.From = new MailAddress("sofanib@outlook.com");
+            message.From = new MailAddress("bran.frankenfield@gmail.com");
             message.Subject = "Location Alert Notification!";
             message.Body = string.Format(BodyText);
             message.IsBodyHtml = true;
 
             using (var smtp = new SmtpClient())
             {
-                var credential = new NetworkCredential
-                {
-                    UserName = "sofanib@outlook.com",  // replace with valid value
-                    Password = "sami114173"  // replace with valid value(password for real email
-                };
+                var credential = new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD);
+
                 smtp.Credentials = credential;
-                smtp.Host = "smtp-mail.outlook.com";
+                smtp.Host = "email-smtp.us-east-1.amazonaws.com";
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
                 smtp.Send(message);
