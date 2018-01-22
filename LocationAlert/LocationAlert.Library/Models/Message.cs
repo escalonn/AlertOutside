@@ -12,6 +12,7 @@ namespace LocationAlert.Library.Models
         public WeatherPreference preferences { get; set; }
         public List<string> RegionMessage { get; set; }
         public string BodyText { get; set; }
+        public bool ShouldSend = false;
 
         public Message(WeatherPreference preferences, string email)
         {
@@ -33,38 +34,42 @@ namespace LocationAlert.Library.Models
 
                 regString += ("<b>Update for Region</b>&nbsp;" + ApiCall.Name + "<br>");
 
-                //****Change 1 to severity enum or switch string case based on severity int
+
                 if (preferences.AlwaysTemp || (CheckRange(Convert.ToInt32(ApiCall.TempInFah), preferences.Temp[0], preferences.Temp[1])))
                 {
                     regString += ("Temperature:&nbsp;" + ApiCall.TempInFah + "<br>");
+                    ShouldSend = true;
                 }
 
                 if (preferences.AlwaysRain || (CheckRange(ApiCall.RainVolume, preferences.Rain[0],preferences.Rain[1])))
                 {
                     regString += ("Rain Volume:&nbsp;" + ApiCall.RainVolume + "<br>");
+                    ShouldSend = true;
                 }
 
                 if (preferences.AlwaysSnow || (CheckRange(ApiCall.SnowVolume, preferences.Snow[0], preferences.Snow[1])))
                 {
                     regString += ("Snow Volume:&nbsp;" + ApiCall.SnowVolume + "<br>");
+                    ShouldSend = true;
                 }
 
                 if (preferences.AlwaysWind || (CheckRange(Convert.ToInt32(ApiCall.Wind), preferences.Wind[0], preferences.Wind[1])))
                 {
                     regString += ("Wind Speed:&nbsp;" + ApiCall.Wind + "<br>");
+                    ShouldSend = true;
                 }
 
                 if (preferences.AlwaysCloud || (CheckRange(ApiCall.Clouds, preferences.Cloud[0], preferences.Cloud[1])))
                 {
                     regString += ("Cloud Severity:&nbsp;" + ApiCall.Clouds + "<br>");
+                    ShouldSend = true;
                 }
 
                 if (preferences.AlwaysHumidity || (CheckRange(ApiCall.Humidity, preferences.Humidity[0], preferences.Humidity[1])))
                 {
                     regString += ("Humidity Severity:&nbsp;" + ApiCall.Humidity + "<br>");
+                    ShouldSend = true;
                 }
-
-                
             }
 
             BodyText += regString;
