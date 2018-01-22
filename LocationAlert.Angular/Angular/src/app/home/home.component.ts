@@ -14,22 +14,31 @@ export class HomeComponent implements OnInit {
 
   constructor(private authentication: AuthenticationService, private router: Router) { }
 
-  loginButton(){
-    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
-    this.authentication.login(this.client);
+  loginButton() {
+    this.authentication.login(
+      this.client,
+      data => {
+        this.client = <Account>data;
+        this.router.navigate(['preferences']);
+      },
+      error => {
+        this.router.navigate(['loginfail']);
+      }
+    );
   }
 
-  registerButton(){
-    sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
-    this.authentication.register(this.client,
-      //success
-      (data) => 
-        {this.router.navigate(['registersuccess']);},
-      //failure
-      (data) => 
-        {this.router.navigate(['registerfail']);});
+  registerButton() {
+    this.authentication.register(
+      this.client,
+      (data) => {
+        this.router.navigate(['registersuccess']);
+      },
+      (error) => {
+        this.router.navigate(['registerfail']);
+      }
+    );
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }
