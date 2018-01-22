@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { FormsModule } from '@angular/forms';
+import { AuthenticationService } from '../authentication.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,9 +12,17 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [HomeComponent],
+      imports: [
+        FormsModule,
+        HttpClientModule,
+      ],
+      providers: [
+        AuthenticationService,
+        { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
