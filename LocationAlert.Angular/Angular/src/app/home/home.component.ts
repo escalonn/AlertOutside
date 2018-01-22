@@ -15,11 +15,16 @@ export class HomeComponent implements OnInit {
   constructor(private authentication: AuthenticationService, private router: Router) { }
 
   loginButton(){
+
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.login(this.client);
+    
   }
 
   registerButton(){
+    var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    if (regexp.test(this.client.email))
+    {
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.register(this.client,
       //success
@@ -28,6 +33,12 @@ export class HomeComponent implements OnInit {
       //failure
       (data) => 
         {this.router.navigate(['registerfail']);});
+    }
+    else
+    {
+      console.log("email invalid");
+       this.router.navigate(['registerfail']);
+    }
   }
 
   ngOnInit() {}
