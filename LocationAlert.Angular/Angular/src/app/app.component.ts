@@ -15,6 +15,7 @@ export class AppComponent {
   onLogout(){
     this.authentication.logout();
     this.router.navigate(['logout']);
+    this.email = "";
   }
 
   setEmail(email){
