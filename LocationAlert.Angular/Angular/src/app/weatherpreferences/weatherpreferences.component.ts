@@ -21,6 +21,7 @@ export class WeatherpreferencesComponent implements OnInit {
     // Send our data!
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.update(this.client);
+    this.router.navigate(['preferences'])
   }
 
   onBack() {

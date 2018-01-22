@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Region } from '../_models/region';
 import { Account } from '../_models/account';
 import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 
 
@@ -21,7 +22,7 @@ export class RegionsComponent implements OnInit {
   lat: number = 51.678418;
   lng: number = 7.809007;
 
-  constructor(private http: HttpClient, private authentication: AuthenticationService) {
+  constructor(private http: HttpClient, private authentication: AuthenticationService, private router: Router) {
 
    }
 
@@ -53,6 +54,8 @@ export class RegionsComponent implements OnInit {
     // Send our data!
     sessionStorage.setItem("AccountKey",JSON.stringify(this.client));
     this.authentication.update(this.client);
+    this.router.navigate(['preferences']);
+
   }
 
   ngOnInit() {
