@@ -45,9 +45,9 @@ node('master') {
 				dir('LocationAlert.Test') {
 					bat 'dotnet test'
 				}
-				dir('LocationAlert.Angular/Angular') {
-					bat 'ng test'
-				}
+				// dir('LocationAlert.Angular/Angular') {
+				// 	bat 'ng test'
+				// }
 			}
 		}
 		catch (exc) {
