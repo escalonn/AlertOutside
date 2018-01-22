@@ -99,7 +99,14 @@ namespace LocationAlert.Library.Models
 
         private bool CheckRange(int value, int min, int max)
         {
-            return (value >= min && value <= max);
+            if (value < min || value > max)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
