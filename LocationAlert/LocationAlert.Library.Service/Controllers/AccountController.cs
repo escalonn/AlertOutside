@@ -88,16 +88,16 @@ namespace LocationAlert.Library.Service.Controllers
         //-----------------------------------------------------------------------------------------------------------------------------------------
 
         // POST account/update
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public IActionResult Update([FromBody] Account clientIn)
         {
-            // if trying to update a different user...
-            //if (HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value != clientIn.Email)
-            //{
-            //    // not authorized to do that
-            //    return StatusCode(403);
-            //}
+            //if trying to update a different user...
+            if (HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value != clientIn.Email)
+            {
+                // not authorized to do that
+                return StatusCode(403);
+            }
 
             // otherwise, change values in database
             string resource = clientIn.Email;
