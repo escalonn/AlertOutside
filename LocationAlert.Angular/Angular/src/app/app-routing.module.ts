@@ -38,7 +38,6 @@ const routes: Routes = [
   {
     path: 'registersuccess',
     component: RegistersuccessComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'registerfail',
