@@ -11,7 +11,7 @@ namespace LocationAlert.Library.Models
         public int PushHours { get; set; }
         public int PushMinutes { get; set; }
         public bool AlwaysTemp { get; set; }
-        public double[] Temp { get; set; }
+        public int[] Temp { get; set; }
         public bool AlwaysRain { get; set; }
         public int[] Rain { get; set; }
         public bool AlwaysSnow { get; set; }
@@ -19,7 +19,7 @@ namespace LocationAlert.Library.Models
         public bool AlwaysCloud { get; set; }
         public int[] Cloud { get; set; }
         public bool AlwaysWind { get; set; }
-        public double[] Wind { get; set; }
+        public int[] Wind { get; set; }
         public bool AlwaysHumidity { get; set; }
         public int[] Humidity { get; set; }
         //// see api at http://openweathermap.org/current

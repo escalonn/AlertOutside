@@ -34,26 +34,26 @@ namespace LocationAlert.Data.Service.Models
         {
             var dataWeather = new Data.Models.WeatherPreference
             {
-                PushHours = dataSvcWeather.pushHours,
-                PushMinutes = dataSvcWeather.pushMinutes,
-                AlwaysTemp = dataSvcWeather.alwaysTemp,
-                TempMin = dataSvcWeather.temp[0],
-                TempMax = dataSvcWeather.temp[1],
-                AlwaysRain = dataSvcWeather.alwaysRain,
-                RainMin = dataSvcWeather.rain[0],
-                RainMax = dataSvcWeather.rain[1],
-                AlwaysSnow = dataSvcWeather.alwaysSnow,
-                SnowMin = dataSvcWeather.snow[0],
-                SnowMax = dataSvcWeather.snow[1],
-                AlwaysCloud = dataSvcWeather.alwaysCloud,
-                CloudMin = dataSvcWeather.cloud[0],
-                CloudMax = dataSvcWeather.cloud[1],
-                AlwaysWind = dataSvcWeather.alwaysWind,
-                WindMin = dataSvcWeather.wind[0],
-                WindMax = dataSvcWeather.wind[1],
-                AlwaysHumidity = dataSvcWeather.alwaysHumidity,
-                HumidityMin = dataSvcWeather.humidity[0],
-                HumidityMax = dataSvcWeather.humidity[1]
+                PushHours = dataSvcWeather.PushHours,
+                PushMinutes = dataSvcWeather.PushMinutes,
+                AlwaysTemp = dataSvcWeather.AlwaysTemp,
+                TempMin = dataSvcWeather.Temp[0],
+                TempMax = dataSvcWeather.Temp[1],
+                AlwaysRain = dataSvcWeather.AlwaysRain,
+                RainMin = dataSvcWeather.Rain[0],
+                RainMax = dataSvcWeather.Rain[1],
+                AlwaysSnow = dataSvcWeather.AlwaysSnow,
+                SnowMin = dataSvcWeather.Snow[0],
+                SnowMax = dataSvcWeather.Snow[1],
+                AlwaysCloud = dataSvcWeather.AlwaysCloud,
+                CloudMin = dataSvcWeather.Cloud[0],
+                CloudMax = dataSvcWeather.Cloud[1],
+                AlwaysWind = dataSvcWeather.AlwaysWind,
+                WindMin = dataSvcWeather.Wind[0],
+                WindMax = dataSvcWeather.Wind[1],
+                AlwaysHumidity = dataSvcWeather.AlwaysHumidity,
+                HumidityMin = dataSvcWeather.Humidity[0],
+                HumidityMax = dataSvcWeather.Humidity[1]
             };
             return dataWeather;
         }
@@ -84,20 +84,20 @@ namespace LocationAlert.Data.Service.Models
         {
             var dataSvcWeather = new WeatherPreference()
             {
-                pushHours = dataWeather.PushHours,
-                pushMinutes = dataWeather.PushMinutes,
-                alwaysTemp = dataWeather.AlwaysTemp,
-                temp = new[] { dataWeather.TempMin, dataWeather.TempMax },
-                alwaysRain = dataWeather.AlwaysRain,
-                rain = new[] { dataWeather.RainMin, dataWeather.RainMax },
-                alwaysSnow = dataWeather.AlwaysSnow,
-                snow = new[] { dataWeather.SnowMin, dataWeather.SnowMax },
-                alwaysCloud = dataWeather.AlwaysCloud,
-                cloud = new[] { dataWeather.CloudMin, dataWeather.CloudMax },
-                alwaysWind = dataWeather.AlwaysWind,
-                wind = new[] { dataWeather.WindMin, dataWeather.WindMax },
-                alwaysHumidity = dataWeather.AlwaysHumidity,
-                humidity = new[] { dataWeather.HumidityMin, dataWeather.HumidityMax }
+                PushHours = dataWeather.PushHours,
+                PushMinutes = dataWeather.PushMinutes,
+                AlwaysTemp = dataWeather.AlwaysTemp,
+                Temp = new[] { dataWeather.TempMin, dataWeather.TempMax },
+                AlwaysRain = dataWeather.AlwaysRain,
+                Rain = new[] { dataWeather.RainMin, dataWeather.RainMax },
+                AlwaysSnow = dataWeather.AlwaysSnow,
+                Snow = new[] { dataWeather.SnowMin, dataWeather.SnowMax },
+                AlwaysCloud = dataWeather.AlwaysCloud,
+                Cloud = new[] { dataWeather.CloudMin, dataWeather.CloudMax },
+                AlwaysWind = dataWeather.AlwaysWind,
+                Wind = new[] { dataWeather.WindMin, dataWeather.WindMax },
+                AlwaysHumidity = dataWeather.AlwaysHumidity,
+                Humidity = new[] { dataWeather.HumidityMin, dataWeather.HumidityMax }
             };
             return dataSvcWeather;
         }

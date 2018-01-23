@@ -108,5 +108,10 @@ namespace LocationAlert.Library.Models
         {
             return value < bounds[0] || value > bounds[1];
         }
+
+        private static bool Between(double value, int[] bounds)
+        {
+            return value < bounds[0] || value > bounds[1];
+        }
     }
 }

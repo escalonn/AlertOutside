@@ -2,19 +2,19 @@
 {
     public class WeatherPreference
     {
-        public int pushHours { get; set; }
-        public int pushMinutes { get; set; }
-        public bool alwaysTemp { get; set; }
-        public int[] temp { get; set; }
-        public bool alwaysRain { get; set; }
-        public int[] rain { get; set; }
-        public bool alwaysSnow { get; set; }
-        public int[] snow { get; set; }
-        public bool alwaysCloud { get; set; }
-        public int[] cloud { get; set; }
-        public bool alwaysWind { get; set; }
-        public int[] wind { get; set; }
-        public bool alwaysHumidity { get; set; }
-        public int[] humidity { get; set; }
+        public int PushHours { get; set; }
+        public int PushMinutes { get; set; }
+        public bool AlwaysTemp { get; set; }
+        public int[] Temp { get; set; }
+        public bool AlwaysRain { get; set; }
+        public int[] Rain { get; set; }
+        public bool AlwaysSnow { get; set; }
+        public int[] Snow { get; set; }
+        public bool AlwaysCloud { get; set; }
+        public int[] Cloud { get; set; }
+        public bool AlwaysWind { get; set; }
+        public int[] Wind { get; set; }
+        public bool AlwaysHumidity { get; set; }
+        public int[] Humidity { get; set; }
     }
 }

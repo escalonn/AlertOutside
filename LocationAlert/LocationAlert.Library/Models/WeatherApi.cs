@@ -66,7 +66,7 @@ namespace LocationAlert.Library.Models
         public double Wind { get; set; }
         public int Clouds { get; set; }
         public string Name { get; set; }
-        public double temperatureK { get; set; }
+        public double TemperatureK { get; set; }
 
         private static string OpenWeatherMapApiKey = "f44745b3b949068be733eb938051eed4";
 
@@ -110,7 +110,7 @@ namespace LocationAlert.Library.Models
                     var rawWeather = JsonConvert.DeserializeObject<WeatherResponse>(stringResult);
 
                     //double temperatureF = KelvinToFahrenheit(temperatureK);
-                    TempInFah = KelvinToFahrenheit(temperatureK);
+                    TempInFah = KelvinToFahrenheit(TemperatureK);
 
                     //***********
 
