@@ -1,7 +1,7 @@
 <div class="container">
   <div class="weatherpref">
   <br>
-  <h4 class="text-center">WeatherPreference</h4>
+  <h4 class="text-center">Weather Preference</h4>
   <hr />
 <form id="WeatherPreference">
   <div class="form-group">
@@ -11,7 +11,7 @@
       <label for="pushHours">Hours:</label>
       <input type="number" class="form-control" name="pushHours" [(ngModel)]="client.weatherPref.pushHours">
     </div>
-    
+
     <div class="col-lg-4">
       <label for="pushMinutes">Minutes:</label>
       <input type="number" class="form-control" name="pushMinutes" [(ngModel)]="client.weatherPref.pushMinutes">
@@ -45,7 +45,7 @@
 
   <div class="form-group">
       <div class="col-lg-4">
-        <label><b>Snow Preferences(inches):</b></label>
+        <label><b>Snow Preferences (inches):</b></label>
         <br>
         <input type="checkbox" id="AlwaysSnow" name="AlwaysSnow" [(ngModel)]="client.weatherPref.alwaysSnow">
         <label for="AlwaysSnow">Always Push Snow Updates</label>
@@ -108,5 +108,3 @@
 </form>
 </div>
 </div>
-
-
