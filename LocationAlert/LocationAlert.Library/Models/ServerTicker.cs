@@ -16,7 +16,7 @@ namespace LocationAlert.Library.Models
         public static List<Account> AccountList { get; set; }
 
         private TimeSpan startTimeSpan = TimeSpan.Zero;
-        private TimeSpan intervalTimeSpan = TimeSpan.FromMinutes(60);
+        private TimeSpan intervalTimeSpan = TimeSpan.FromMinutes(10);
 
         public static ServerTicker Instance
         {
