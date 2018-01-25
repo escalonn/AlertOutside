@@ -95,7 +95,11 @@ namespace LocationAlert.Library.Models
                 smtp.Host = "email-smtp.us-east-1.amazonaws.com";
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
-                smtp.Send(message);
+                try
+                {
+                    smtp.Send(message);
+                }
+                catch (SmtpException) { }
             }
         }
 
