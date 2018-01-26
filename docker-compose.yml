@@ -1,0 +1,26 @@
+version: "3"
+services:
+  data:
+    image: nicholasescalona/ao-data
+    networks:
+      - net
+    environment:
+      ASPNETCORE_URLS: "http://*:5000"
+      ConnectionStrings__LocationAlertDB:
+  lib:
+    image: nicholasescalona/ao-lib
+    ports:
+      - "20000:5001"
+    networks:
+      - net
+    environment:
+      ASPNETCORE_URLS: "http://*:5001"
+      ServiceUris__data: "http://data:5000"
+  angular:
+    image: nicholasescalona/ao-angular
+    ports:
+      - "10000:4200"
+    networks:
+      - net
+networks:
+  net:
