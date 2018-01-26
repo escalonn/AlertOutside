@@ -11,7 +11,7 @@ RUN dotnet restore
 # copy everything else and build
 WORKDIR /app
 COPY . ./
-WORKDIR LocationAlert.Library.Service
+WORKDIR /app/LocationAlert.Library.Service
 RUN dotnet publish -c Release -o ../out
 
 # build runtime image
