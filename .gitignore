@@ -1,5 +1,4 @@
-
-# Created by https://www.gitignore.io/api/csharp,windows,sonarqube,visualstudio
+# Created by https://www.gitignore.io/api/csharp,vagrant,windows,sonarqube,visualstudio,visualstudiocode
 
 ### Csharp ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -305,6 +304,18 @@ __pycache__/
 # SonarLint working directories, configuration files (including credentials)
 .sonarlint/
 
+### Vagrant ###
+.vagrant/
+*.box
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -464,4 +475,5 @@ $RECYCLE.BIN/
 # By default, sensitive information, such as encrypted password
 # should be stored in the .pubxml.user file.
 
-# End of https://www.gitignore.io/api/csharp,windows,sonarqube,visualstudio
+
+# End of https://www.gitignore.io/api/csharp,vagrant,windows,sonarqube,visualstudio,visualstudiocode
